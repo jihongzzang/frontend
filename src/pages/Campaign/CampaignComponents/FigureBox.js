@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function SmallFigureBox({ FigureName, Figure }) {
+function FigureBox({ width, height, FigureName, Figure }) {
   return (
-    <SmallFigure>
+    <SmallFigure width={width} height={height}>
       <FigureNameText>{FigureName}</FigureNameText>
       <FigureText>{Figure}</FigureText>
     </SmallFigure>
@@ -14,19 +14,21 @@ const SmallFigure = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 130px;
-  height: 90px;
-  background-color: pink;
-  margin: 0 5px;
+  width: ${props => props.width};
+  height: ${props => props.height};
+  /* width: 130px;
+  height: 90px; */
+  /* margin: 0 5px; */
   border-radius: 12px;
+  border: 1px solid #e1e1ef;
 `;
 
 const FigureNameText = styled.span`
-  color: brown;
+  color: #5891e5;
 `;
 
 const FigureText = styled.span`
-  color: blue;
+  color: #5891e5;
 `;
 
-export default SmallFigureBox;
+export default FigureBox;
