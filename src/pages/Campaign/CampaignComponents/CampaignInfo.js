@@ -15,7 +15,7 @@ function CampaignInfo() {
 const CampaignInfoBox = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 54px;
+  margin-top: 10px;
 `;
 
 export default CampaignInfo;

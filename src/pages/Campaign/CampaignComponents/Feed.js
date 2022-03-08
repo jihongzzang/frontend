@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Feed({ imgWidth, imgHeight }) {
+function Feed({ feedWidth, imgWidth, imgHeight }) {
   return (
-    <FeedBox>
+    <FeedBox feedWidth={feedWidth}>
       <FeedImgBox imgWidth={imgWidth} imgHeight={imgHeight}>
         <img
           alt="feedImg"
@@ -20,6 +20,7 @@ function Feed({ imgWidth, imgHeight }) {
 }
 
 const FeedBox = styled.div`
+  width: ${props => props.feedWidth};
   display: flex;
   margin: 0 10px;
   border-radius: 12px;
