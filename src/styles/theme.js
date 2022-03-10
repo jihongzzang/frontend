@@ -30,9 +30,9 @@ const theme = {
     chartBlue: '#0B008A',
     chartBlue2: '#AAA6D6',
     chartBlue3: '#5969FF',
-    searchBackground: 'B1D1FF',
-    pageBackground: 'F0F0F6',
-    borderColor: 'E1E1EF',
+    searchBackground: '#B1D1FF',
+    pageBackground: '#F0F0F6',
+    borderColor: '#E1E1EF',
   },
   btnRadius: {
     borderRadius0: '5px',
