@@ -3,6 +3,7 @@ import SearchArea from './SearchArea';
 import styled from 'styled-components';
 import StateArea from './StateArea';
 import SortArea from './SortArea';
+import Card from './Card';
 import SEARCH_LISTS from './SEARCH_LISTS';
 import SORT_LISTS from './SORT_LISTS';
 
@@ -43,6 +44,7 @@ function Main() {
         selectedSort={selectedSort}
         changeSortOptionHandler={changeSortOptionHandler}
       />
+      <Card />
     </MainWrraper>
   );
 }
