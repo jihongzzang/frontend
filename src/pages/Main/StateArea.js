@@ -1,32 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 import Btn from '../../components/Btn';
+import STATE_LISTS from './STATE_LISTS';
 
 const StateArea = ({ selected }) => {
+  const stateLists = STATE_LISTS;
+  const renderUi = selected.length ? true : false;
   return (
-    <StateWrraper>
-      {selected === 'influencer' ? (
-        <div>
-          <StyledBtn>계정명</StyledBtn>
-          <StyledBtn>계약상태</StyledBtn>
-          <StyledBtn>팔로워 수</StyledBtn>
-          <StyledBtn>좋아요 수</StyledBtn>
-          <StyledBtn>댓글 수</StyledBtn>
-          <StyledBtn>노출</StyledBtn>
-          <StyledBtn>참여/참여율</StyledBtn>
-        </div>
-      ) : (
-        <div>
-          <StyledBtn>캠페인</StyledBtn>
-          <StyledBtn>캠페인상태</StyledBtn>
-          <StyledBtn>기간</StyledBtn>
-          <StyledBtn>평균 좋아요 수</StyledBtn>
-          <StyledBtn>평균 댓글 수</StyledBtn>
-          <StyledBtn>평균 노출</StyledBtn>
-          <StyledBtn>평균 참여/참여율</StyledBtn>
-        </div>
-      )}
-    </StateWrraper>
+    renderUi && (
+      <StateWrraper>
+        <ContentWrraper>
+          {selected === 'campaign' && (
+            <>
+              {stateLists.campaign.map(({ id, korName }) => (
+                <StyledBtn key={id}>{korName}</StyledBtn>
+              ))}
+            </>
+          )}
+          {selected === 'influencer' && (
+            <>
+              {stateLists.influencer.map(({ id, korName }) => (
+                <StyledBtn key={id}>{korName}</StyledBtn>
+              ))}
+            </>
+          )}
+        </ContentWrraper>
+      </StateWrraper>
+    )
   );
 };
 
@@ -39,17 +39,17 @@ const StateWrraper = styled.div`
   align-items: center;
   width: 94%;
   height: 6.919%;
+  padding: 0 20px;
   border: 1px solid ${({ theme }) => theme.palette.borderColor};
   background: ${({ theme }) => theme.palette.searchBackground};
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
+`;
 
-  div {
-    width: 100%;
-    margin: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+const ContentWrraper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const StyledBtn = styled(Btn)`

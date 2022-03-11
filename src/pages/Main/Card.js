@@ -1,17 +1,21 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import {
-  influencerListSelector,
-  campaignListSelector,
-} from '../../Atoms/fetchDataState';
+import styled from 'styled-components';
+import NotingSelect from '../../components/NotingSelect';
+import CardList from './CardList';
 
-const Card = () => {
-  const influencerData = useRecoilValue(influencerListSelector);
-  const campaignData = useRecoilValue(campaignListSelector);
-
-  console.log(influencerData);
-  console.log(campaignData);
-  return <div>Card</div>;
+const Card = ({ selected }) => {
+  return (
+    <CardWrapper>
+      {selected === '' && <NotingSelect />}
+      {selected === 'campaign' && <CardList selected={selected} />}
+      {selected === 'influencer' && <CardList selected={selected} />}
+    </CardWrapper>
+  );
 };
 
 export default Card;
+
+const CardWrapper = styled.div`
+  margin: 0 3%;
+  margin-top: 10px;
+`;

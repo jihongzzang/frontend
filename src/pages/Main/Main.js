@@ -41,10 +41,11 @@ function Main() {
       <StateArea selected={selected} />
       <SortArea
         sortLists={sortLists}
+        selected={selected}
         selectedSort={selectedSort}
         changeSortOptionHandler={changeSortOptionHandler}
       />
-      <Card />
+      <Card selected={selected} />
     </MainWrraper>
   );
 }
@@ -52,5 +53,7 @@ function Main() {
 export default Main;
 
 const MainWrraper = styled.div`
+  padding-top: 36px;
   height: 954px;
+  background: ${({ theme }) => theme.palette.pageBackground};
 `;
