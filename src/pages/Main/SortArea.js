@@ -2,24 +2,32 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
-const SortArea = ({ sortLists, selectedSort, changeSortOptionHandler }) => {
+const SortArea = ({
+  selected,
+  sortLists,
+  selectedSort,
+  changeSortOptionHandler,
+}) => {
+  const renderUi = selected.length ? true : false;
   return (
-    <SortWrraper>
-      <FormControl className="formControl" size="small">
-        <InputLabel className="inputLabel" shrink={false}>
-          {selectedSort ? '' : '분류기준'}
-        </InputLabel>
-        <Select value={selectedSort} onChange={changeSortOptionHandler}>
-          {sortLists.map(({ id, name, korName }) => {
-            return (
-              <MenuItem key={id} value={name} name={name}>
-                {korName}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-    </SortWrraper>
+    renderUi && (
+      <SortWrraper>
+        <FormControl className="formControl" size="small">
+          <InputLabel className="inputLabel" shrink={false}>
+            {selectedSort ? '' : '분류기준'}
+          </InputLabel>
+          <Select value={selectedSort} onChange={changeSortOptionHandler}>
+            {sortLists.map(({ id, name, korName }) => {
+              return (
+                <MenuItem key={id} value={name} name={name}>
+                  {korName}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+      </SortWrraper>
+    )
   );
 };
 

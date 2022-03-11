@@ -72,7 +72,6 @@ export default SearchArea;
 
 const SearchWrraper = styled.div`
   margin: 0 3%;
-  margin-top: 36px;
   display: flex;
   flex-direction: column;
   width: 94%;
