@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { selectedCampaignState } from '../../../selectedCampaignState';
 
-function DropDown() {
-  const [state, setState] = useState('');
+function DropDown({ dropDownList }) {
+  const [state, setState] = useRecoilState(selectedCampaignState);
 
   const handleChange = e => {
     setState(e.target.value);
   };
-  const handleSubmit = e => {
-    console.log('this is ' + state);
-  };
 
   return (
-    <DropDownBox onSubmit={handleSubmit}>
+    <DropDownBox>
       <label>
         <select value={state} onChange={handleChange}>
-          <option value="one">one</option>
-          <option value="two">two</option>
-          <option value="three">three</option>
+          {dropDownList?.map(campaign => {
+            return (
+              <option key={campaign.id} value={campaign.id}>
+                {campaign.name}
+              </option>
+            );
+          })}
         </select>
       </label>
-      <input type="submit" value="선택" />
     </DropDownBox>
   );
 }
 
-const DropDownBox = styled.form`
+const DropDownBox = styled.div`
   width: 100%;
   height: 40px;
   border-radius: 12px;

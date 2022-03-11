@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import FigureBox from './FigureBox';
 
-function CampaignPrimaryFigures() {
+function CampaignPrimaryFigures({ FigureStandardText }) {
   return (
     <BigFiguresBox>
-      <FigureStandard>*2022년 3월 2일 기준, 전 일 대비 증가량</FigureStandard>
+      <FigureStandard>{FigureStandardText}</FigureStandard>
       <FigureBoxes>
         {/* TODO
         map으로 돌린다. */}

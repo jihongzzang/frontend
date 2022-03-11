@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import DropDown from './DropDown';
 
-function CampaignPrimaryInfo() {
+function CampaignPrimaryInfo({ List, dropDownList }) {
   return (
     <CampaignPrimaryInfoBox>
-      <DropDown />
+      <DropDown dropDownList={dropDownList} />
       <CampaignPrimaryInfos>
         <CampaignState>
-          <span>진행 중</span>
+          <span>{List?.korState}</span>
         </CampaignState>
         <CampaignPrimaryInfoText>
-          <span>CampaignTitle</span>
+          <span>{List?.name}</span>
           <span>CampaignTag</span>
           <span>CampaignPeriod</span>
         </CampaignPrimaryInfoText>

@@ -5,9 +5,9 @@ import GraphBox from './GraphBox';
 function GraphBoxes() {
   return (
     <GraphBoxesWrap>
-      <GraphBox />
-      <GraphBox />
-      <GraphBox />
+      <GraphBox width="32.2%" height="440px" />
+      <GraphBox width="32.2%" height="440px" />
+      <GraphBox width="32.2%" height="440px" />
     </GraphBoxesWrap>
   );
 }
