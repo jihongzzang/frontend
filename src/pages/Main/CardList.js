@@ -6,6 +6,11 @@ import {
   campaignListSelector,
 } from '../../Atoms/fetchDataState';
 import Btn from '../../components/Btn';
+import {
+  convertDate,
+  convertNumber,
+  convertPercent,
+} from '../../Hooks/convertData';
 
 const CardList = ({ selected }) => {
   const influencerData = useRecoilValue(influencerListSelector);
@@ -19,30 +24,30 @@ const CardList = ({ selected }) => {
             <Campaign key={campaign.id}>
               <ContentWrraper>
                 <span>No.{idx + 1}</span>
-                <img src={campaign.img} alt="캠페인 이미지" />
-                <span>{campaign.kor_name}</span>
+                <img src={campaign.image} alt="캠페인 이미지" />
+                <span>{campaign.name}</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{campaign.status[1]}</span>
+                <span>{campaign.campaign_status}</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>
-                  {campaign.start_date} - {campaign.end_date}
-                </span>
+                <span>{convertDate(campaign.created_at)}</span>
+                <span>&nbsp;-&nbsp;</span>
+                <span>{convertDate(campaign.end_at)}</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{campaign.likes}</span>
+                <span>{convertNumber(campaign.average_like)}개</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{campaign.comments}</span>
+                <span>{convertNumber(campaign.average_comment)}개</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{campaign.exposure}</span>
+                <span>{convertNumber(campaign.average_exposure)}회</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{campaign.engagement} </span>
+                <span>{campaign.average_participation} </span>
                 <span>&nbsp;/&nbsp;</span>
-                <span>{campaign.engagement_rate}%</span>
+                <span>{convertPercent(campaign.average_rate)}</span>
               </ContentWrraper>
             </Campaign>
           );
@@ -53,28 +58,28 @@ const CardList = ({ selected }) => {
             <Campaign key={influencer.id}>
               <ContentWrraper>
                 <span>No.{idx + 1}</span>
-                <img src={influencer.img} alt="캠페인 이미지" />
-                <span>{influencer.kor_name}</span>
+                <img src={influencer.profile_image} alt="캠페인 이미지" />
+                <span>{influencer.full_name}</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{influencer.status[1]}</span>
+                <span>{influencer.campaign_status}</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{influencer.followers}</span>
+                <span>{convertNumber(influencer.follower)}명</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{influencer.likes}</span>
+                <span>{convertNumber(influencer.average_like)}개</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{influencer.comments}</span>
+                <span>{convertNumber(influencer.average_comment)}개</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{influencer.exposure}</span>
+                <span>{convertNumber(influencer.average_exposure)}회</span>
               </ContentWrraper>
               <ContentWrraper>
-                <span>{influencer.engagement} </span>
+                <span>{influencer.average_participation} </span>
                 <span>&nbsp;/&nbsp;</span>
-                <span>{influencer.engagement_rate}%</span>
+                <span>{influencer.average_rate}%</span>
               </ContentWrraper>
             </Campaign>
           );
@@ -90,7 +95,6 @@ const Wrrapper = styled.div`
   flex-direction: column;
   overflow-y: auto;
   height: 600px;
-  border-bottom: 1px solid ${({ theme }) => theme.palette.borderColor};
 `;
 
 const Campaign = styled.div`
