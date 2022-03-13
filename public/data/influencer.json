@@ -1,0 +1,118 @@
+[
+  {
+    "male": 63,
+    "female": 37
+  },
+  [
+    {
+      "id": 1,
+      "profile_image": "https://picsum.photos/320/320",
+      "updated_at": "2022-02-15T00:00:00",
+      "full_name": "한햇살",
+      "name": "fibres_good",
+      "created_at": "2022-01-25T00:00:00",
+      "company_id": 1,
+      "influencer_posts": [
+        {
+          "id": 1,
+          "campaign_id": 3,
+          "tag": "@discoveryexpedition_kr",
+          "url": "https://www.instagram.com/p/Caj7UdWv9hl/",
+          "influencer_id": 1,
+          "campaign": {
+            "tag": "@discoveryexpedition_kr",
+            "name": "디스커버리 맨투맨",
+            "description": "디스커버리 맨투맨 광고",
+            "image": "https://user-images.githubusercontent.com/2377807/157627425-937f8b2b-71d3-48a5-a5ae-7dc48db24202.png",
+            "updated_at": "2022-03-01T00:00:00",
+            "id": 3,
+            "end_at": "2022-04-01T00:00:00",
+            "created_at": "2022-03-01T00:00:00"
+          }
+        }
+      ],
+      "insights": [
+        {
+          "comment": 28,
+          "website_click": 63,
+          "male_follower": 5076,
+          "hashtag": 776,
+          "female_follower": 5891,
+          "reaction": 518,
+          "bookmark": 96,
+          "home": 42,
+          "search_frequency": 797,
+          "exposure": 2172,
+          "created_at": "2022-01-01T00:00:00",
+          "id": 1,
+          "profile": 318,
+          "influencer_post_id": 1,
+          "visit_frequency": 1131,
+          "profile_visit": 455,
+          "influencer_id": 1,
+          "like": 322
+        },
+        {
+          "comment": 5,
+          "website_click": 88,
+          "male_follower": 6363,
+          "hashtag": 372,
+          "female_follower": 1512,
+          "reaction": 367,
+          "bookmark": 47,
+          "home": 273,
+          "search_frequency": 42,
+          "exposure": 1668,
+          "created_at": "2022-01-02T00:00:00",
+          "id": 2,
+          "profile": 289,
+          "influencer_post_id": 1,
+          "visit_frequency": 1136,
+          "profile_visit": 279,
+          "influencer_id": 1,
+          "like": 240
+        },
+        {
+          "comment": 46,
+          "website_click": 33,
+          "male_follower": 5585,
+          "hashtag": 222,
+          "female_follower": 1041,
+          "reaction": 186,
+          "bookmark": 99,
+          "home": 90,
+          "search_frequency": 460,
+          "exposure": 841,
+          "created_at": "2022-01-03T00:00:00",
+          "id": 3,
+          "profile": 157,
+          "influencer_post_id": 1,
+          "visit_frequency": 1381,
+          "profile_visit": 153,
+          "influencer_id": 1,
+          "like": 188
+        },
+        {
+          "comment": 14,
+          "website_click": 76,
+          "male_follower": 5958,
+          "hashtag": 555,
+          "female_follower": 4417,
+          "reaction": 280,
+          "bookmark": 53,
+          "home": 397,
+          "search_frequency": 422,
+          "exposure": 1988,
+          "created_at": "2022-01-04T00:00:00",
+          "id": 4,
+          "profile": 476,
+          "influencer_post_id": 1,
+          "visit_frequency": 1435,
+          "profile_visit": 204,
+          "influencer_id": 1,
+          "like": 63
+        }
+      ]
+    }
+  ]
+]
