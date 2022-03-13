@@ -2,18 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import DropDown from './DropDown';
 
-function CampaignPrimaryInfo({ List, dropDownList }) {
+function CampaignPrimaryInfo({ List, dropDownList, stateTag }) {
   return (
     <CampaignPrimaryInfoBox>
       <DropDown dropDownList={dropDownList} />
       <CampaignPrimaryInfos>
         <CampaignState>
-          <span>{List?.korState}</span>
+          <span>{stateTag}</span>
         </CampaignState>
         <CampaignPrimaryInfoText>
           <span>{List?.name}</span>
-          <span>CampaignTag</span>
-          <span>CampaignPeriod</span>
+          <span>{List.campaignTag}</span>
+          <CampaignPeriod>
+            {List?.startDate} ~ {List?.endDate}
+          </CampaignPeriod>
         </CampaignPrimaryInfoText>
       </CampaignPrimaryInfos>
     </CampaignPrimaryInfoBox>
@@ -32,7 +34,7 @@ const CampaignPrimaryInfos = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
 `;
 
@@ -43,14 +45,18 @@ const CampaignState = styled.div`
   width: 72px;
   height: 24px;
   margin: 0 5px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
+  border: 1px solid #e1e1ef;
   background-color: #5891e5;
-
   span {
-    color: #fff;
+    color: ${({ theme }) => theme.palette.white};
+    font-size: ${({ theme }) => theme.fontsize.fontSize2};
+    font-weight: 400;
   }
 `;
-
+const CampaignPeriod = styled.span`
+  font-size: ${({ theme }) => theme.fontsize.fontSize1};
+`;
 const CampaignPrimaryInfoText = styled.div`
   display: flex;
   justify-content: space-between;

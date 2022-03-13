@@ -16,19 +16,19 @@ const SmallFigure = styled.div`
   align-items: center;
   width: ${props => props.width};
   height: ${props => props.height};
-  /* width: 130px;
-  height: 90px; */
-  /* margin: 0 5px; */
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
 `;
 
 const FigureNameText = styled.span`
-  color: #5891e5;
+  color: ${({ theme }) => theme.palette.navNoneActive};
+  white-space: pre-wrap;
+  margin: 5px 0;
 `;
 
 const FigureText = styled.span`
-  color: #5891e5;
+  color: ${({ theme }) => theme.palette.navNoneActive};
+  margin: 5px 0;
 `;
 
 export default FigureBox;

@@ -5,43 +5,37 @@ import Feed from './Feed';
 function Feeds() {
   return (
     <FeedsBox>
-      <Feed feedWidth="300px" imgWidth="150px" imgHeight="150px" />
-      <SmallFeedsWrap>
-        <span>
-          캠페인 참여 게시물 순위 ((좋아요 + 댓글 수) 기준 / 매일 업데이트)
-        </span>
-        <SmallFeeds>
-          {/* TODO 
-         map으로 구현 */}
-          <Feed feedWidth="240px" imgWidth="120px" imgHeight="120px" />
-          <Feed feedWidth="240px" imgWidth="120px" imgHeight="120px" />
-          <Feed feedWidth="240px" imgWidth="120px" imgHeight="120px" />
-          <Feed feedWidth="240px" imgWidth="120px" imgHeight="120px" />
-        </SmallFeeds>
-      </SmallFeedsWrap>
+      <Text>
+        * 캠페인 참여 게시물 순위 ((좋아요 + 댓글 수) 기준 / 매일 업데이트)
+      </Text>
+      <FeedsWrap>
+        <Feed feedWidth="500px" imgWidth="150px" imgHeight="150px" />
+        <Feed feedWidth="500px" imgWidth="150px" imgHeight="150px" />
+        <Feed feedWidth="500px" imgWidth="150px" imgHeight="150px" />
+      </FeedsWrap>
     </FeedsBox>
   );
 }
 
 const FeedsBox = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
   height: 200px;
-  margin-top: 15px;
-  border-radius: 12px;
+  margin: 15px 0 10px;
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
 `;
 
-const SmallFeedsWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: end;
+const Text = styled.span`
+  font-size: ${({ theme }) => theme.fontsize.fontSize1};
+  align-self: flex-end;
+  margin: 10px 10px;
 `;
 
-const SmallFeeds = styled.div`
+const FeedsWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
 `;
+
 export default Feeds;

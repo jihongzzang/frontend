@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CampaignPrimaryFigures from './CampaignPrimaryFigures';
+import GraphBox from './GraphBox';
 
 function CompletedCampaign() {
   return (
@@ -9,6 +10,10 @@ function CompletedCampaign() {
       <CampaignRoas>
         <span>Campaign Marketing ROAS</span>
       </CampaignRoas>
+      <GraphBoxes>
+        <GraphBox width="49.16%">one</GraphBox>
+        <GraphBox width="49.16%">two</GraphBox>
+      </GraphBoxes>
     </div>
   );
 }
@@ -20,8 +25,14 @@ const CampaignRoas = styled.div`
   height: 60px;
   width: 100%;
   margin-top: 10px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
+`;
+
+const GraphBoxes = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 `;
 
 export default CompletedCampaign;

@@ -23,7 +23,7 @@ const FeedBox = styled.div`
   width: ${props => props.feedWidth};
   display: flex;
   margin: 0 10px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
 `;
 

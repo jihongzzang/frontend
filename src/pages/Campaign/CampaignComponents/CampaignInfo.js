@@ -3,10 +3,14 @@ import styled from 'styled-components';
 import CampaignPrimaryInfo from './CampaignPrimaryInfo';
 import CampaignSecondaryFigures from './CampaignSecondaryFigures';
 
-function CampaignInfo({ List, dropDownList }) {
+function CampaignInfo({ List, dropDownList, stateTag }) {
   return (
     <CampaignInfoBox>
-      <CampaignPrimaryInfo List={List} dropDownList={dropDownList} />
+      <CampaignPrimaryInfo
+        List={List}
+        dropDownList={dropDownList}
+        stateTag={stateTag}
+      />
       <CampaignSecondaryFigures />
     </CampaignInfoBox>
   );

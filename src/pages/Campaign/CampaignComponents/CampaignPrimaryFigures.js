@@ -12,37 +12,37 @@ function CampaignPrimaryFigures({ FigureStandardText }) {
         <FigureBox
           width="220px"
           height="100px"
-          FigureName="평균 좋아요 수"
+          FigureName="#캠페인 태그 검색 횟수"
           Figure="1,500"
         />
         <FigureBox
           width="220px"
           height="100px"
-          FigureName="평균 좋아요 수"
+          FigureName="#캠페인 태그 게시물 총 갯수"
           Figure="1,500"
         />
         <FigureBox
           width="220px"
           height="100px"
-          FigureName="평균 좋아요 수"
+          FigureName="공식 계정 방문 횟수"
           Figure="1,500"
         />
         <FigureBox
           width="220px"
           height="100px"
-          FigureName="평균 좋아요 수"
+          FigureName="공식 계정 팔로워 수"
           Figure="1,500"
         />
         <FigureBox
           width="220px"
           height="100px"
-          FigureName="평균 좋아요 수"
+          FigureName="공식 계정을 통해 공식 사이트 방문 횟수"
           Figure="1,500"
         />
         <FigureBox
           width="220px"
           height="100px"
-          FigureName="평균 좋아요 수"
+          FigureName="공식 사이트 매출"
           Figure="1,500"
         />
       </FigureBoxes>
@@ -55,7 +55,7 @@ const BigFiguresBox = styled.div`
 `;
 
 const FigureStandard = styled.span`
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fontsize.fontSize1};
 `;
 
 const FigureBoxes = styled.div`

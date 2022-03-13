@@ -1,12 +1,7 @@
 import React from 'react';
-import Campaign from '../Campaign/Campaign';
 
 function Main() {
-  return (
-    <div>
-      <Campaign />
-    </div>
-  );
+  return <div>Main</div>;
 }
 
 export default Main;
