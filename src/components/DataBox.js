@@ -38,9 +38,9 @@ const SIZES = {
     height: '120px',
     fontSize: '14px',
   },
-  small: {
-    height: '150px',
-    fontSize: '15px',
+  large: {
+    height: '330px',
+    fontSize: '14px',
   },
 };
 

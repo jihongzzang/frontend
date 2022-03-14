@@ -24,7 +24,7 @@ const theme = {
     navActive: '#54B79E',
     navNoneActive: '#5891E5',
     chartRed: '#E15759',
-    chartRed2: 'FF407B',
+    chartRed2: '#FF407B',
     chartYellow: '#F28E2A',
     chartGreen: '#008A89',
     chartGreen2: '#00C0B1',

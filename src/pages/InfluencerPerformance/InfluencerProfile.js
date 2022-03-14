@@ -41,11 +41,11 @@ const InfluencerProfile = () => {
   };
 
   const campaignDataMapping = {
-    1: influencerData[0].insight_1.total_data,
-    2: influencerData[0].insight_1['1st_weeks_data'],
-    3: influencerData[0].insight_1['2nd_weeks_data'],
-    4: influencerData[0].insight_1['3rd_weeks_data'],
-    5: influencerData[0].insight_1['4th_weeks_data'],
+    1: influencerData[0].insight_1.all,
+    2: influencerData[0].insight_1['1st'],
+    3: influencerData[0].insight_1['2nd'],
+    4: influencerData[0].insight_1['3rd'],
+    5: influencerData[0].insight_1['4th'],
   };
 
   const extractData1 = Object.values(campaignDataMapping[1]);
@@ -347,7 +347,8 @@ const ContentText = styled.div`
 const DataWrraper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 77%;
+  width: 70%;
+  margin-left: 100px;
   margin-right: 20px;
 `;
 
