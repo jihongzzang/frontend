@@ -21,3 +21,7 @@ export const convertDate = date => {
 export const convertPercent = num => {
   return parseFloat(num).toFixed(2) + '%';
 };
+
+export const convertNumberToFixed = data => {
+  return typeof data === 'number' ? data.toFixed(2) : data;
+};

@@ -13,6 +13,7 @@ const theme = {
   palette: {
     black: '#222222',
     grey: '#22222280',
+    grey2: '#E3E3EC',
     lightGrey: '#EBEBEB',
     lightGrey2: '#F2F2F2',
     darkGrey: '#666666',

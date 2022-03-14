@@ -53,7 +53,9 @@ export default Nav;
 
 const NavWrraper = styled.div`
   display: flex;
-  width: 100%;
+  width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
   height: 70px;
   background: linear-gradient(
     90deg,
