@@ -28,6 +28,7 @@ function Main() {
     const { value } = e.target;
     setSelectedSort(value);
   };
+
   return (
     <MainWrraper>
       <SearchArea
