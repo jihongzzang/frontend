@@ -39,8 +39,10 @@ export const filteredInfluencer = selector({
   key: 'filteredInfluencer',
   get: ({ get }) => {
     const allInfluencer = get(influencerListSelector2);
-    const influencerName = get(selectedInfluencer);
-    const influencerData = allInfluencer.filter(x => x.name === influencerName);
+    const target = get(selectedInfluencer);
+    const influencerData = allInfluencer.filter(
+      influencer => influencer.name === target
+    );
     return influencerData;
   },
 });
