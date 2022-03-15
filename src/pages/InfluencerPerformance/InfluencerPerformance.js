@@ -38,9 +38,7 @@ export default InfluencerPerformance;
 
 const Wrraper = styled.div`
   width: 1440px;
-  height: 954px;
-  margin-right: auto;
-  margin-left: auto;
+  height: 100vh;
   padding-top: 10px;
   background: ${({ theme }) => theme.palette.pageBackground};
 `;

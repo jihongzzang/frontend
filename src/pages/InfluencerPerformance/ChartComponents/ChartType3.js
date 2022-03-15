@@ -1,11 +1,12 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import styled from 'styled-components';
-import DataBox from '../../../components/DataBox';
 import { useRecoilValue } from 'recoil';
 import { chartData1, chartData2, chartData3 } from '../../../Atoms/chartData';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart, registerables } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import DataBox from '../../../components/DataBox';
+import styled from 'styled-components';
+import theme from '../../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
@@ -35,13 +36,7 @@ const ChartType3 = () => {
             return tooltipItem.yLabel;
           },
         },
-      },
-      datalabels: {
-        display: true,
-        align: 'center',
-        font: {
-          weight: 'normal',
-        },
+        displayColors: 'blue',
       },
     },
     indexAxis: 'y',
@@ -59,9 +54,9 @@ const ChartType3 = () => {
           font: {
             size: c => {
               if (c.index === 0) {
-                return 12;
+                return theme.fontsize.fontSize1;
               } else {
-                return 12;
+                return theme.fontsize.fontSize1;
               }
             },
             weight: c => {
@@ -93,16 +88,16 @@ const ChartType3 = () => {
         border: '0',
         backgroundColor: c => {
           if (c.index === 0) {
-            return '#0B008A';
+            return theme.palette.chartBlue;
           } else {
-            return '#0B008A';
+            return theme.palette.chartBlue;
           }
         },
         barThickness: 18,
         datalabels: {
-          color: 'white',
+          color: theme.palette.white,
           font: {
-            size: 12,
+            size: theme.fontsize.fontSize1,
           },
         },
       },
@@ -112,14 +107,14 @@ const ChartType3 = () => {
         border: '0',
         backgroundColor: c => {
           if (c.index === 0) {
-            return '#AAA6D6';
+            return theme.palette.chartBlue2;
           } else {
-            return '#AAA6D6';
+            return theme.palette.chartBlue2;
           }
         },
         barThickness: 18,
         datalabels: {
-          color: 'white',
+          color: theme.palette.white,
         },
       },
     ],

@@ -19,6 +19,7 @@ export const chartData1 = selector({
     };
   },
 });
+
 export const chartData2 = selector({
   key: 'chartData2',
   get: ({ get }) => {
@@ -60,5 +61,13 @@ export const chartData4 = selector({
   get: ({ get }) => {
     const data = get(filteredInfluencer);
     return data[0] !== undefined ? data[0]?.followersRate : null;
+  },
+});
+
+export const chartData5 = selector({
+  key: 'chartData5',
+  get: ({ get }) => {
+    const data = get(filteredInfluencer);
+    return data[0] !== undefined ? data[0]?.followers : null;
   },
 });

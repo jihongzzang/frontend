@@ -1,11 +1,12 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import styled from 'styled-components';
-import DataBox from '../../../components/DataBox';
 import { useRecoilValue } from 'recoil';
 import { chartData1, chartData2, chartData3 } from '../../../Atoms/chartData';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart, registerables } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import DataBox from '../../../components/DataBox';
+import styled from 'styled-components';
+import theme from '../../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
@@ -61,9 +62,9 @@ const ChartType1 = () => {
           font: {
             size: c => {
               if (c.index === 0) {
-                return 12;
+                return theme.fontsize.fontSize1;
               } else {
-                return 12;
+                return theme.fontsize.fontSize1;
               }
             },
             weight: c => {
@@ -95,14 +96,14 @@ const ChartType1 = () => {
         border: '0',
         backgroundColor: c => {
           if (c.index === 0) {
-            return '#E15759';
+            return theme.palette.chartRed;
           } else {
-            return '#E15759';
+            return theme.palette.chartRed;
           }
         },
         barThickness: 18,
         datalabels: {
-          color: 'white',
+          color: theme.palette.white,
         },
       },
       {
@@ -111,14 +112,14 @@ const ChartType1 = () => {
         border: '0',
         backgroundColor: c => {
           if (c.index === 0) {
-            return '#F28E2A';
+            return theme.palette.chartYellow;
           } else {
-            return '#F28E2A';
+            return theme.palette.chartYellow;
           }
         },
         barThickness: 18,
         datalabels: {
-          color: 'white',
+          color: theme.palette.white,
         },
       },
     ],

@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { selector } from 'recoil';
 import axios from 'axios';
 
 export const influencerListSelector = selector({
@@ -28,5 +28,3 @@ export const influencerListSelector2 = selector({
     return response.data.influencer;
   },
 });
-
-// '/data/main.json'

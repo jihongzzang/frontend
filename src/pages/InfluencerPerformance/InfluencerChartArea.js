@@ -20,7 +20,6 @@ const Wrraper = styled.div`
   margin: 0 3%;
   margin-top: 10px;
   width: 94%;
-  height: 34.956%;
   display: flex;
   justify-content: space-between;
   color: ${({ theme }) => theme.palette.black};

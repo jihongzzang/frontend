@@ -1,11 +1,12 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import styled from 'styled-components';
-import DataBox from '../../../components/DataBox';
 import { useRecoilValue } from 'recoil';
 import { chartData1, chartData2, chartData3 } from '../../../Atoms/chartData';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart, registerables } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import DataBox from '../../../components/DataBox';
+import styled from 'styled-components';
+import theme from '../../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
@@ -59,9 +60,9 @@ const ChartType2 = () => {
           font: {
             size: c => {
               if (c.index === 0) {
-                return 12;
+                return theme.fontsize.fontSize1;
               } else {
-                return 12;
+                return theme.fontsize.fontSize1;
               }
             },
             weight: c => {
@@ -92,14 +93,14 @@ const ChartType2 = () => {
         border: '0',
         backgroundColor: c => {
           if (c.index === 0) {
-            return '#008A89';
+            return theme.palette.chartGreen;
           } else {
-            return '#008A89';
+            return theme.palette.chartGreen;
           }
         },
         barThickness: 18,
         datalabels: {
-          color: 'white',
+          color: theme.palette.white,
         },
         barPercentage: 0.5,
       },
@@ -109,14 +110,14 @@ const ChartType2 = () => {
         border: '0',
         backgroundColor: c => {
           if (c.index === 0) {
-            return '#00C0B1';
+            return theme.palette.chartGreen2;
           } else {
-            return '#00C0B1';
+            return theme.palette.chartGreen2;
           }
         },
         barThickness: 18,
         datalabels: {
-          color: 'white',
+          color: theme.palette.white,
         },
       },
     ],
