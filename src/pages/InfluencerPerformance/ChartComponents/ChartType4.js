@@ -29,6 +29,9 @@ const ChartType4 = () => {
       legend: {
         display: false,
       },
+      tooltip: {
+        displayColors: false,
+      },
       tooltips: {
         callbacks: {
           label: function (tooltipItem) {
@@ -91,18 +94,18 @@ const ChartType4 = () => {
       <Content>
         <Doughnut data={data} options={options} width={100} height={50} />
         <ChartInner>
-          <div>여성</div>
+          <div>남성</div>
           <div>55%</div>
         </ChartInner>
       </Content>
       <Footer>
         <FooterBox>
           <span>55%</span>
-          <span>여성</span>
+          <span>남성</span>
         </FooterBox>
         <FooterBox>
           <span>45%</span>
-          <span>남성</span>
+          <span>여성</span>
         </FooterBox>
       </Footer>
     </StyledDataBox>
@@ -113,7 +116,7 @@ export default ChartType4;
 
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 23%;
+  width: 22%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

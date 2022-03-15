@@ -120,8 +120,8 @@ const SearchWrraper = styled.div`
   margin: 0 3%;
   display: flex;
   flex-direction: column;
+  padding: 10px 0;
   width: 94%;
-  height: 10.4%;
   border: 1px solid ${({ theme }) => theme.palette.borderColor};
   background: ${({ theme }) => theme.palette.white};
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
@@ -130,7 +130,6 @@ const SearchWrraper = styled.div`
 
 const Title = styled.div`
   margin-left: 20px;
-  margin-top: 10px;
   h2 {
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
     font-weight: 600;

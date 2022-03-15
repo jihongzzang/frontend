@@ -30,12 +30,11 @@ const ChartType1 = () => {
       legend: {
         display: false,
       },
-      tooltips: {
-        callbacks: {
-          label: function (tooltipItem) {
-            return tooltipItem.yLabel;
-          },
+      tooltip: {
+        label: function (tooltipItem) {
+          return tooltipItem.yLabel;
         },
+        displayColors: false,
       },
       datalabels: {
         display: true,
@@ -87,7 +86,7 @@ const ChartType1 = () => {
     layout: { padding: 10 },
   };
 
-  const dataHorBar = {
+  const data = {
     labels: [discoveryData.hashtag, anotherData.hashtag, theOtherData.hashtag],
     datasets: [
       {
@@ -141,7 +140,7 @@ const ChartType1 = () => {
           <span>참여율</span>
         </LegendDataBox>
       </Header>
-      <Bar data={dataHorBar} options={options} width={300} height={200} />
+      <Bar data={data} options={options} width={300} height={200} />
     </StyledDataBox>
   );
 };
@@ -149,7 +148,7 @@ const ChartType1 = () => {
 export default ChartType1;
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 32%;
+  width: 32.6%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

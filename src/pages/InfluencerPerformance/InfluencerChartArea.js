@@ -18,7 +18,7 @@ export default InfluencerChartArea;
 
 const Wrraper = styled.div`
   margin: 0 3%;
-  margin-top: 10px;
+  padding-top: 15px;
   width: 94%;
   display: flex;
   justify-content: space-between;

@@ -30,13 +30,22 @@ const ChartType3 = () => {
       legend: {
         display: false,
       },
+      tooltip: {
+        displayColors: false,
+      },
       tooltips: {
         callbacks: {
           label: function (tooltipItem) {
             return tooltipItem.yLabel;
           },
         },
-        displayColors: 'blue',
+      },
+    },
+    datalabels: {
+      display: true,
+      align: 'center',
+      font: {
+        weight: 'normal',
       },
     },
     indexAxis: 'y',
@@ -79,7 +88,7 @@ const ChartType3 = () => {
     layout: { padding: 10 },
   };
 
-  const dataHorBar = {
+  const data = {
     labels: [discoveryData.hashtag, anotherData.hashtag, theOtherData.hashtag],
     datasets: [
       {
@@ -132,7 +141,7 @@ const ChartType3 = () => {
           <span>전환정도</span>
         </LegendDataBox>
       </Header>
-      <Bar data={dataHorBar} options={options} width={300} height={200} />
+      <Bar data={data} options={options} width={300} height={200} />
     </StyledDataBox>
   );
 };
@@ -141,7 +150,7 @@ export default ChartType3;
 
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 32%;
+  width: 32.6%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

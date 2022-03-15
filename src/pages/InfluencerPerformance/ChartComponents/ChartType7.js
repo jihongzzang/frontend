@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { selectedWeeks } from '../../../Atoms/selectedState';
-import { chartData5 } from '../../../Atoms/chartData';
+import { chartData6 } from '../../../Atoms/chartData';
 import { convertWeeks } from '../../../Hooks/convertWeeks';
 import { Chart, registerables } from 'chart.js';
 import { Line } from 'react-chartjs-2';
@@ -12,17 +12,20 @@ import theme from '../../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
-const ChartType5 = () => {
-  const followersTransitionData = useRecoilValue(chartData5);
+const ChartType7 = () => {
+  const flowConversionData = useRecoilValue(chartData6);
   const week = useRecoilValue(selectedWeeks);
+  const convertArr = Object.values(flowConversionData);
+  const sliceData = convertArr.slice(1, convertArr.length - 1);
+
+  const initailValue = { hashtagClick: 0 };
+
+  sliceData.unshift(initailValue);
   const parsingData = {
-    [week]: followersTransitionData.slice(
-      0,
-      convertWeeks(week, followersTransitionData)
-    ),
+    [week]: sliceData.slice(0, convertWeeks(week, sliceData)),
   };
 
-  const renderData = parsingData[week].map(ele => ele.value);
+  const renderData = parsingData[week].map(ele => ele.hashtagClick);
 
   const options = {
     plugins: {
@@ -61,7 +64,6 @@ const ChartType5 = () => {
           color: theme.palette.lightGrey,
         },
         ticks: {
-          stepSize: 500,
           font: {
             size: c => {
               if (c.index === 0) {
@@ -71,7 +73,7 @@ const ChartType5 = () => {
               }
             },
             weight: c => {
-              if (c.index === convertWeeks(week, followersTransitionData)) {
+              if (c.index === convertWeeks(week, sliceData)) {
                 return 'normal';
               } else {
                 return 'normal';
@@ -95,10 +97,10 @@ const ChartType5 = () => {
     datasets: [
       {
         data: renderData,
-        label: '팔로워 수',
+        label: '전환',
         borderWidth: 2,
-        backgroundColor: theme.palette.chartRed2,
-        borderColor: theme.palette.chartRed2,
+        backgroundColor: theme.palette.chartBlue2,
+        borderColor: theme.palette.chartBlue2,
         pointRadius: 1.5,
         datalabels: {
           color: theme.palette.black,
@@ -114,22 +116,21 @@ const ChartType5 = () => {
     <StyledDataBox size="large" color="borderColor" outline>
       <Header>
         <LegendDataBox size="medium" color="black">
-          <h2>팔로워 추이</h2>
+          <h2>인사이트 반응 영역 공식계정 전환 추이</h2>
         </LegendDataBox>
       </Header>
-      <Content>
-        <Line data={data} options={options} width={300} height={280} />
-      </Content>
+      <Line data={data} options={options} width={300} height={200} />
     </StyledDataBox>
   );
 };
 
-export default ChartType5;
+export default ChartType7;
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 22%;
+  width: 26.3%;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 `;
 
 const Header = styled.div`
@@ -147,17 +148,10 @@ const LegendDataBox = styled(DataBox)`
   margin-right: 10px;
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
   color: ${({ theme }) => theme.palette.black};
+
   h2 {
     margin-left: 10px;
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
   }
-`;
-
-const Content = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 300px;
 `;

@@ -48,7 +48,7 @@ export default AsideRanker;
 
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 23%;
+  width: 29.5%;
   display: flex;
   flex-direction: column;
 `;
