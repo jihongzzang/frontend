@@ -8,14 +8,9 @@ export const chartData1 = selector({
     const target = get(selectedWeeks);
     const data = get(filteredInfluencer);
     return {
-      hashtag:
-        data[0] !== undefined ? data[0]?.insight_1?.hashtag_name[1] : null,
-      name:
-        data[0] !== undefined ? Object.keys(data[0]?.insight_1[target]) : null,
-      value:
-        data[0] !== undefined
-          ? Object.values(data[0]?.insight_1[target])
-          : null,
+      hashtag: data[0].insight_1.hashtag_name[1],
+      name: Object.keys(data[0].insight_1[target]),
+      value: Object.values(data[0].insight_1[target]),
     };
   },
 });
@@ -26,14 +21,9 @@ export const chartData2 = selector({
     const target = get(selectedWeeks);
     const data = get(filteredInfluencer);
     return {
-      hashtag:
-        data[0] !== undefined ? data[0]?.insight_2?.hashtag_name[1] : null,
-      name:
-        data[0] !== undefined ? Object.keys(data[0]?.insight_2[target]) : null,
-      value:
-        data[0] !== undefined
-          ? Object.values(data[0]?.insight_2[target])
-          : null,
+      hashtag: data[0].insight_2.hashtag_name[1],
+      name: Object.keys(data[0].insight_2[target]),
+      value: Object.values(data[0].insight_2[target]),
     };
   },
 });
@@ -44,14 +34,9 @@ export const chartData3 = selector({
     const target = get(selectedWeeks);
     const data = get(filteredInfluencer);
     return {
-      hashtag:
-        data[0] !== undefined ? data[0]?.insight_3?.hashtag_name[1] : null,
-      name:
-        data[0] !== undefined ? Object.keys(data[0]?.insight_3[target]) : null,
-      value:
-        data[0] !== undefined
-          ? Object.values(data[0]?.insight_3[target])
-          : null,
+      hashtag: data[0].insight_3.hashtag_name[1],
+      name: Object.keys(data[0].insight_3[target]),
+      value: Object.values(data[0].insight_3[target]),
     };
   },
 });
@@ -60,7 +45,7 @@ export const chartData4 = selector({
   key: 'chartData4',
   get: ({ get }) => {
     const data = get(filteredInfluencer);
-    return data[0] !== undefined ? data[0]?.followersRate : null;
+    return data[0].followersRate;
   },
 });
 
@@ -68,6 +53,14 @@ export const chartData5 = selector({
   key: 'chartData5',
   get: ({ get }) => {
     const data = get(filteredInfluencer);
-    return data[0] !== undefined ? data[0]?.followers : null;
+    return data[0].followers;
+  },
+});
+
+export const chartData6 = selector({
+  key: 'chartData6',
+  get: ({ get }) => {
+    const data = get(filteredInfluencer);
+    return data[0].insight_1;
   },
 });

@@ -9,6 +9,7 @@ import InfluencerChartAreaFooter from './InfluencerChartAreaFooter';
 import { SEARCH_STATE } from './SEARCH_STATE';
 import { WEEK_LISTS } from './WEEK_LISTS';
 import styled from 'styled-components';
+import InfluencerFooter from './InfluencerFooter';
 
 const InfluencerPerformance = () => {
   const influencerData = useRecoilValue(influencerListSelector2);
@@ -28,6 +29,7 @@ const InfluencerPerformance = () => {
           <InfluencerProfile />
           <InfluencerChartArea />
           <InfluencerChartAreaFooter />
+          <InfluencerFooter />
         </>
       )}
     </Wrraper>
@@ -38,7 +40,7 @@ export default InfluencerPerformance;
 
 const Wrraper = styled.div`
   width: 1440px;
-  height: 100vh;
-  padding-top: 10px;
+  height: 100%;
+  padding-top: 15px;
   background: ${({ theme }) => theme.palette.pageBackground};
 `;

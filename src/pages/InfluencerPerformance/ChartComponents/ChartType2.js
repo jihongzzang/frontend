@@ -14,12 +14,12 @@ const ChartType2 = () => {
   const discoveryData = useRecoilValue(chartData1);
   const anotherData = useRecoilValue(chartData2);
   const theOtherData = useRecoilValue(chartData3);
-  const reachsData = [
-    discoveryData.value && discoveryData.value[4],
-    anotherData.value && anotherData.value[4],
-    theOtherData.value && theOtherData.value[4],
+  const exposureData = [
+    discoveryData.value && discoveryData.value[5],
+    anotherData.value && anotherData.value[5],
+    theOtherData.value && theOtherData.value[5],
   ];
-  const fromHastagData = [
+  const hashtagData = [
     discoveryData.value && discoveryData.value[6],
     anotherData.value && anotherData.value[6],
     theOtherData.value && theOtherData.value[6],
@@ -30,12 +30,11 @@ const ChartType2 = () => {
       legend: {
         display: false,
       },
-      tooltips: {
-        callbacks: {
-          label: function (tooltipItem) {
-            return tooltipItem.yLabel;
-          },
+      tooltip: {
+        label: function (tooltipItem) {
+          return tooltipItem.yLabel;
         },
+        displayColors: false,
       },
       datalabels: {
         display: true,
@@ -84,12 +83,12 @@ const ChartType2 = () => {
     responsive: true,
     layout: { padding: 10 },
   };
-  const dataHorBar = {
+  const data = {
     labels: [discoveryData.hashtag, anotherData.hashtag, theOtherData.hashtag],
     datasets: [
       {
-        data: reachsData,
-        label: '도달 수',
+        data: exposureData,
+        label: '노출 수',
         border: '0',
         backgroundColor: c => {
           if (c.index === 0) {
@@ -105,7 +104,7 @@ const ChartType2 = () => {
         barPercentage: 0.5,
       },
       {
-        data: fromHastagData,
+        data: hashtagData,
         label: '해시태그로 인한 유입',
         border: '0',
         backgroundColor: c => {
@@ -135,7 +134,7 @@ const ChartType2 = () => {
           <span>해시태그</span>
         </LegendDataBox>
       </Header>
-      <Bar data={dataHorBar} options={options} width={300} height={200} />
+      <Bar data={data} options={options} width={300} height={200} />
     </StyledDataBox>
   );
 };
@@ -144,7 +143,7 @@ export default ChartType2;
 
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 32%;
+  width: 32.6%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

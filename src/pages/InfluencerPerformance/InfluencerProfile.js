@@ -295,7 +295,7 @@ const InfluencerProfile = () => {
 export default InfluencerProfile;
 const ProfileWrapper = styled.div`
   margin: 0 3%;
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   width: 94%;
