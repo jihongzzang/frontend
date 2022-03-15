@@ -1,46 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
 import FigureBox from './FigureBox';
+import SECONDARY_FIGURES from './SECONDARY_FIGURES';
+import { convertNumber } from '../../../Hooks/convertData';
 
-function CampaignSecondaryFigures() {
+function CampaignSecondaryFigures({ List }) {
+  SECONDARY_FIGURES[0].figureValue = convertNumber(
+    List.budget
+  ).toLocaleString();
+  SECONDARY_FIGURES[1].figureValue = List.average_like.toLocaleString();
+  SECONDARY_FIGURES[2].figureValue = List.average_comment.toLocaleString();
+  SECONDARY_FIGURES[3].figureValue = List.average_exposure.toLocaleString();
+  SECONDARY_FIGURES[4].figureValue =
+    List.average_participation.toLocaleString();
+
   return (
     <SmallFigures>
-      <FigureBox
-        width="130px"
-        height="90px"
-        FigureName="평균 좋아요 수"
-        Figure="1,500"
-      />
-      <FigureBox
-        width="130px"
-        height="90px"
-        FigureName="평균 댓글 수"
-        Figure="1,500"
-      />
-      <FigureBox
-        width="130px"
-        height="90px"
-        FigureName="평균 노출"
-        Figure="1,500"
-      />
-      <FigureBox
-        width="130px"
-        height="90px"
-        FigureName="평균 참여"
-        Figure="1,500"
-      />
-      <FigureBox
-        width="130px"
-        height="90px"
-        FigureName="마케팅 비용"
-        Figure="1,500"
-      />
+      {SECONDARY_FIGURES.map(f => {
+        return (
+          <FigureBox
+            width="9vw"
+            height="9.5vh"
+            FigureName={f.figureName}
+            Figure={f.figureValue}
+            money={f.money}
+          />
+        );
+      })}
     </SmallFigures>
   );
 }
 const SmallFigures = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 49.16%;
+  width: 46.65vw;
 `;
 export default CampaignSecondaryFigures;

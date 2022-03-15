@@ -1,66 +1,48 @@
 import React from 'react';
 import styled from 'styled-components';
 import FigureBox from './FigureBox';
+import PRIMARY_FIGURES from './PRIMARY_FIGURES';
+import { convertNumber } from '../../../Hooks/convertData';
 
-function CampaignPrimaryFigures({ FigureStandardText }) {
+function CampaignPrimaryFigures({ List, FigureStandardText }) {
+  PRIMARY_FIGURES[0].figureValue = List.total_hashtag.toLocaleString();
+  PRIMARY_FIGURES[1].figureValue = List.count_post.toLocaleString();
+  PRIMARY_FIGURES[2].figureValue = List.official_visit.toLocaleString();
+  PRIMARY_FIGURES[3].figureValue = List.official_follower.toLocaleString();
+  PRIMARY_FIGURES[4].figureValue = List.official_referrer.toLocaleString();
+  PRIMARY_FIGURES[5].figureValue = convertNumber(2000).toLocaleString();
+
   return (
     <BigFiguresBox>
       <FigureStandard>{FigureStandardText}</FigureStandard>
       <FigureBoxes>
-        {/* TODO
-        map으로 돌린다. */}
-        <FigureBox
-          width="220px"
-          height="100px"
-          FigureName="#캠페인 태그 검색 횟수"
-          Figure="1,500"
-        />
-        <FigureBox
-          width="220px"
-          height="100px"
-          FigureName="#캠페인 태그 게시물 총 갯수"
-          Figure="1,500"
-        />
-        <FigureBox
-          width="220px"
-          height="100px"
-          FigureName="공식 계정 방문 횟수"
-          Figure="1,500"
-        />
-        <FigureBox
-          width="220px"
-          height="100px"
-          FigureName="공식 계정 팔로워 수"
-          Figure="1,500"
-        />
-        <FigureBox
-          width="220px"
-          height="100px"
-          FigureName="공식 계정을 통해 공식 사이트 방문 횟수"
-          Figure="1,500"
-        />
-        <FigureBox
-          width="220px"
-          height="100px"
-          FigureName="공식 사이트 매출"
-          Figure="1,500"
-        />
+        {PRIMARY_FIGURES.map(f => {
+          return (
+            <FigureBox
+              width="15vw"
+              height="12vh"
+              FigureName={f.figureName}
+              Figure={f.figureValue}
+              money={f.money}
+            />
+          );
+        })}
       </FigureBoxes>
     </BigFiguresBox>
   );
 }
 
 const BigFiguresBox = styled.div`
-  margin-top: 15px;
+  margin-top: 1vh;
 `;
 
 const FigureStandard = styled.span`
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
+  color: ${({ theme }) => theme.palette.darkGrey};
 `;
 
 const FigureBoxes = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
 `;
 export default CampaignPrimaryFigures;

@@ -23,6 +23,7 @@ const FeedBox = styled.div`
   width: ${props => props.feedWidth};
   display: flex;
   margin: 0 10px;
+  background-color: ${({ theme }) => theme.palette.white};
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
 `;

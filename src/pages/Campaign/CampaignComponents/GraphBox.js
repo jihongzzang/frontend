@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Chart } from 'chart.js/auto';
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import DropDown from './DropDown';
 
 function GraphBox({ width, height }) {

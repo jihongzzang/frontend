@@ -1,58 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 import { selectedCampaignState } from '../../selectedCampaignState';
 import CampaignInfo from './CampaignComponents/CampaignInfo';
 import CompletedCampaign from './CampaignComponents/CompletedCampaign';
 import OngoingCampaign from './CampaignComponents/OngoingCampaign';
+import LIST from './CampaignComponents/LIST';
 
 function Campaign() {
   const [state, setState] = useRecoilState(selectedCampaignState);
+  // const [campaignList, setCampaignList] = useState([]);
 
-  function parseDate(date) {
-    return (
-      date.getFullYear() +
-      '-' +
-      (date.getMonth() + 1 > 9
-        ? (date.getMonth() + 1).toString()
-        : '0' + (date.getMonth() + 1)) +
-      '-' +
-      (date.getDate() > 9
-        ? date.getDate().toString()
-        : '0' + date.getDate().toString())
-    );
-  }
+  // useEffect(() => {
+  //   fetch('http://172.1.6.129:8000/influencer/yooo?status_filter=all')
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setCampaignList(res[0]);
+  //       console.log(res[0]);
+  //     });
+  // }, []);
 
-  const today = parseDate(new Date());
-  const yesterday = parseDate(
-    new Date(Date.parse(new Date()) - 1 * 1000 * 60 * 60 * 24)
-  );
-
+  const campaignList = LIST;
   function findCampaign(e) {
     if (e.id == state) {
       return true;
     }
   }
-
   const selectedCampaign = campaignList?.find(findCampaign);
 
-  function defineState(date) {
-    if (date <= selectedCampaign?.endDate) {
+  function defineState() {
+    if (selectedCampaign?.campaign_status === '진행 중') {
       return true;
     }
+    if (selectedCampaign?.campaign_status === '완료') {
+      return false;
+    }
   }
-
-  const campaignStates = defineState(today);
-
+  const campaignStates = defineState();
+  const handle = e => {
+    setState(e.target.value);
+  };
   return (
-    <div>
+    <CampaignWrap>
       {campaignStates ? (
         <>
           <CampaignInfo
             List={selectedCampaign}
             dropDownList={campaignList}
             stateTag="진행 중"
+            value={state}
+            onChange={handle}
           />
-          <OngoingCampaign />
+          <OngoingCampaign List={selectedCampaign} />
         </>
       ) : (
         <>
@@ -60,43 +59,19 @@ function Campaign() {
             List={selectedCampaign}
             dropDownList={campaignList}
             stateTag="완료"
+            value={state}
+            onChange={handle}
           />
-          <CompletedCampaign />
+          <CompletedCampaign List={selectedCampaign} />
         </>
       )}
-    </div>
+    </CampaignWrap>
   );
 }
 
-export default Campaign;
+const CampaignWrap = styled.div`
+  padding: 1% 3% 3% 3%;
+  background-color: ${({ theme }) => theme.palette.pageBackground};
+`;
 
-const campaignList = [
-  {
-    id: 1,
-    name: '이상하고 아름다운 캠페인',
-    startDate: '2022-03-01',
-    endDate: '2022-03-20',
-    campaignTag: '@discoveryexpedition_kr',
-  },
-  {
-    id: 2,
-    name: '이미 끝나버린 캠페인',
-    startDate: '2022-03-01',
-    endDate: '2022-03-05',
-    campaignTag: '@discoveryexpedition_kr',
-  },
-  {
-    id: 3,
-    name: '아직도 안 끝난 캠페인',
-    startDate: '2022-03-01',
-    endDate: '2022-03-15',
-    campaignTag: '@discoveryexpedition_kr',
-  },
-  {
-    id: 4,
-    name: '끝난지 얼마안된 캠페인',
-    startDate: '2022-03-01',
-    endDate: '2022-03-01',
-    campaignTag: '@discoveryexpedition_kr',
-  },
-];
+export default Campaign;

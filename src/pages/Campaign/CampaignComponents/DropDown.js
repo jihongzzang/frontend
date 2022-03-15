@@ -1,22 +1,13 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { selectedCampaignState } from '../../../selectedCampaignState';
 import { Select, MenuItem } from '@mui/material';
-import { red } from '@mui/material/colors';
 
-function DropDown({ dropDownList }) {
-  const [state, setState] = useRecoilState(selectedCampaignState);
-
-  const handleChange = e => {
-    setState(e.target.value);
-  };
-
+function DropDown({ value, onChange, dropDownList }) {
   return (
     <DropDownBox
       sx={{ borderRadius: '12px' }}
-      value={state}
-      onChange={handleChange}
+      value={value}
+      onChange={onChange}
     >
       {dropDownList?.map(campaign => {
         return (
@@ -31,10 +22,8 @@ function DropDown({ dropDownList }) {
 
 const DropDownBox = styled(Select)`
   width: 100%;
-  height: 40px;
-  /* border-radius: 12px; */
-  //border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
-  /* border: 1px solid #e1e1ef; */
+  height: 4.5vh;
+  background-color: ${({ theme }) => theme.palette.white};
   text-align: center;
 `;
 

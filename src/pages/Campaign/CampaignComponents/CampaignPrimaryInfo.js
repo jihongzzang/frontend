@@ -1,24 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { selectedCampaignState } from '../../../selectedCampaignState';
 import styled from 'styled-components';
 import DropDown from './DropDown';
+import { convertDate } from '../../../Hooks/convertData';
 
-function CampaignPrimaryInfo({ List, dropDownList, stateTag }) {
+function CampaignPrimaryInfo({
+  value,
+  onChange,
+  List,
+  dropDownList,
+  stateTag,
+}) {
   return (
-    <CampaignPrimaryInfoBox>
-      <DropDown dropDownList={dropDownList} />
-      <CampaignPrimaryInfos>
-        <CampaignState>
-          <span>{stateTag}</span>
-        </CampaignState>
-        <CampaignPrimaryInfoText>
-          <span>{List?.name}</span>
-          <span>{List.campaignTag}</span>
-          <CampaignPeriod>
-            {List?.startDate} ~ {List?.endDate}
-          </CampaignPeriod>
-        </CampaignPrimaryInfoText>
-      </CampaignPrimaryInfos>
-    </CampaignPrimaryInfoBox>
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {List ? (
+        <CampaignPrimaryInfoBox>
+          <DropDown
+            dropDownList={dropDownList}
+            value={value}
+            onChange={onChange}
+          />
+          <CampaignPrimaryInfos>
+            <CampaignState>
+              <span>{List.campaign_status}</span>
+            </CampaignState>
+            <CampaignPrimaryInfoText>
+              <span>{List.description}</span>
+              <span>{List.tag}</span>
+              <CampaignPeriod>
+                {convertDate(List.created_at)} ~ {convertDate(List.end_at)}
+              </CampaignPeriod>
+            </CampaignPrimaryInfoText>
+          </CampaignPrimaryInfos>
+        </CampaignPrimaryInfoBox>
+      ) : (
+        'null'
+      )}
+    </>
   );
 }
 
@@ -26,14 +46,15 @@ const CampaignPrimaryInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 49.16%;
+  width: 46.65vw;
 `;
 
 const CampaignPrimaryInfos = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
+  height: 4.5vh;
+  background-color: ${({ theme }) => theme.palette.white};
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
 `;
@@ -56,12 +77,15 @@ const CampaignState = styled.div`
 `;
 const CampaignPeriod = styled.span`
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
+  color: ${({ theme }) => theme.palette.darkGrey};
 `;
 const CampaignPrimaryInfoText = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin: 0 10px;
+  color: ${({ theme }) => theme.palette.darkGrey};
 `;
 
 export default CampaignPrimaryInfo;
