@@ -10,45 +10,7 @@
       "img": "/images/profile.jpeg",
       "status": ["ing", "진행중"],
       "account_value": 100000000,
-      "followers": 40000,
-      "insight1": {
-        "likes": ["좋아요", 3000],
-        "comments": ["댓글 수", 100],
-        "hashtagClick": ["해시태그 전환", 300],
-        "exposure": ["노출", 2000],
-        "reach": ["도달", 3000],
-        "engagement": ["참여도", 3100],
-        "engagement_rate": ["참여율", 7.75]
-      },
-      "insight2": {
-        "likes": ["좋아요", 3000],
-        "comments": ["댓글 수", 100],
-        "hashtagClick": ["해시태그 전환", 300],
-        "exposure": ["노출", 2000],
-        "reach": ["도달", 3000],
-        "engagement": ["참여도", 3100],
-        "engagement_rate": ["참여율", 7.75]
-      },
-      "insight3": {
-        "likes": ["좋아요", 3000],
-        "comments": ["댓글 수", 100],
-        "hashtagClick": ["해시태그 전환", 300],
-        "exposure": ["노출", 2000],
-        "reach": ["도달", 3000],
-        "engagement": ["참여도", 3100],
-        "engagement_rate": ["참여율", 7.75]
-      }
-    },
-    {
-      "id": 2,
-      "gender": ["female", "여성"],
-      "age": 20,
-      "residence": ["seoul", "서울"],
-      "name": "jungjimin",
-      "kor_name": "정지민",
-      "img": "/images/profile.jpeg",
-      "status": ["ing", "진행중"],
-      "account_value": 100000000,
+      "campaign_id": 1,
       "followers": [
         { "value": 10000, "date": "2022-03-01" },
         { "value": 11000, "date": "2022-03-07" },
@@ -74,7 +36,207 @@
           "exposure": 800,
           "fromhastagClick": 300,
           "engagement": 110,
+          "engagement_rate": 5
+        },
+        "2nd": {
+          "likes": 210,
+          "comments": 20,
+          "actions": 60,
+          "hashtagClick": 30,
+          "reach": 800,
+          "exposure": 1300,
+          "fromhastagClick": 600,
+          "engagement": 230,
+          "engagement_rate": 1.8
+        },
+        "3rd": {
+          "likes": 150,
+          "comments": 10,
+          "actions": 40,
+          "hashtagClick": 10,
+          "reach": 500,
+          "exposure": 700,
+          "fromhastagClick": 200,
+          "engagement": 160,
+          "engagement_rate": 1.3
+        },
+        "4th": {
+          "likes": 140,
+          "comments": 6,
+          "actions": 20,
+          "hashtagClick": 10,
+          "reach": 100,
+          "exposure": 200,
+          "fromhastagClick": 100,
+          "engagement": 146,
+          "engagement_rate": 1.2
+        },
+        "all": {
+          "likes": 600,
+          "comments": 46,
+          "actions": 120,
+          "hashtagClick": 60,
+          "reach": 2000,
+          "exposure": 3000,
+          "fromhastagClick": 1200,
+          "engagement": 646,
+          "engagement_rate": 5.5
+        }
+      },
+      "insight_2": {
+        "hashtag_name": ["trip", "여행", "광고"],
+        "1st": {
+          "likes": 100,
+          "comments": 10,
+          "actions": 30,
+          "hashtagClick": 10,
+          "reach": 600,
+          "exposure": 800,
+          "fromhastagClick": 300,
+          "engagement": 110,
           "engagement_rate": 1
+        },
+        "2nd": {
+          "likes": 210,
+          "comments": 20,
+          "actions": 60,
+          "hashtagClick": 30,
+          "reach": 800,
+          "exposure": 1300,
+          "fromhastagClick": 600,
+          "engagement": 230,
+          "engagement_rate": 1.8
+        },
+        "3rd": {
+          "likes": 150,
+          "comments": 10,
+          "actions": 40,
+          "hashtagClick": 10,
+          "reach": 500,
+          "exposure": 700,
+          "fromhastagClick": 200,
+          "engagement": 160,
+          "engagement_rate": 1.3
+        },
+        "4th": {
+          "likes": 140,
+          "comments": 6,
+          "actions": 20,
+          "hashtagClick": 10,
+          "reach": 100,
+          "exposure": 200,
+          "fromhastagClick": 100,
+          "engagement": 146,
+          "engagement_rate": 1.2
+        },
+        "all": {
+          "likes": 600,
+          "comments": 46,
+          "actions": 120,
+          "hashtagClick": 60,
+          "reach": 2000,
+          "exposure": 3000,
+          "fromhastagClick": 1200,
+          "engagement": 646,
+          "engagement_rate": 5.5
+        }
+      },
+      "insight_3": {
+        "hashtag_name": ["restaurant", "맛집", "광고"],
+        "1st": {
+          "likes": 100,
+          "comments": 10,
+          "actions": 30,
+          "hashtagClick": 10,
+          "reach": 600,
+          "exposure": 800,
+          "fromhastagClick": 300,
+          "engagement": 110,
+          "engagement_rate": 1
+        },
+        "2nd": {
+          "likes": 210,
+          "comments": 20,
+          "actions": 60,
+          "hashtagClick": 30,
+          "reach": 800,
+          "exposure": 1300,
+          "fromhastagClick": 600,
+          "engagement": 230,
+          "engagement_rate": 1.8
+        },
+        "3rd": {
+          "likes": 150,
+          "comments": 10,
+          "actions": 40,
+          "hashtagClick": 10,
+          "reach": 500,
+          "exposure": 700,
+          "fromhastagClick": 200,
+          "engagement": 160,
+          "engagement_rate": 1.3
+        },
+        "4th": {
+          "likes": 140,
+          "comments": 6,
+          "actions": 20,
+          "hashtagClick": 10,
+          "reach": 100,
+          "exposure": 200,
+          "fromhastagClick": 100,
+          "engagement": 146,
+          "engagement_rate": 1.2
+        },
+        "all": {
+          "likes": 600,
+          "comments": 46,
+          "actions": 120,
+          "hashtagClick": 60,
+          "reach": 2000,
+          "exposure": 3000,
+          "fromhastagClick": 1200,
+          "engagement": 646,
+          "engagement_rate": 5.5
+        }
+      }
+    },
+    {
+      "id": 2,
+      "gender": ["female", "여성"],
+      "age": 20,
+      "residence": ["seoul", "서울"],
+      "name": "jungjimin",
+      "kor_name": "정지민",
+      "img": "/images/profile.jpeg",
+      "status": ["ing", "진행중"],
+      "account_value": 100000000,
+      "campaign_id": 1,
+      "followers": [
+        { "value": 10000, "date": "2022-03-01" },
+        { "value": 11000, "date": "2022-03-07" },
+        { "value": 11300, "date": "2022-03-14" },
+        { "value": 11500, "date": "2022-03-21" },
+        { "value": 11800, "date": "2022-03-28" }
+      ],
+      "followersRate": [
+        { "female": 45, "male": 55, "date": "2022-03-01" },
+        { "female": 40, "male": 60, "date": "2022-03-07" },
+        { "female": 38, "male": 62, "date": "2022-03-14" },
+        { "female": 40, "male": 60, "date": "2022-03-21" },
+        { "female": 45, "male": 55, "date": "2022-03-28" }
+      ],
+      "insight_1": {
+        "hashtag_name": ["discovery", "디스커버리", "광고"],
+        "1st": {
+          "likes": 100,
+          "comments": 10,
+          "actions": 30,
+          "hashtagClick": 10,
+          "reach": 600,
+          "exposure": 800,
+          "fromhastagClick": 300,
+          "engagement": 110,
+          "engagement_rate": 10
         },
         "2nd": {
           "likes": 210,
@@ -248,32 +410,194 @@
       "img": "/images/profile.jpeg",
       "status": ["ing", "진행중"],
       "account_value": 100000000,
-      "insight1": {
-        "likes": ["좋아요", 3000],
-        "comments": ["댓글 수", 100],
-        "hashtagClick": ["해시태그 전환", 300],
-        "exposure": ["노출", 2000],
-        "reach": ["도달", 3000],
-        "engagement": ["참여도", 3100],
-        "engagement_rate": ["참여율", 7.75]
+      "campaign_id": 1,
+      "followers": [
+        { "value": 10000, "date": "2022-03-01" },
+        { "value": 11000, "date": "2022-03-07" },
+        { "value": 11300, "date": "2022-03-14" },
+        { "value": 11500, "date": "2022-03-21" },
+        { "value": 11800, "date": "2022-03-28" }
+      ],
+      "followersRate": [
+        { "female": 45, "male": 55, "date": "2022-03-01" },
+        { "female": 40, "male": 60, "date": "2022-03-07" },
+        { "female": 38, "male": 62, "date": "2022-03-14" },
+        { "female": 40, "male": 60, "date": "2022-03-21" },
+        { "female": 45, "male": 55, "date": "2022-03-28" }
+      ],
+      "insight_1": {
+        "hashtag_name": ["discovery", "디스커버리", "광고"],
+        "1st": {
+          "likes": 100,
+          "comments": 10,
+          "actions": 30,
+          "hashtagClick": 10,
+          "reach": 600,
+          "exposure": 800,
+          "fromhastagClick": 300,
+          "engagement": 110,
+          "engagement_rate": 15
+        },
+        "2nd": {
+          "likes": 210,
+          "comments": 20,
+          "actions": 60,
+          "hashtagClick": 30,
+          "reach": 800,
+          "exposure": 1300,
+          "fromhastagClick": 600,
+          "engagement": 230,
+          "engagement_rate": 1.8
+        },
+        "3rd": {
+          "likes": 150,
+          "comments": 10,
+          "actions": 40,
+          "hashtagClick": 10,
+          "reach": 500,
+          "exposure": 700,
+          "fromhastagClick": 200,
+          "engagement": 160,
+          "engagement_rate": 1.3
+        },
+        "4th": {
+          "likes": 140,
+          "comments": 6,
+          "actions": 20,
+          "hashtagClick": 10,
+          "reach": 100,
+          "exposure": 200,
+          "fromhastagClick": 100,
+          "engagement": 146,
+          "engagement_rate": 1.2
+        },
+        "all": {
+          "likes": 600,
+          "comments": 46,
+          "actions": 120,
+          "hashtagClick": 60,
+          "reach": 2000,
+          "exposure": 3000,
+          "fromhastagClick": 1200,
+          "engagement": 646,
+          "engagement_rate": 5.5
+        }
       },
-      "insight2": {
-        "likes": ["좋아요", 3000],
-        "comments": ["댓글 수", 100],
-        "hashtagClick": ["해시태그 전환", 300],
-        "exposure": ["노출", 2000],
-        "reach": ["도달", 3000],
-        "engagement": ["참여도", 3100],
-        "engagement_rate": ["참여율", 7.75]
+      "insight_2": {
+        "hashtag_name": ["trip", "여행", "광고"],
+        "1st": {
+          "likes": 100,
+          "comments": 10,
+          "actions": 30,
+          "hashtagClick": 10,
+          "reach": 600,
+          "exposure": 800,
+          "fromhastagClick": 300,
+          "engagement": 110,
+          "engagement_rate": 1
+        },
+        "2nd": {
+          "likes": 210,
+          "comments": 20,
+          "actions": 60,
+          "hashtagClick": 30,
+          "reach": 800,
+          "exposure": 1300,
+          "fromhastagClick": 600,
+          "engagement": 230,
+          "engagement_rate": 1.8
+        },
+        "3rd": {
+          "likes": 150,
+          "comments": 10,
+          "actions": 40,
+          "hashtagClick": 10,
+          "reach": 500,
+          "exposure": 700,
+          "fromhastagClick": 200,
+          "engagement": 160,
+          "engagement_rate": 1.3
+        },
+        "4th": {
+          "likes": 140,
+          "comments": 6,
+          "actions": 20,
+          "hashtagClick": 10,
+          "reach": 100,
+          "exposure": 200,
+          "fromhastagClick": 100,
+          "engagement": 146,
+          "engagement_rate": 1.2
+        },
+        "all": {
+          "likes": 600,
+          "comments": 46,
+          "actions": 120,
+          "hashtagClick": 60,
+          "reach": 2000,
+          "exposure": 3000,
+          "fromhastagClick": 1200,
+          "engagement": 646,
+          "engagement_rate": 5.5
+        }
       },
-      "insight3": {
-        "likes": ["좋아요", 3000],
-        "comments": ["댓글 수", 100],
-        "hashtagClick": ["해시태그 전환", 300],
-        "exposure": ["노출", 2000],
-        "reach": ["도달", 3000],
-        "engagement": ["참여도", 3100],
-        "engagement_rate": ["참여율", 7.75]
+      "insight_3": {
+        "hashtag_name": ["restaurant", "맛집", "광고"],
+        "1st": {
+          "likes": 100,
+          "comments": 10,
+          "actions": 30,
+          "hashtagClick": 10,
+          "reach": 600,
+          "exposure": 800,
+          "fromhastagClick": 300,
+          "engagement": 110,
+          "engagement_rate": 1
+        },
+        "2nd": {
+          "likes": 210,
+          "comments": 20,
+          "actions": 60,
+          "hashtagClick": 30,
+          "reach": 800,
+          "exposure": 1300,
+          "fromhastagClick": 600,
+          "engagement": 230,
+          "engagement_rate": 1.8
+        },
+        "3rd": {
+          "likes": 150,
+          "comments": 10,
+          "actions": 40,
+          "hashtagClick": 10,
+          "reach": 500,
+          "exposure": 700,
+          "fromhastagClick": 200,
+          "engagement": 160,
+          "engagement_rate": 1.3
+        },
+        "4th": {
+          "likes": 140,
+          "comments": 6,
+          "actions": 20,
+          "hashtagClick": 10,
+          "reach": 100,
+          "exposure": 200,
+          "fromhastagClick": 100,
+          "engagement": 146,
+          "engagement_rate": 1.2
+        },
+        "all": {
+          "likes": 600,
+          "comments": 46,
+          "actions": 120,
+          "hashtagClick": 60,
+          "reach": 2000,
+          "exposure": 3000,
+          "fromhastagClick": 1200,
+          "engagement": 646,
+          "engagement_rate": 5.5
+        }
       }
     },
     {

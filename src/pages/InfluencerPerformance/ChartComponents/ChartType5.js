@@ -1,28 +1,43 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import styled from 'styled-components';
-import DataBox from '../../../components/DataBox';
 import { useRecoilValue } from 'recoil';
-import { chartData1, chartData2, chartData3 } from '../../../Atoms/chartData';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { selectedWeeks } from '../../../Atoms/selectedState';
+import { chartData5 } from '../../../Atoms/chartData';
 import { Chart, registerables } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import DataBox from '../../../components/DataBox';
+import styled from 'styled-components';
+import theme from '../../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
 const ChartType5 = () => {
-  const discoveryData = useRecoilValue(chartData1);
-  const anotherData = useRecoilValue(chartData2);
-  const theOtherData = useRecoilValue(chartData3);
-  const likesData = [
-    discoveryData.value && discoveryData.value[0],
-    anotherData.value && anotherData.value[0],
-    theOtherData.value && theOtherData.value[0],
-  ];
-  const commentData = [
-    discoveryData.value && discoveryData.value[1],
-    anotherData.value && anotherData.value[1],
-    theOtherData.value && theOtherData.value[1],
-  ];
+  const followersTransitionData = useRecoilValue(chartData5);
+  const week = useRecoilValue(selectedWeeks);
+
+  const sliceNum = week => {
+    if (week === '1st') {
+      return 2;
+    }
+    if (week === '2nd') {
+      return 3;
+    }
+    if (week === '3rd') {
+      return 4;
+    }
+    if (week === '4th') {
+      return 5;
+    }
+    if (week === 'all') {
+      return followersTransitionData.length;
+    }
+  };
+
+  const parsingData = {
+    [week]: followersTransitionData.slice(0, sliceNum(week)),
+  };
+
+  const renderData = parsingData[week].map(ele => ele.value);
 
   const options = {
     plugins: {
@@ -30,6 +45,7 @@ const ChartType5 = () => {
         display: false,
       },
       tooltips: {
+        displayColors: false,
         callbacks: {
           label: function (tooltipItem) {
             return tooltipItem.yLabel;
@@ -38,37 +54,39 @@ const ChartType5 = () => {
       },
       datalabels: {
         display: true,
-        align: 'center',
+        align: 'top',
         font: {
           weight: 'normal',
         },
       },
     },
-    indexAxis: 'y',
+    indexAxis: 'x',
     scales: {
       x: {
-        stacked: true,
         grid: {
-          display: false,
+          display: true,
+          color: theme.palette.lightGrey,
         },
       },
       y: {
-        stacked: true,
         grid: {
-          display: false,
+          display: true,
+          color: theme.palette.lightGrey,
         },
         ticks: {
+          beginAtZero: true,
+          stepSize: 500,
           font: {
             size: c => {
               if (c.index === 0) {
-                return 12;
+                return theme.fontsize.fontSize1;
               } else {
-                return 12;
+                return theme.fontsize.fontSize1;
               }
             },
             weight: c => {
-              if (c.index === 0) {
-                return 'bold';
+              if (c.index === sliceNum(week)) {
+                return 'normal';
               } else {
                 return 'normal';
               }
@@ -83,42 +101,24 @@ const ChartType5 = () => {
       },
     },
     responsive: true,
-    layout: { padding: 10 },
+    layout: { padding: 15 },
   };
 
-  const dataHorBar = {
-    labels: [discoveryData.hashtag, anotherData.hashtag, theOtherData.hashtag],
+  const data = {
+    labels: ['초기', '1주차', '2주차', '3주차', '4주차'],
     datasets: [
       {
-        data: likesData,
-        label: '좋아요 수',
-        border: '0',
-        backgroundColor: c => {
-          if (c.index === 0) {
-            return '#E15759';
-          } else {
-            return '#E15759';
-          }
-        },
-        barThickness: 18,
+        data: renderData,
+        label: '팔로워 수',
+        borderWidth: 2,
+        backgroundColor: theme.palette.chartRed2,
+        borderColor: theme.palette.chartRed2,
+        pointRadius: 1.5,
         datalabels: {
-          color: 'white',
-        },
-      },
-      {
-        data: commentData,
-        label: '댓글 수',
-        border: '0',
-        backgroundColor: c => {
-          if (c.index === 0) {
-            return '#F28E2A';
-          } else {
-            return '#F28E2A';
-          }
-        },
-        barThickness: 18,
-        datalabels: {
-          color: 'white',
+          color: theme.palette.black,
+          font: {
+            size: theme.fontsize.fontSize0,
+          },
         },
       },
     ],
@@ -131,7 +131,9 @@ const ChartType5 = () => {
           <h2>팔로워 추이</h2>
         </LegendDataBox>
       </Header>
-      <Bar data={dataHorBar} options={options} width={300} height={200} />
+      <Content>
+        <Line data={data} options={options} width={300} height={280} />
+      </Content>
     </StyledDataBox>
   );
 };
@@ -142,7 +144,6 @@ const StyledDataBox = styled(DataBox)`
   width: 22%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 `;
 
 const Header = styled.div`
@@ -165,4 +166,12 @@ const LegendDataBox = styled(DataBox)`
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
   }
+`;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 300px;
 `;

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import styled from 'styled-components';
-import DataBox from '../../../components/DataBox';
 import { useRecoilValue } from 'recoil';
 import { chartData1, chartData2, chartData3 } from '../../../Atoms/chartData';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart, registerables } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import DataBox from '../../../components/DataBox';
+import styled from 'styled-components';
+import theme from '../../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 

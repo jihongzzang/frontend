@@ -1,16 +1,17 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { chartData4 } from '../../../Atoms/chartData';
 import { selectedWeeks } from '../../../Atoms/selectedState';
+import { chartData4 } from '../../../Atoms/chartData';
 import { Chart, registerables } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import DataBox from '../../../components/DataBox';
 import styled from 'styled-components';
-import { convertPercent } from '../../../Hooks/convertData';
+import theme from '../../../styles/theme';
+
+Chart.register(ChartDataLabels, ...registerables);
 
 const ChartType4 = () => {
-  Chart.register(ChartDataLabels, ...registerables);
   const followersRateData = useRecoilValue(chartData4);
   const week = useRecoilValue(selectedWeeks);
   const parsingData = {
@@ -50,48 +51,35 @@ const ChartType4 = () => {
         },
       },
     },
-    cutout: 60,
-    elements: {
-      center: {
-        text: 'Red is 2/3 the total numbers',
-        color: 'black',
-        fontStyle: 'Arial',
-        sidePadding: 20,
-        minFontSize: 20,
-        lineHeight: 25,
-      },
-    },
+    cutout: 50,
     responsive: true,
-    layout: { padding: 30 },
+    layout: { padding: 10 },
   };
 
   const data = {
-    labels: [renderData[0][0], renderData[1][0]],
+    labels: ['여성', '남성'],
     datasets: [
       {
         data: [renderData[0][1], renderData[1][1]],
         label: '팔로워 성별 비율',
         backgroundColor: c => {
           if (c.index === 0) {
-            return '#FF407B';
+            return theme.palette.chartRed2;
           } else {
-            return '#5969FF';
+            return theme.palette.chartBlue3;
           }
         },
-        hoverOffset: 4,
         offset: 5,
         datalabels: {
-          color: 'white',
+          color: theme.palette.white,
           font: {
-            size: 18,
+            size: theme.fontsize.fontSize5,
             weight: 500,
           },
         },
       },
     ],
   };
-
-  console.log(data);
 
   return (
     <StyledDataBox size="large" color="borderColor" outline>
@@ -101,19 +89,21 @@ const ChartType4 = () => {
         </LegendDataBox>
       </Header>
       <Content>
-        <Doughnut data={data} options={options} width={300} height={200} />
+        <Doughnut data={data} options={options} width={100} height={50} />
         <ChartInner>
           <div>여성</div>
           <div>55%</div>
         </ChartInner>
       </Content>
       <Footer>
-        <div>
+        <FooterBox>
+          <span>55%</span>
           <span>여성</span>
-        </div>
-        <div>
+        </FooterBox>
+        <FooterBox>
+          <span>45%</span>
           <span>남성</span>
-        </div>
+        </FooterBox>
       </Footer>
     </StyledDataBox>
   );
@@ -153,7 +143,7 @@ const LegendDataBox = styled(DataBox)`
 
 const Content = styled.div`
   margin: 0 auto;
-  max-width: 100%;
+  width: 240px;
   position: relative;
 `;
 
@@ -181,5 +171,29 @@ const ChartInner = styled.div`
 `;
 
 const Footer = styled.div`
-  background: black;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  color: ${({ theme }) => theme.palette.black};
+  border-top: 1px solid ${({ theme }) => theme.palette.borderColor};
+`;
+
+const FooterBox = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  :nth-child(1) {
+    border-right: 1px solid ${({ theme }) => theme.palette.borderColor};
+  }
+  span:nth-child(1) {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  span:nth-child(2) {
+    font-size: 13px;
+  }
 `;
