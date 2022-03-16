@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import ChartType4 from './ChartComponents/ChartType4';
-import ChartType5 from './ChartComponents/ChartType5';
 import ChartType6 from './ChartComponents/ChartType6';
 import ChartType7 from './ChartComponents/ChartType7';
+import ChartType8 from './ChartComponents/ChartType8';
 
 const InfluencerChartAreaFooter = () => {
   return (
     <Wrraper>
-      <ChartType4 />
-      <ChartType5 />
+      <ChartType8 />
       <ChartType6 />
       <ChartType7 />
     </Wrraper>

@@ -24,6 +24,12 @@ const ChartType4 = () => {
 
   const renderData = Object.entries(parsingData[week]);
 
+  const comparisonGenderData =
+    renderData[0][1] > renderData[1][1] ? '여성' : '남성';
+
+  const comparisonPercentData =
+    renderData[0][1] > renderData[1][1] ? true : false;
+
   const options = {
     plugins: {
       legend: {
@@ -88,23 +94,27 @@ const ChartType4 = () => {
     <StyledDataBox size="large" color="borderColor" outline>
       <Header>
         <LegendDataBox size="medium" color="black">
-          <h2>팔로워 성별 비율</h2>
+          <h2>
+            팔로워 성별 비율 <span>(주차별)</span>
+          </h2>
         </LegendDataBox>
       </Header>
       <Content>
         <Doughnut data={data} options={options} width={100} height={50} />
         <ChartInner>
-          <div>남성</div>
-          <div>55%</div>
+          <div gender={comparisonGenderData}>{comparisonGenderData}</div>
+          <div gender={comparisonGenderData}>
+            {comparisonPercentData ? renderData[0][1] : renderData[1][1]}%
+          </div>
         </ChartInner>
       </Content>
       <Footer>
         <FooterBox>
-          <span>55%</span>
+          <span>{renderData[1][1]}%</span>
           <span>남성</span>
         </FooterBox>
         <FooterBox>
-          <span>45%</span>
+          <span>{renderData[0][1]}%</span>
           <span>여성</span>
         </FooterBox>
       </Footer>
@@ -141,6 +151,10 @@ const LegendDataBox = styled(DataBox)`
     margin-left: 10px;
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
+    span {
+      font-size: ${({ theme }) => theme.fontsize.fontSize1};
+      font-weight: 400;
+    }
   }
 `;
 
@@ -169,7 +183,8 @@ const ChartInner = styled.div`
   div {
     font-weight: bold;
     font-size: 20px;
-    color: ${({ theme }) => theme.palette.chartBlue3};
+    color: ${props =>
+      props.children[0].props.gender === '남성' ? '#5969FF' : '#FF407B'};
   }
 `;
 

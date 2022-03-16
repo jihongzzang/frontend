@@ -15,6 +15,7 @@ Chart.register(ChartDataLabels, ...registerables);
 const ChartType5 = () => {
   const followersTransitionData = useRecoilValue(chartData5);
   const week = useRecoilValue(selectedWeeks);
+
   const parsingData = {
     [week]: followersTransitionData.slice(
       0,
@@ -44,6 +45,13 @@ const ChartType5 = () => {
         align: 'top',
         font: {
           weight: 'normal',
+        },
+        formatter: value => {
+          if (value !== 0) {
+            return value.toLocaleString() + '명';
+          } else {
+            return value;
+          }
         },
       },
     },
@@ -87,7 +95,14 @@ const ChartType5 = () => {
       },
     },
     responsive: true,
-    layout: { padding: 15 },
+    layout: {
+      padding: {
+        top: 30,
+        bottom: 20,
+        left: 10,
+        right: 20,
+      },
+    },
   };
 
   const data = {
@@ -114,7 +129,9 @@ const ChartType5 = () => {
     <StyledDataBox size="large" color="borderColor" outline>
       <Header>
         <LegendDataBox size="medium" color="black">
-          <h2>팔로워 추이</h2>
+          <h2>
+            팔로워 추이 <span>(주차별)</span>
+          </h2>
         </LegendDataBox>
       </Header>
       <Content>
@@ -127,7 +144,7 @@ const ChartType5 = () => {
 export default ChartType5;
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 22%;
+  width: 24%;
   display: flex;
   flex-direction: column;
 `;
@@ -151,6 +168,10 @@ const LegendDataBox = styled(DataBox)`
     margin-left: 10px;
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
+    span {
+      font-weight: 400;
+      font-size: ${({ theme }) => theme.fontsize.fontSize1};
+    }
   }
 `;
 

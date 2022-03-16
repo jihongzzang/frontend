@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { chartData1, chartData2, chartData3 } from '../../../Atoms/chartData';
+import { selectedWeeks } from '../../../Atoms/selectedState';
+import { chartData6 } from '../../../Atoms/chartData';
+import { convertWeeks2 } from '../../../Hooks/convertWeeks';
 import { Chart, registerables } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -10,20 +12,15 @@ import theme from '../../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
-const ChartType1 = () => {
-  const discoveryData = useRecoilValue(chartData1);
-  const anotherData = useRecoilValue(chartData2);
-  const theOtherData = useRecoilValue(chartData3);
-  const likesData = [
-    discoveryData.value && discoveryData.value[0],
-    anotherData.value && anotherData.value[0],
-    theOtherData.value && theOtherData.value[0],
-  ];
-  const commentData = [
-    discoveryData.value && discoveryData.value[1],
-    anotherData.value && anotherData.value[1],
-    theOtherData.value && theOtherData.value[1],
-  ];
+const ChartType8 = () => {
+  const engagementData = useRecoilValue(chartData6);
+  const week = useRecoilValue(selectedWeeks);
+  const convertArr = Object.values(engagementData);
+  const parsingData = {
+    [week]: convertArr.slice(1, convertWeeks2(week, convertArr)),
+  };
+
+  const renderData = parsingData[week].map(ele => ele.engagement_rate);
 
   const options = {
     plugins: {
@@ -38,30 +35,29 @@ const ChartType1 = () => {
       },
       datalabels: {
         display: true,
-        align: 'center',
         font: {
           weight: 'normal',
         },
+        align: 'top',
+        anchor: 'end',
         formatter: value => {
           if (value !== 0) {
-            return value.toLocaleString() + '개';
+            return value + '%';
           } else {
             return value;
           }
         },
       },
     },
-    indexAxis: 'y',
+    indexAxis: 'x',
     scales: {
       x: {
-        stacked: true,
         grid: {
           display: true,
           color: theme.palette.lightGrey,
         },
       },
       y: {
-        stacked: true,
         grid: {
           display: true,
           color: theme.palette.lightGrey,
@@ -94,47 +90,31 @@ const ChartType1 = () => {
     responsive: true,
     layout: {
       padding: {
-        top: 10,
+        top: 30,
         bottom: 10,
-        left: 10,
-        right: 30,
+        left: 20,
+        right: 20,
       },
     },
   };
 
   const data = {
-    labels: [discoveryData.hashtag, anotherData.hashtag, theOtherData.hashtag],
+    labels: ['1주차', '2주차', '3주차', '4주차'],
     datasets: [
       {
-        data: likesData,
-        label: '좋아요 수',
+        data: renderData,
+        label: '참여율',
         border: '0',
         backgroundColor: c => {
           if (c.index === 0) {
-            return theme.palette.chartRed;
+            return theme.palette.chartBlue0;
           } else {
-            return theme.palette.chartRed;
+            return theme.palette.chartBlue0;
           }
         },
-        barThickness: 18,
+        barThickness: 20,
         datalabels: {
-          color: theme.palette.white,
-        },
-      },
-      {
-        data: commentData,
-        label: '댓글 수',
-        border: '0',
-        backgroundColor: c => {
-          if (c.index === 0) {
-            return theme.palette.chartYellow;
-          } else {
-            return theme.palette.chartYellow;
-          }
-        },
-        barThickness: 18,
-        datalabels: {
-          color: theme.palette.white,
+          color: theme.palette.black,
         },
       },
     ],
@@ -145,27 +125,23 @@ const ChartType1 = () => {
       <Header>
         <LegendDataBox size="medium" color="black">
           <h2>
-            인플루언서 해시태그 별 퍼포먼스 비교&nbsp;<p>(주차별)</p>
+            현 캠페인 참여율 <span>(주차별)</span>
           </h2>
         </LegendDataBox>
-        <LegendDataBox size="medium" color="black">
-          <span>좋아요 수</span>
-          <span>|</span>
-          <span>댓글 수</span>
-        </LegendDataBox>
       </Header>
-      <Bar data={data} options={options} width={300} height={200} />
+      <Content>
+        <Bar data={data} options={options} width={270} height={180} />
+      </Content>
     </StyledDataBox>
   );
 };
 
-export default ChartType1;
+export default ChartType8;
 const StyledDataBox = styled(DataBox)`
   background: white;
   width: 32.6%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 `;
 
 const Header = styled.div`
@@ -174,6 +150,14 @@ const Header = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid ${({ theme }) => theme.palette.borderColor};
 `;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+`;
+
 const LegendDataBox = styled(DataBox)`
   background: white;
   height: 40px;
@@ -182,27 +166,11 @@ const LegendDataBox = styled(DataBox)`
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
   color: ${({ theme }) => theme.palette.black};
-  span {
-    padding: 1px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.palette.grey};
-  }
-  span:nth-child(1) {
-    color: ${({ theme }) => theme.palette.chartRed};
-  }
-  span:nth-child(3) {
-    color: ${({ theme }) => theme.palette.chartYellow};
-  }
-  span:nth-child(5) {
-    color: ${({ theme }) => theme.palette.chartGreen};
-  }
   h2 {
     margin-left: 10px;
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
-    display: flex;
-    align-items: center;
-    p {
+    span {
       font-weight: 400;
       font-size: ${({ theme }) => theme.fontsize.fontSize1};
     }

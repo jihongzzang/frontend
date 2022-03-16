@@ -48,6 +48,13 @@ const ChartType7 = () => {
         font: {
           weight: 'normal',
         },
+        formatter: value => {
+          if (value !== 0) {
+            return value + '회';
+          } else {
+            return value;
+          }
+        },
       },
     },
     indexAxis: 'x',
@@ -89,7 +96,14 @@ const ChartType7 = () => {
       },
     },
     responsive: true,
-    layout: { padding: 15 },
+    layout: {
+      padding: {
+        top: 30,
+        bottom: 10,
+        left: 20,
+        right: 20,
+      },
+    },
   };
 
   const data = {
@@ -116,10 +130,12 @@ const ChartType7 = () => {
     <StyledDataBox size="large" color="borderColor" outline>
       <Header>
         <LegendDataBox size="medium" color="black">
-          <h2>인사이트 반응 영역 공식계정 전환 추이</h2>
+          <h2>
+            인사이트 반응 영역 공식계정 전환 추이 <span>(주차별)</span>
+          </h2>
         </LegendDataBox>
       </Header>
-      <Line data={data} options={options} width={300} height={200} />
+      <Line data={data} options={options} width={270} height={180} />
     </StyledDataBox>
   );
 };
@@ -127,7 +143,7 @@ const ChartType7 = () => {
 export default ChartType7;
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 26.3%;
+  width: 32.6%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -153,5 +169,9 @@ const LegendDataBox = styled(DataBox)`
     margin-left: 10px;
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
+    span {
+      font-weight: 400;
+      font-size: ${({ theme }) => theme.fontsize.fontSize1};
+    }
   }
 `;
