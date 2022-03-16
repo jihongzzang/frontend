@@ -52,12 +52,14 @@ const ChartType3 = () => {
     scales: {
       x: {
         grid: {
-          display: false,
+          display: true,
+          color: theme.palette.lightGrey,
         },
       },
       y: {
         grid: {
-          display: false,
+          display: true,
+          color: theme.palette.lightGrey,
         },
         ticks: {
           font: {
@@ -85,7 +87,14 @@ const ChartType3 = () => {
       },
     },
     responsive: true,
-    layout: { padding: 10 },
+    layout: {
+      padding: {
+        top: 10,
+        bottom: 10,
+        left: 10,
+        right: 30,
+      },
+    },
   };
 
   const data = {
@@ -108,6 +117,13 @@ const ChartType3 = () => {
           font: {
             size: theme.fontsize.fontSize1,
           },
+          formatter: value => {
+            if (value !== 0) {
+              return value.toLocaleString() + '회';
+            } else {
+              return value;
+            }
+          },
         },
       },
       {
@@ -124,6 +140,13 @@ const ChartType3 = () => {
         barThickness: 18,
         datalabels: {
           color: theme.palette.white,
+          formatter: value => {
+            if (value !== 0) {
+              return value.toLocaleString() + '회';
+            } else {
+              return value;
+            }
+          },
         },
       },
     ],
@@ -133,7 +156,9 @@ const ChartType3 = () => {
     <StyledDataBox size="large" color="borderColor" outline>
       <Header>
         <LegendDataBox size="medium" color="black">
-          <h2>반응 부분에서 전환률 정도</h2>
+          <h2>
+            반응 영역에서 전환률 정도&nbsp;<p>(주차별)</p>
+          </h2>
         </LegendDataBox>
         <LegendDataBox size="medium" color="black">
           <span>반응</span>
@@ -189,5 +214,11 @@ const LegendDataBox = styled(DataBox)`
     margin-left: 10px;
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
+    display: flex;
+    align-items: center;
+    p {
+      font-weight: 400;
+      font-size: ${({ theme }) => theme.fontsize.fontSize1};
+    }
   }
 `;

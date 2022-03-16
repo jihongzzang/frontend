@@ -42,18 +42,27 @@ const ChartType2 = () => {
         font: {
           weight: 'normal',
         },
+        formatter: value => {
+          if (value !== 0) {
+            return value.toLocaleString() + '회';
+          } else {
+            return value;
+          }
+        },
       },
     },
     indexAxis: 'y',
     scales: {
       x: {
         grid: {
-          display: false,
+          display: true,
+          color: theme.palette.lightGrey,
         },
       },
       y: {
         grid: {
-          display: false,
+          display: true,
+          color: theme.palette.lightGrey,
         },
         ticks: {
           font: {
@@ -81,7 +90,14 @@ const ChartType2 = () => {
       },
     },
     responsive: true,
-    layout: { padding: 10 },
+    layout: {
+      padding: {
+        top: 10,
+        bottom: 10,
+        left: 10,
+        right: 30,
+      },
+    },
   };
   const data = {
     labels: [discoveryData.hashtag, anotherData.hashtag, theOtherData.hashtag],
@@ -126,7 +142,9 @@ const ChartType2 = () => {
     <StyledDataBox size="large" color="borderColor" outline>
       <Header>
         <LegendDataBox size="medium" color="black">
-          <h2>노출영역에서 해시태그로 인한 유입정도</h2>
+          <h2>
+            노출영역에서 해시태그로 인한 유입정도&nbsp;<p>(주차별)</p>
+          </h2>
         </LegendDataBox>
         <LegendDataBox size="medium" color="black">
           <span>노출수</span>
@@ -181,5 +199,11 @@ const LegendDataBox = styled(DataBox)`
     margin-left: 10px;
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontsize.fontSize2};
+    display: flex;
+    align-items: center;
+    p {
+      font-weight: 400;
+      font-size: ${({ theme }) => theme.fontsize.fontSize1};
+    }
   }
 `;

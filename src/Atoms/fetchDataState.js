@@ -26,3 +26,11 @@ export const influencerListSelector2 = selector({
     return response.data.influencer;
   },
 });
+
+export const testData = selector({
+  key: 'testData',
+  get: async ({ get }) => {
+    const response = await axios.get('/data/test.json');
+    return response;
+  },
+});

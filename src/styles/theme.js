@@ -28,6 +28,7 @@ const theme = {
     chartYellow: '#F28E2A',
     chartGreen: '#008A89',
     chartGreen2: '#00C0B1',
+    chartBlue0: '#5470B7',
     chartBlue: '#0B008A',
     chartBlue2: '#AAA6D6',
     chartBlue3: '#5969FF',
