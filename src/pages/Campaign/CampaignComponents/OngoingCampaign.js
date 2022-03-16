@@ -11,7 +11,7 @@ function OngoingCampaign({ List }) {
         List={List}
         FigureStandardText="*2022년 3월 2일 기준, 전 일 대비 증가량"
       />
-      <GraphBoxes />
+      <GraphBoxes List={List} />
       <Feeds />
     </div>
   );

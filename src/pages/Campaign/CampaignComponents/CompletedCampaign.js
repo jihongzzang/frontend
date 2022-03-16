@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CampaignPrimaryFigures from './CampaignPrimaryFigures';
-import GraphBox from './GraphBox';
+import GraphBoxes from './GraphBoxes';
 import { convertNumber } from '../../../Hooks/convertData';
 
 function CompletedCampaign({ List }) {
@@ -17,10 +17,7 @@ function CompletedCampaign({ List }) {
           Campaign Marketing ROAS : 200%
         </span>
       </CampaignRoas>
-      <GraphBoxes>
-        <GraphBox width="46.65vw">one</GraphBox>
-        <GraphBox width="46.65vw">two</GraphBox>
-      </GraphBoxes>
+      <GraphBoxes List={List} />
     </div>
   );
 }
@@ -37,10 +34,10 @@ const CampaignRoas = styled.div`
   border: 1px solid #e1e1ef;
 `;
 
-const GraphBoxes = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-`;
+// const GraphBoxes = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   margin-bottom: 10px;
+// `;
 
 export default CompletedCampaign;
