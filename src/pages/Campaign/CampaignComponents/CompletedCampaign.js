@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import CampaignPrimaryFigures from './CampaignPrimaryFigures';
-import GraphBoxes from './GraphBoxes';
-import { convertNumber } from '../../../Hooks/convertData';
+import GraphBoxes from './Graph/GraphBoxes';
 
-function CompletedCampaign({ List }) {
-  // const ROAS = List.budget.toLocaleString();
+function CompletedCampaign({ List, FiguresList }) {
   return (
     <div>
       <CampaignPrimaryFigures
@@ -17,7 +15,7 @@ function CompletedCampaign({ List }) {
           Campaign Marketing ROAS : 200%
         </span>
       </CampaignRoas>
-      <GraphBoxes List={List} />
+      <GraphBoxes List={List} FiguresList={FiguresList} />
     </div>
   );
 }
@@ -28,7 +26,7 @@ const CampaignRoas = styled.div`
   align-items: center;
   height: 5vh;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 5px;
   background-color: ${({ theme }) => theme.palette.white};
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;

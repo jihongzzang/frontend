@@ -12,7 +12,7 @@ function GraphDrop({ value, onChange, List }) {
       {List?.map(figure => {
         return (
           <MenuItem key={figure.id} value={figure.id}>
-            {figure.figureName}
+            {figure.figureTitle}
           </MenuItem>
         );
       })}

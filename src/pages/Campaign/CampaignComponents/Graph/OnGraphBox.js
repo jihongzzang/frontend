@@ -3,10 +3,16 @@ import styled from 'styled-components';
 import { Chart } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import GraphDrop from './GraphDrop';
-import PRIMARY_FIGURES from './PRIMARY_FIGURES';
-import FIGURE_GRAPH from './FIGURE_GRAPH';
+import theme from '../../../../styles/theme';
+import { automaticDate, hashTag } from '../OngoingCampaignDailyFigures';
 
-function GraphBox({ width }) {
+function GraphBox({
+  width,
+  FiguresList,
+  FiguresClass,
+  IndexAxis,
+  BarThickness,
+}) {
   const [graph, setGraph] = useState(1);
   const handleGraph = e => {
     setGraph(e.target.value);
@@ -17,32 +23,40 @@ function GraphBox({ width }) {
       return true;
     }
   }
-  const selectedFigure = PRIMARY_FIGURES?.find(findFigure);
-
-  console.log(selectedFigure?.figureName);
-  const labelsList = FIGURE_GRAPH[0];
+  const selectedFigure = FiguresClass.find(findFigure);
+  const selectedfigureData = FiguresList[selectedFigure.figureName];
   return (
     <GraphBoxWrap width={width}>
-      <GraphDrop value={graph} onChange={handleGraph} List={PRIMARY_FIGURES} />
+      <GraphDrop value={graph} onChange={handleGraph} List={FiguresClass} />
       <Graph>
         <Bar
           data={{
-            labels: labelsList,
+            // labels: FiguresList.campaign_name,
+            labels: automaticDate,
             datasets: [
               {
-                label: selectedFigure.figureName,
-                backgroundColor: '#5891E5',
+                label: selectedFigure?.figureTitle,
+                backgroundColor: 'blue',
+                // backgroundColor: function (value) {
+                //   if (value.include('고어텍스')) {
+                //     return 'yellow';
+                //   }
+                //   return 'blue';
+                // },
                 borderWidth: 0,
-                // data: [65, 59, 80, 81, 56],
-                data: FIGURE_GRAPH[graph],
+                barThickness: 5,
+
+                // data: selectedfigureData,
+                data: hashTag,
               },
             ],
           }}
           options={{
-            title: {
-              display: true,
-              text: 'Average Rainfall per month',
-              fontSize: 20,
+            indexAxis: IndexAxis,
+            elements: {
+              bar: {
+                borderWidth: 0,
+              },
             },
             legend: {
               display: true,
@@ -69,14 +83,15 @@ function GraphBox({ width }) {
 
 const GraphBoxWrap = styled.div`
   width: ${props => props.width};
-  height: ${props => props.height};
+  background-color: white;
   margin-top: 15px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
 `;
 
 const Graph = styled.div`
-  border-radius: 50px;
+  height: 400px;
+  margin-top: 10px;
 `;
 
 export default GraphBox;

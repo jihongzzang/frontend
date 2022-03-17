@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { selectedCampaignState } from '../../../selectedCampaignState';
+import React from 'react';
 import styled from 'styled-components';
 import DropDown from './DropDown';
 import { convertDate } from '../../../Hooks/convertData';
 
-function CampaignPrimaryInfo({
-  value,
-  onChange,
-  List,
-  dropDownList,
-  stateTag,
-}) {
+function CampaignPrimaryInfo({ value, onChange, List, dropDownList }) {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -36,7 +28,7 @@ function CampaignPrimaryInfo({
           </CampaignPrimaryInfos>
         </CampaignPrimaryInfoBox>
       ) : (
-        'null'
+        <Roading>데이터를 받아옵니다.</Roading>
       )}
     </>
   );
@@ -67,7 +59,6 @@ const CampaignState = styled.div`
   height: 24px;
   margin: 0 5px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
-  border: 1px solid #e1e1ef;
   background-color: #5891e5;
   span {
     color: ${({ theme }) => theme.palette.white};
@@ -88,4 +79,10 @@ const CampaignPrimaryInfoText = styled.div`
   color: ${({ theme }) => theme.palette.darkGrey};
 `;
 
+const Roading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46.65vw;
+`;
 export default CampaignPrimaryInfo;

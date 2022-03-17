@@ -5,7 +5,7 @@ import { Select, MenuItem } from '@mui/material';
 function DropDown({ value, onChange, dropDownList }) {
   return (
     <DropDownBox
-      sx={{ borderRadius: '12px' }}
+      sx={{ borderRadius: '12px', borderColor: 'red' }}
       value={value}
       onChange={onChange}
     >

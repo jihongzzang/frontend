@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { selectedCampaignState } from '../../selectedCampaignState';
 import CampaignInfo from './CampaignComponents/CampaignInfo';
 import CompletedCampaign from './CampaignComponents/CompletedCampaign';
 import OngoingCampaign from './CampaignComponents/OngoingCampaign';
-import LIST from './CampaignComponents/LIST';
 
 function Campaign() {
-  const [state, setState] = useRecoilState(selectedCampaignState);
-  // const [campaignList, setCampaignList] = useState([]);
+  const [state, setState] = useState(1);
+  const [campaignList, setCampaignList] = useState([]);
+  const [completedCampaignList, setCompletedCampaignList] = useState([]);
+  useEffect(() => {
+    fetch('http://172.1.6.129:8000/influencer/yooo?status_filter=all')
+      .then(res => res.json())
+      .then(res => {
+        setCampaignList(res[0]);
+        setCompletedCampaignList(res[1]);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   fetch('http://172.1.6.129:8000/influencer/yooo?status_filter=all')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setCampaignList(res[0]);
-  //       console.log(res[0]);
-  //     });
-  // }, []);
-
-  const campaignList = LIST;
   function findCampaign(e) {
     if (e.id == state) {
       return true;
@@ -31,8 +27,7 @@ function Campaign() {
   function defineState() {
     if (selectedCampaign?.campaign_status === '진행 중') {
       return true;
-    }
-    if (selectedCampaign?.campaign_status === '완료') {
+    } else if (selectedCampaign?.campaign_status === '완료') {
       return false;
     }
   }
@@ -40,6 +35,7 @@ function Campaign() {
   const handle = e => {
     setState(e.target.value);
   };
+
   return (
     <CampaignWrap>
       {campaignStates ? (
@@ -51,7 +47,10 @@ function Campaign() {
             value={state}
             onChange={handle}
           />
-          <OngoingCampaign List={selectedCampaign} />
+          <OngoingCampaign
+            List={selectedCampaign}
+            FiguresList={completedCampaignList}
+          />
         </>
       ) : (
         <>
@@ -62,7 +61,10 @@ function Campaign() {
             value={state}
             onChange={handle}
           />
-          <CompletedCampaign List={selectedCampaign} />
+          <CompletedCampaign
+            List={selectedCampaign}
+            FiguresList={completedCampaignList}
+          />
         </>
       )}
     </CampaignWrap>
