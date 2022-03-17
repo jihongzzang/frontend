@@ -7,6 +7,14 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Nanum Gothic', 'Montoserrat', sans-serif;
     box-sizing: border-box;
   }
+  
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
 `;
 
 export default GlobalStyle;

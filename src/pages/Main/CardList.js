@@ -128,7 +128,6 @@ const ContentWrraper = styled(Btn)`
     width: 20%;
     justify-content: flex-start;
     img {
-      width: 27.945%;
       height: 80px;
       object-fit: cover;
       margin-left: 10px;

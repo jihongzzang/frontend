@@ -31,3 +31,7 @@ export const formatDate = date => {
   if (day.length < 2) day = '0' + day;
   return [year, month, day].join('-');
 };
+
+export const convertNumberToFixed = data => {
+  return typeof data === 'number' ? data.toFixed(2) : data;
+};

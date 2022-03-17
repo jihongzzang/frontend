@@ -28,6 +28,7 @@ function Main() {
     const { value } = e.target;
     setSelectedSort(value);
   };
+
   return (
     <MainWrraper>
       <SearchArea
@@ -52,6 +53,7 @@ function Main() {
 export default Main;
 
 const MainWrraper = styled.div`
+  width: 1440px;
   padding-top: 36px;
   height: 954px;
   background: ${({ theme }) => theme.palette.pageBackground};
