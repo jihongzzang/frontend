@@ -1,4 +1,4 @@
-const STATE_LISTS = {
+export const STATE_LISTS = {
   campaign: [
     {
       id: 1,
@@ -60,5 +60,3 @@ const STATE_LISTS = {
     },
   ],
 };
-
-export default STATE_LISTS;

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import StateArea from './StateArea';
 import SortArea from './SortArea';
 import Card from './Card';
-import SEARCH_LISTS from './SEARCH_LISTS';
-import SORT_LISTS from './SORT_LISTS';
+import SEARCH_LISTS from '../../constantData/SEARCH_LISTS';
+import { SORT_LISTS } from '../../constantData/SORT_LISTS';
 
 function Main() {
   const searchLists = SEARCH_LISTS;

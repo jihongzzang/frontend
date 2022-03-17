@@ -1,9 +1,9 @@
 import React from 'react';
+import ChartType4 from '../../components/ChartComponents/ChartType4';
+import ChartType5 from '../../components/ChartComponents/ChartType5';
+import AsideCategory from './AsideCategory';
 import AsideRanker from './AsideRanker';
 import styled from 'styled-components';
-import ChartType4 from './ChartComponents/ChartType4';
-import ChartType5 from './ChartComponents/ChartType5';
-import AsideCategory from './AsideCategory';
 
 const InfluencerFooter = () => {
   return (

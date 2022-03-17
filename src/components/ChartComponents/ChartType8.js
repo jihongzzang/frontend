@@ -1,29 +1,26 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { selectedWeeks } from '../../../Atoms/selectedState';
-import { chartData5 } from '../../../Atoms/chartData';
-import { convertWeeks } from '../../../Hooks/convertWeeks';
+import { selectedWeeks } from '../../Atoms/selectedState';
+import { chartData6 } from '../../Atoms/chartData';
+import { convertWeeks2 } from '../../Hooks/convertWeeks';
 import { Chart, registerables } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import DataBox from '../../../components/DataBox';
+import DataBox from '../DataBox';
 import styled from 'styled-components';
-import theme from '../../../styles/theme';
+import theme from '../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
-const ChartType5 = () => {
-  const followersTransitionData = useRecoilValue(chartData5);
+const ChartType8 = () => {
+  const engagementData = useRecoilValue(chartData6);
   const week = useRecoilValue(selectedWeeks);
-
+  const convertArr = Object.values(engagementData);
   const parsingData = {
-    [week]: followersTransitionData.slice(
-      0,
-      convertWeeks(week, followersTransitionData)
-    ),
+    [week]: convertArr.slice(1, convertWeeks2(week, convertArr)),
   };
 
-  const renderData = parsingData[week].map(ele => ele.value);
+  const renderData = parsingData[week].map(ele => ele.engagement_rate);
 
   const options = {
     plugins: {
@@ -31,24 +28,21 @@ const ChartType5 = () => {
         display: false,
       },
       tooltip: {
-        displayColors: false,
-      },
-      tooltips: {
-        callbacks: {
-          label: function (tooltipItem) {
-            return tooltipItem.yLabel;
-          },
+        label: function (tooltipItem) {
+          return tooltipItem.yLabel;
         },
+        displayColors: false,
       },
       datalabels: {
         display: true,
-        align: 'top',
         font: {
           weight: 'normal',
         },
+        align: 'top',
+        anchor: 'end',
         formatter: value => {
           if (value !== 0) {
-            return value.toLocaleString() + '명';
+            return value + '%';
           } else {
             return value;
           }
@@ -69,7 +63,6 @@ const ChartType5 = () => {
           color: theme.palette.lightGrey,
         },
         ticks: {
-          stepSize: 500,
           font: {
             size: c => {
               if (c.index === 0) {
@@ -79,8 +72,8 @@ const ChartType5 = () => {
               }
             },
             weight: c => {
-              if (c.index === convertWeeks(week, followersTransitionData)) {
-                return 'normal';
+              if (c.index === 0) {
+                return 'bold';
               } else {
                 return 'normal';
               }
@@ -98,28 +91,30 @@ const ChartType5 = () => {
     layout: {
       padding: {
         top: 30,
-        bottom: 20,
-        left: 10,
+        bottom: 10,
+        left: 20,
         right: 20,
       },
     },
   };
 
   const data = {
-    labels: ['초기', '1주차', '2주차', '3주차', '4주차'],
+    labels: ['1주차', '2주차', '3주차', '4주차'],
     datasets: [
       {
         data: renderData,
-        label: '팔로워 수',
-        borderWidth: 2,
-        backgroundColor: theme.palette.chartRed2,
-        borderColor: theme.palette.chartRed2,
-        pointRadius: 1.5,
+        label: '참여율',
+        border: '0',
+        backgroundColor: c => {
+          if (c.index === 0) {
+            return theme.palette.chartBlue0;
+          } else {
+            return theme.palette.chartBlue0;
+          }
+        },
+        barThickness: 20,
         datalabels: {
           color: theme.palette.black,
-          font: {
-            size: theme.fontsize.fontSize0,
-          },
         },
       },
     ],
@@ -130,21 +125,21 @@ const ChartType5 = () => {
       <Header>
         <LegendDataBox size="medium" color="black">
           <h2>
-            팔로워 추이 <span>(주차별)</span>
+            현 캠페인 참여율 <span>(주차별)</span>
           </h2>
         </LegendDataBox>
       </Header>
       <Content>
-        <Line data={data} options={options} width={300} height={280} />
+        <Bar data={data} options={options} width={270} height={180} />
       </Content>
     </StyledDataBox>
   );
 };
 
-export default ChartType5;
+export default ChartType8;
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 24%;
+  width: 32.6%;
   display: flex;
   flex-direction: column;
 `;
@@ -156,12 +151,19 @@ const Header = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.palette.borderColor};
 `;
 
+const Content = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+`;
+
 const LegendDataBox = styled(DataBox)`
   background: white;
   height: 40px;
-  border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   padding: 0;
   margin-right: 10px;
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
   color: ${({ theme }) => theme.palette.black};
   h2 {
@@ -173,12 +175,4 @@ const LegendDataBox = styled(DataBox)`
       font-size: ${({ theme }) => theme.fontsize.fontSize1};
     }
   }
-`;
-
-const Content = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 300px;
 `;

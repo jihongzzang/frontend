@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Btn from '../../components/Btn';
-import STATE_LISTS from './STATE_LISTS';
+import { STATE_LISTS } from '../../constantData/STATE_LISTS';
 
 const StateArea = ({ selected }) => {
   const stateLists = STATE_LISTS;

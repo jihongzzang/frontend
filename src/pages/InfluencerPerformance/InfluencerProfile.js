@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import DataBox from '../../components/DataBox';
+import { useRecoilValue } from 'recoil';
+import { filteredInfluencer, selectedWeeks } from '../../Atoms/selectedState';
 import { convertNumberToFixed } from '../../Hooks/convertData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
-import { useRecoilValue } from 'recoil';
-import { filteredInfluencer, selectedWeeks } from '../../Atoms/selectedState';
+import DataBox from '../../components/DataBox';
+import styled from 'styled-components';
 
 const InfluencerProfile = () => {
   const influencerData = useRecoilValue(filteredInfluencer);

@@ -6,9 +6,13 @@ import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import DataBox from '../../components/DataBox';
 import styled from 'styled-components';
 import { leftselectedInfluencer } from '../../Atoms/analysisState';
+import { filteredInfluencer } from '../../Atoms/selectedState';
 
 const LeftProfile = () => {
-  const influencerData = useRecoilValue(leftselectedInfluencer);
+  const influencerData = useRecoilValue(filteredInfluencer);
+
+  const campaignDataMapping = { 1: influencerData[0].insight_1.all };
+
   const followerData = {
     name: '팔로워 수',
     value: {
@@ -22,9 +26,7 @@ const LeftProfile = () => {
     },
   };
 
-  const campaignDataMapping = {
-    1: influencerData[0].insight_1.all,
-  };
+  console.log(followerData);
 
   const extractData1 = Object.values(campaignDataMapping[1]);
 
@@ -59,7 +61,7 @@ const LeftProfile = () => {
           <span>계정 가치: {influencerData[0].account_value}</span>
         </ContentText>
         <DataWrraper>
-          <StyledDataBox color="grey2" size="medium">
+          {/* <StyledDataBox color="grey2" size="medium">
             <span>{followerData.name}</span>
             <>
               <span>{followerData.value[1]}</span>
@@ -72,7 +74,7 @@ const LeftProfile = () => {
                 </div>
               </span>
             </>
-          </StyledDataBox>
+          </StyledDataBox> */}
           {Object.values(uiDataMapping).map((data, idx) => {
             return (
               <StyledDataBox color="grey2" size="medium" key={idx}>

@@ -1,15 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import Btn from '../../components/Btn';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   selectedInfluencerState,
   selectedInfluencer,
   selectedWeeks,
   statusInfluencersData,
-} from '../../Atoms/selectedState';
-
-import { useRecoilState, useRecoilValue } from 'recoil';
+} from '../Atoms/selectedState';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import Btn from './Btn';
+import styled from 'styled-components';
 
 const InfluencerSearchArea = ({ influencerType, weekType }) => {
   const [state, setState] = useRecoilState(selectedInfluencerState);
@@ -41,11 +40,11 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
         <h2>인플루언서 검색</h2>
       </Title>
       <Content>
-        <div>
+        <InputWrraper>
           <h4>계약상태</h4>
           <FormControl className="formControl" size="small">
             <InputLabel className="inputLabel" shrink={false}>
-              {state ? '' : '인플루언서 계약상태'}
+              {state ? '' : '상태'}
             </InputLabel>
             <Select value={state} onChange={changeSelectOptionHandler}>
               {influencerType.map(({ id, name, korName }) => {
@@ -57,14 +56,18 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
               })}
             </Select>
           </FormControl>
-        </div>
-        <div>
+        </InputWrraper>
+        <InputWrraper>
           <h4>인플루언서</h4>
           <FormControl className="formControl" size="small">
             <InputLabel className="inputLabel" shrink={false}>
               {influencer ? '' : '목록'}
             </InputLabel>
-            <Select value={influencer} onChange={changeSelectOptionHandler2}>
+            <Select
+              value={influencer}
+              onChange={changeSelectOptionHandler2}
+              autosize={true}
+            >
               {state === 'all' &&
                 influencerLists.map(({ id, name, kor_name }) => {
                   return (
@@ -91,11 +94,15 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
                 })}
             </Select>
           </FormControl>
-        </div>
-        <div>
+        </InputWrraper>
+        <InputWrraper>
           <h4>주차별 검색</h4>
           <FormControl className="formControl" size="small">
-            <Select value={weeks} onChange={changeSelectOptionHandler3}>
+            <Select
+              value={weeks}
+              onChange={changeSelectOptionHandler3}
+              autosize={true}
+            >
               {weekType.map(({ id, name, korName }) => {
                 return (
                   <MenuItem key={id} value={name} name={name}>
@@ -105,7 +112,7 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
               })}
             </Select>
           </FormControl>
-        </div>
+        </InputWrraper>
         <StyledBtn color="darkGrey" outline>
           검색
         </StyledBtn>
@@ -139,24 +146,22 @@ const Title = styled.div`
 const Content = styled.div`
   display: flex;
   margin-top: 10px;
-
-  div {
-    h4 {
-      margin-left: 20px;
-      font-size: ${({ theme }) => theme.fontsize.fontSize1};
-      font-weight: 600;
-    }
+  h4 {
+    margin-left: 20px;
+    font-size: ${({ theme }) => theme.fontsize.fontSize1};
+    font-weight: 600;
   }
 
   .formControl {
+    width: 90%;
     background: ${({ theme }) => theme.palette.white};
-    width: 260px;
     border-radius: 4px;
     margin-top: 5px;
     margin-left: 20px;
   }
 
   .MuiSelect-select {
+    width: 100%;
     font-size: 14px;
     font-weight: 500;
     color: ${({ theme }) => theme.palette.black};
@@ -177,11 +182,14 @@ const StyledBtn = styled(Btn)`
   font-weight: 500;
   color: ${({ theme }) => theme.palette.black};
   border: 1px solid #c4c4c3;
-
   :active {
     background: ${({ theme }) => theme.palette.lightGrey};
   }
   :hover {
     border: 1px solid ${({ theme }) => theme.palette.black};
   }
+`;
+
+const InputWrraper = styled.div`
+  width: 17%;
 `;
