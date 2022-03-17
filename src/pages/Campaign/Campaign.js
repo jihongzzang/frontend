@@ -9,7 +9,7 @@ function Campaign() {
   const [campaignList, setCampaignList] = useState([]);
   const [completedCampaignList, setCompletedCampaignList] = useState([]);
   useEffect(() => {
-    fetch('http://172.1.6.129:8000/influencer/yooo?status_filter=all')
+    fetch('http://172.1.6.129:8000/performance/completion?status_filter=all')
       .then(res => res.json())
       .then(res => {
         setCampaignList(res[0]);
