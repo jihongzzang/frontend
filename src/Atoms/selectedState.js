@@ -23,7 +23,7 @@ export const statusInfluencersData = selector({
     const target = get(selectedInfluencerState);
     return target === 'all'
       ? allData
-      : allData.filter(status => status.status[0] === target);
+      : allData.filter(({ status }) => status[0] === target);
   },
 });
 
@@ -40,9 +40,7 @@ export const filteredInfluencer = selector({
   get: ({ get }) => {
     const allInfluencer = get(influencerListSelector2);
     const target = get(selectedInfluencer);
-    const influencerData = allInfluencer.filter(
-      influencer => influencer.name === target
-    );
+    const influencerData = allInfluencer.filter(({ name }) => name === target);
     return influencerData;
   },
 });

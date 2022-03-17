@@ -11,6 +11,11 @@
       "status": ["ing", "진행중"],
       "account_value": 100000000,
       "campaign_id": 1,
+      "participatedCampaigns": [
+        { "id": 1, "name": "22fwWinter" },
+        { "id": 2, "name": "22fwWinter" },
+        { "id": 3, "name": "22fwFall" }
+      ],
       "followers": [
         { "value": 10000, "date": "2022-03-01" },
         { "value": 11000, "date": "2022-03-07" },
@@ -211,6 +216,11 @@
       "status": ["ing", "진행중"],
       "account_value": 100000000,
       "campaign_id": 1,
+      "participatedCampaigns": [
+        { "id": 3, "name": "22fwFall" },
+        { "id": 4, "name": "22ssSummer" },
+        { "id": 5, "name": "22ssSpring" }
+      ],
       "followers": [
         { "value": 10000, "date": "2022-03-01" },
         { "value": 11000, "date": "2022-03-07" },
@@ -411,6 +421,10 @@
       "status": ["ing", "진행중"],
       "account_value": 100000000,
       "campaign_id": 1,
+      "participatedCampaigns": [
+        { "id": 2, "name": "22fwWinter" },
+        { "id": 3, "name": "22fwFall" }
+      ],
       "followers": [
         { "value": 10000, "date": "2022-03-01" },
         { "value": 11000, "date": "2022-03-07" },

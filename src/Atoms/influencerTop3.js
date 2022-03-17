@@ -7,7 +7,9 @@ export const influencerTop3 = selector({
     const influencer = get(filteredInfluencer);
     const influencers = get(statusInfluencersData);
     const targetCampaignId = influencer[0].campaign_id;
-    const data = influencers.filter(x => x.campaign_id === targetCampaignId);
+    const data = influencers.filter(
+      ({ campaign_id }) => campaign_id === targetCampaignId
+    );
     return data;
   },
 });
