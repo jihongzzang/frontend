@@ -1,13 +1,13 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { selectedWeeks } from '../../../Atoms/selectedState';
-import { chartData4 } from '../../../Atoms/chartData';
+import { selectedWeeks } from '../../Atoms/selectedState';
+import { chartData4 } from '../../Atoms/chartData';
 import { Chart, registerables } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import DataBox from '../../../components/DataBox';
+import DataBox from '../DataBox';
 import styled from 'styled-components';
-import theme from '../../../styles/theme';
+import theme from '../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 

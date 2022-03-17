@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import ChartType1 from './ChartComponents/ChartType1';
-import ChartType2 from './ChartComponents/ChartType2';
-import ChartType3 from './ChartComponents/ChartType3';
+import ChartType1 from '../../components/ChartComponents/ChartType1';
+import ChartType2 from '../../components/ChartComponents/ChartType2';
+import ChartType3 from '../../components/ChartComponents/ChartType3';
 
 const InfluencerChartArea = () => {
   return (

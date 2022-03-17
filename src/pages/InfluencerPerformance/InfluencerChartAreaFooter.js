@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import ChartType6 from './ChartComponents/ChartType6';
-import ChartType7 from './ChartComponents/ChartType7';
-import ChartType8 from './ChartComponents/ChartType8';
+import ChartType6 from '../../components/ChartComponents/ChartType6';
+import ChartType7 from '../../components/ChartComponents/ChartType7';
+import ChartType8 from '../../components/ChartComponents/ChartType8';
 
 const InfluencerChartAreaFooter = () => {
   return (

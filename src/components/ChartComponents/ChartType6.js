@@ -1,31 +1,31 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { selectedWeeks } from '../../../Atoms/selectedState';
-import { chartData6 } from '../../../Atoms/chartData';
-import { convertWeeks } from '../../../Hooks/convertWeeks';
+import { selectedWeeks } from '../../Atoms/selectedState';
+import { chartData6 } from '../../Atoms/chartData';
+import { convertWeeks } from '../../Hooks/convertWeeks';
 import { Chart, registerables } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import DataBox from '../../../components/DataBox';
+import DataBox from '../DataBox';
 import styled from 'styled-components';
-import theme from '../../../styles/theme';
+import theme from '../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
-const ChartType7 = () => {
+const ChartType6 = () => {
   const flowConversionData = useRecoilValue(chartData6);
   const week = useRecoilValue(selectedWeeks);
   const convertArr = Object.values(flowConversionData);
   const sliceData = convertArr.slice(1, convertArr.length - 1);
 
-  const initailValue = { hashtagClick: 0 };
+  const initailValue = { fromhastagClick: 0 };
 
   sliceData.unshift(initailValue);
   const parsingData = {
     [week]: sliceData.slice(0, convertWeeks(week, sliceData)),
   };
 
-  const renderData = parsingData[week].map(ele => ele.hashtagClick);
+  const renderData = parsingData[week].map(ele => ele.fromhastagClick);
 
   const options = {
     plugins: {
@@ -111,10 +111,10 @@ const ChartType7 = () => {
     datasets: [
       {
         data: renderData,
-        label: '전환',
+        label: '유입',
         borderWidth: 2,
-        backgroundColor: theme.palette.chartBlue2,
-        borderColor: theme.palette.chartBlue2,
+        backgroundColor: theme.palette.chartGreen2,
+        borderColor: theme.palette.chartGreen2,
         pointRadius: 1.5,
         datalabels: {
           color: theme.palette.black,
@@ -131,7 +131,7 @@ const ChartType7 = () => {
       <Header>
         <LegendDataBox size="medium" color="black">
           <h2>
-            인사이트 반응 영역 공식계정 전환 추이 <span>(주차별)</span>
+            인사이트 노출 영역 해시태그로 인한 유입 추이 <span>(주차별)</span>
           </h2>
         </LegendDataBox>
       </Header>
@@ -140,7 +140,7 @@ const ChartType7 = () => {
   );
 };
 
-export default ChartType7;
+export default ChartType6;
 const StyledDataBox = styled(DataBox)`
   background: white;
   width: 32.6%;
@@ -164,7 +164,6 @@ const LegendDataBox = styled(DataBox)`
   margin-right: 10px;
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
   color: ${({ theme }) => theme.palette.black};
-
   h2 {
     margin-left: 10px;
     font-weight: 600;
