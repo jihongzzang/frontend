@@ -4,7 +4,7 @@ import {
   rightSelectedInfluencer,
   rightfilteredInfluencers,
 } from '../../Atoms/analysisState';
-
+import { selectedInfluencer } from '../../Atoms/selectedState';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Btn from '../../components/Btn';
 import styled from 'styled-components';
@@ -12,6 +12,8 @@ import styled from 'styled-components';
 const RightSearch = () => {
   const [influencer, setInfluencer] = useRecoilState(rightSelectedInfluencer);
   const comparativeInfluencers = useRecoilValue(rightfilteredInfluencers);
+  const selectConditon = useRecoilValue(selectedInfluencer);
+  const disabled = selectConditon ? false : true;
 
   const changeSelectOptionHandler2 = e => {
     const { value } = e.target;
@@ -21,7 +23,7 @@ const RightSearch = () => {
   return (
     <SearchWrraper>
       <Title>
-        <h2>인플루언서 검색</h2>
+        <h2>비교대상 인플루언서 검색</h2>
       </Title>
       <Content>
         <div>
@@ -30,7 +32,11 @@ const RightSearch = () => {
             <InputLabel className="inputLabel" shrink={false}>
               {influencer ? '' : '목록'}
             </InputLabel>
-            <Select value={influencer} onChange={changeSelectOptionHandler2}>
+            <Select
+              value={influencer}
+              onChange={changeSelectOptionHandler2}
+              disabled={disabled}
+            >
               {comparativeInfluencers.map(({ id, name, kor_name }) => {
                 return (
                   <MenuItem key={id} value={name} name={name}>
