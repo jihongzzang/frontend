@@ -111,7 +111,8 @@ const ChartType3 = () => {
             return theme.palette.chartBlue;
           }
         },
-        barThickness: 18,
+        categoryPercentage: 0.8,
+        barPercentage: 0.6,
         datalabels: {
           color: theme.palette.white,
           font: {
@@ -137,7 +138,8 @@ const ChartType3 = () => {
             return theme.palette.chartBlue2;
           }
         },
-        barThickness: 18,
+        categoryPercentage: 0.8,
+        barPercentage: 0.6,
         datalabels: {
           color: theme.palette.white,
           formatter: value => {

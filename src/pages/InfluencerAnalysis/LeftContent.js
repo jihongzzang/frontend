@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
-import { renderState } from '../../Atoms/selectedState';
+import { renderState, renderState2 } from '../../Atoms/selectedState';
 import LeftProfile from './LeftProfile';
 import LeftSearch from './LeftSearch';
 import styled from 'styled-components';
@@ -9,10 +9,12 @@ import ChartType5 from '../../components/ChartComponents/ChartType5';
 
 const LeftContent = () => {
   const renderCondition = useRecoilValue(renderState);
+  const renderCondition2 = useRecoilValue(renderState2);
+
   return (
     <Left>
       <LeftSearch />
-      {renderCondition && (
+      {renderCondition && renderCondition2 && (
         <>
           <LeftProfile />
           <CenterWrraper>

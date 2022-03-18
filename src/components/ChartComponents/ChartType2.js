@@ -113,11 +113,11 @@ const ChartType2 = () => {
             return theme.palette.chartGreen;
           }
         },
-        barThickness: 18,
+        categoryPercentage: 0.8,
+        barPercentage: 0.6,
         datalabels: {
           color: theme.palette.white,
         },
-        barPercentage: 0.5,
       },
       {
         data: hashtagData,
@@ -130,7 +130,8 @@ const ChartType2 = () => {
             return theme.palette.chartGreen2;
           }
         },
-        barThickness: 18,
+        categoryPercentage: 0.8,
+        barPercentage: 0.6,
         datalabels: {
           color: theme.palette.white,
         },

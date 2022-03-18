@@ -31,6 +31,7 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
     const { value } = e.target;
     setInfluencer(value);
     setWeeks('all');
+    reset('');
   };
 
   const changeSelectOptionHandler3 = e => {
