@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 import { influencerListSelector2 } from './fetchDataState';
-import { statusInfluencersData } from './selectedState';
+import { selectedInfluencer, statusInfluencersData } from './selectedState';
 
 export const rightSelectedInfluencer = atom({
   key: 'rightSelectedInfluencer',
@@ -11,12 +11,14 @@ export const rightfilteredInfluencers = selector({
   key: 'rightfilteredInfluencers',
   get: ({ get }) => {
     const target = get(statusInfluencersData);
-    return target;
+    const target2 = get(selectedInfluencer);
+    const influencerData = target.filter(ele => ele.name !== target2);
+    return influencerData;
   },
 });
 
-export const rightselectedInfluencer = selector({
-  key: 'rightselectededInfluencer',
+export const rightFilteredInfluencer = selector({
+  key: 'rightFilterdInfluencer',
   get: ({ get }) => {
     const allInfluencers = get(influencerListSelector2);
     const target = get(rightSelectedInfluencer);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { filteredInfluencer, selectedWeeks } from '../../Atoms/selectedState';
+import { rightFilteredInfluencer } from '../../Atoms/analysisState';
+import { selectedWeeks } from '../../Atoms/selectedState';
 import { convertNumberToFixed } from '../../Hooks/convertData';
 import {
   profileData,
@@ -9,21 +10,20 @@ import {
 import DataBox from '../../components/DataBox';
 import styled from 'styled-components';
 
-const LeftProfile = () => {
-  const influencerData = useRecoilValue(filteredInfluencer);
+const RightProfile = () => {
+  const influencerData = useRecoilValue(rightFilteredInfluencer);
   const week = useRecoilValue(selectedWeeks);
   const followerData = profileFollowerData(influencerData);
   const uiDataMapping = profileData(influencerData);
   delete uiDataMapping[week].likes;
   delete uiDataMapping[week].comments;
-
   return (
     <ProfileWrapper>
       <Content>
         <ContentText>
           <span>이름 : {influencerData[0].kor_name}</span>
-          <span>성별: {influencerData[0].gender[1]}</span>
-          <span>나이: {influencerData[0].age}</span>
+          <span>성별 : {influencerData[0].gender[1]}</span>
+          <span>나이 : {influencerData[0].age}</span>
         </ContentText>
         <DataWrraper>
           <StyledDataBox color="grey2" size="medium">
@@ -49,7 +49,7 @@ const LeftProfile = () => {
   );
 };
 
-export default LeftProfile;
+export default RightProfile;
 
 const ProfileWrapper = styled.div`
   margin-left: 3%;
