@@ -10,6 +10,7 @@ import InfluencerChartArea from './InfluencerChartArea';
 import InfluencerChartAreaFooter from './InfluencerChartAreaFooter';
 import InfluencerFooter from './InfluencerFooter';
 import styled from 'styled-components';
+import NotingSelect from '../../components/NotingSelect';
 
 const InfluencerPerformance = () => {
   const influencerData = useRecoilValue(influencerListSelector2);
@@ -23,13 +24,17 @@ const InfluencerPerformance = () => {
         influencerData={influencerData}
         weekType={weekType}
       />
-      {renderCondition && (
+      {renderCondition ? (
         <>
           <InfluencerProfile />
           <InfluencerChartArea />
           <InfluencerChartAreaFooter />
           <InfluencerFooter />
         </>
+      ) : (
+        <MiddleWrraper2>
+          <NotingSelect />
+        </MiddleWrraper2>
       )}
     </Wrraper>
   );
@@ -42,4 +47,11 @@ const Wrraper = styled.div`
   height: 100%;
   padding-top: 15px;
   background: ${({ theme }) => theme.palette.pageBackground};
+`;
+
+const MiddleWrraper2 = styled.div`
+  margin-top: 15px;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-bottom: 30px;
 `;

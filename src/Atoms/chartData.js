@@ -81,3 +81,11 @@ export const chartData10 = selector({
     return data[0].followers;
   },
 });
+
+export const chartData11 = selector({
+  key: 'chartData11',
+  get: ({ get }) => {
+    const data = get(rightFilteredInfluencer);
+    return data[0].insight_1;
+  },
+});

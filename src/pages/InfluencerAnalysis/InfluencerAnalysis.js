@@ -1,15 +1,31 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+
+import { renderState2 } from '../../Atoms/selectedState';
+import ChartAreaMiddle from './ChartAreaMiddle';
 import LeftContent from './LeftContent';
 import RightContent from './RightContent';
+import styled from 'styled-components';
+import NothingSelect from '../../components/NotingSelect';
 
 const InfluencerAnalysis = () => {
+  const renderCondition = useRecoilValue(renderState2);
+
   return (
     <Wrraper>
-      <ContentWrraper>
+      <TopWrraper>
         <LeftContent />
         <RightContent />
-      </ContentWrraper>
+      </TopWrraper>
+      {renderCondition ? (
+        <MiddleWrraper>
+          <ChartAreaMiddle />
+        </MiddleWrraper>
+      ) : (
+        <MiddleWrraper2>
+          <NothingSelect />
+        </MiddleWrraper2>
+      )}
     </Wrraper>
   );
 };
@@ -25,13 +41,15 @@ const Wrraper = styled.div`
   background: ${({ theme }) => theme.palette.pageBackground};
 `;
 
-const Title = styled.div`
-  display: flex;
-  font-size: 14px;
-  margin-left: 22px;
-  margin-bottom: 15px;
+const MiddleWrraper = styled.div``;
+
+const MiddleWrraper2 = styled.div`
+  margin-top: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 30px;
 `;
 
-const ContentWrraper = styled.div`
+const TopWrraper = styled.div`
   display: flex;
 `;
