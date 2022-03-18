@@ -6,8 +6,10 @@ import RightContent from './RightContent';
 const InfluencerAnalysis = () => {
   return (
     <Wrraper>
-      <LeftContent />
-      <RightContent />
+      <ContentWrraper>
+        <LeftContent />
+        <RightContent />
+      </ContentWrraper>
     </Wrraper>
   );
 };
@@ -19,5 +21,17 @@ const Wrraper = styled.div`
   height: 100%;
   padding-top: 15px;
   display: flex;
+  flex-direction: column;
   background: ${({ theme }) => theme.palette.pageBackground};
+`;
+
+const Title = styled.div`
+  display: flex;
+  font-size: 14px;
+  margin-left: 22px;
+  margin-bottom: 15px;
+`;
+
+const ContentWrraper = styled.div`
+  display: flex;
 `;

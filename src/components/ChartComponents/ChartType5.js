@@ -144,7 +144,7 @@ const ChartType5 = () => {
 export default ChartType5;
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 24%;
+  width: 322.86px;
   display: flex;
   flex-direction: column;
 `;

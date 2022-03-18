@@ -4,7 +4,6 @@ import InfluencerSearchArea from '../../components/InfluencerSearchArea';
 import { influencerListSelector2 } from '../../Atoms/fetchDataState';
 import { WEEK_LISTS } from '../../constantData/WEEK_LISTS';
 import { SEARCH_STATE } from '../../constantData/SEARCH_STATE';
-import styled from 'styled-components';
 
 const LeftSearch = () => {
   const influencerData = useRecoilValue(influencerListSelector2);
