@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Select, MenuItem } from '@mui/material';
 
@@ -11,7 +11,7 @@ function GraphDrop({ value, onChange, List }) {
     >
       {List?.map(figure => {
         return (
-          <MenuItem key={figure.id} value={figure.id}>
+          <MenuItem key={figure.primaryFigureId} value={figure.primaryFigureId}>
             {figure.figureTitle}
           </MenuItem>
         );

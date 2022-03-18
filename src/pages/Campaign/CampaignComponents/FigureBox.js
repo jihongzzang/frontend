@@ -5,7 +5,6 @@ function FigureBox({ width, height, FigureName, Figure, money }) {
   return (
     <SmallFigure width={width} height={height}>
       <FigureNameText>{FigureName}</FigureNameText>
-      <Money>{money}</Money>
       <FigureText>{Figure}</FigureText>
     </SmallFigure>
   );

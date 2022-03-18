@@ -1,52 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
-import GraphBox from './GraphBox';
-import OnGraphBox from './OnGraphBox';
+import CompletedGraphBox from './CompletedGraphBox';
+import OnGoingGraphBox from './OnGoingGraphBox';
 import PRIMARY_FIGURES from '../PRIMARY_FIGURES';
+import { CHANGEDONGOING } from '../CHANGEDONGOING';
 
 function GraphBoxes({ List, FiguresList }) {
   const campaignStatus = List?.campaign_status === '진행 중';
+  const dailyList = CHANGEDONGOING[1];
 
   return (
     <GraphBoxesWrap>
       {campaignStatus ? (
         <>
-          <OnGraphBox
+          <OnGoingGraphBox
             width="46.65vw"
-            FiguresList={FiguresList}
+            FiguresList={dailyList}
             FiguresClass={PRIMARY_FIGURES}
             IndexAxis="y"
-            BarThickness="20"
+            BarThickness="10"
           />
-          <OnGraphBox
+          <OnGoingGraphBox
             width="46.65vw"
-            FiguresList={FiguresList}
-            FiguresClass={PRIMARY_FIGURES}
-            IndexAxis="x"
-            BarThickness="20"
-          />
-          {/* <OnGraphBox
-            width="32.2%"
-            FiguresList={FiguresList}
+            FiguresList={dailyList}
             FiguresClass={PRIMARY_FIGURES}
             IndexAxis="y"
-            BarThickness="20"
-          /> */}
+            BarThickness="10"
+          />
         </>
       ) : (
         <>
-          <GraphBox
+          <CompletedGraphBox
             width="46.65vw"
             FiguresList={FiguresList}
             FiguresClass={PRIMARY_FIGURES}
-            IndexAxis="x"
+            IndexAxis="y"
             BarThickness="30"
           />
-          <GraphBox
+          <CompletedGraphBox
             width="46.65vw"
             FiguresList={FiguresList}
             FiguresClass={PRIMARY_FIGURES}
-            IndexAxis="x"
+            IndexAxis="y"
             BarThickness="30"
           />
         </>

@@ -66,11 +66,3 @@ export const hashTag = automaticDate
     return Object.keys(value).map(i => value[i]);
   })
   .reduce((a, b) => a.concat(b), []);
-
-// console.log(hashTag);
-// console.log(officialFollower);
-
-//   return <div>OngoingCampaignDailyFigures</div>;
-// }
-
-// export default OngoingCampaignDailyFigures;

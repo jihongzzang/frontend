@@ -3,19 +3,26 @@ import styled from 'styled-components';
 import CampaignInfo from './CampaignComponents/CampaignInfo';
 import CompletedCampaign from './CampaignComponents/CompletedCampaign';
 import OngoingCampaign from './CampaignComponents/OngoingCampaign';
+import { formatDate } from '../../Hooks/convertData';
+import { useRecoilState } from 'recoil';
+import { campaignState } from '../../Atoms/campaignState';
+import LIST from './CampaignComponents/LIST';
 
 function Campaign() {
-  const [state, setState] = useState(1);
-  const [campaignList, setCampaignList] = useState([]);
-  const [completedCampaignList, setCompletedCampaignList] = useState([]);
-  useEffect(() => {
-    fetch('http://172.1.6.129:8000/influencer/yooo?status_filter=all')
-      .then(res => res.json())
-      .then(res => {
-        setCampaignList(res[0]);
-        setCompletedCampaignList(res[1]);
-      });
-  }, []);
+  const [state, setState] = useRecoilState(campaignState);
+  // const [campaignList, setCampaignList] = useState([]);
+  // const [completedCampaignList, setCompletedCampaignList] = useState([]);
+  // useEffect(() => {
+  //   fetch('http://172.1.6.129:8000/performance/completion?status_filter=all')
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setCampaignList(res[0]);
+  //       setCompletedCampaignList(res[1]);
+  //     });
+  // }, []);
+
+  const campaignList = LIST[0];
+  const completedCampaignList = LIST[1];
 
   function findCampaign(e) {
     if (e.id == state) {
@@ -23,7 +30,6 @@ function Campaign() {
     }
   }
   const selectedCampaign = campaignList?.find(findCampaign);
-
   function defineState() {
     if (selectedCampaign?.campaign_status === '진행 중') {
       return true;
@@ -47,10 +53,7 @@ function Campaign() {
             value={state}
             onChange={handle}
           />
-          <OngoingCampaign
-            List={selectedCampaign}
-            FiguresList={completedCampaignList}
-          />
+          <OngoingCampaign List={selectedCampaign} />
         </>
       ) : (
         <>
@@ -72,6 +75,7 @@ function Campaign() {
 }
 
 const CampaignWrap = styled.div`
+  width: 100%;
   padding: 1% 3% 3% 3%;
   background-color: ${({ theme }) => theme.palette.pageBackground};
 `;

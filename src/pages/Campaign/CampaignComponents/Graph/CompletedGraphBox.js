@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Chart } from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
+import { color } from '@mui/system';
 
-function GraphBox({
+Chart.register(ChartDataLabels, ...registerables);
+
+function CompletedGraphBox({
   width,
   FiguresList,
   FiguresClass,
@@ -16,14 +20,14 @@ function GraphBox({
   const handleGraph = e => {
     setGraph(e.target.value);
   };
-
   function findFigure(e) {
-    if (e.id == graph) {
+    if (e.primaryFigureId === graph) {
       return true;
     }
   }
   const selectedFigure = FiguresClass.find(findFigure);
-  const selectedfigureData = FiguresList[selectedFigure.figureName];
+  const completedSelectedfigureData = FiguresList[selectedFigure?.figureName];
+
   return (
     <GraphBoxWrap width={width}>
       <GraphDrop value={graph} onChange={handleGraph} List={FiguresClass} />
@@ -34,20 +38,20 @@ function GraphBox({
             datasets: [
               {
                 label: selectedFigure?.figureTitle,
-                backgroundColor: ['red', 'blue'],
-                // backgroundColor: function (value) {
-                //   if (value.include('고어텍스')) {
-                //     return 'yellow';
-                //   }
-                //   return 'blue';
-                // },
+                backgroundColor: theme.palette.chartBlue0,
                 borderWidth: 0,
                 barThickness: BarThickness,
-                data: selectedfigureData,
+                data: completedSelectedfigureData,
+                datalabels: {
+                  align: 'start',
+                  anchor: 'end',
+                  color: theme.palette.white,
+                },
               },
             ],
           }}
           options={{
+            aspectRatio: 3,
             indexAxis: IndexAxis,
             elements: {
               bar: {
@@ -90,4 +94,4 @@ const Graph = styled.div`
   margin-top: 10px;
 `;
 
-export default GraphBox;
+export default CompletedGraphBox;

@@ -25,17 +25,10 @@ const CampaignRoas = styled.div`
   justify-content: center;
   align-items: center;
   height: 5vh;
-  width: 100%;
   margin-top: 5px;
   background-color: ${({ theme }) => theme.palette.white};
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
   border: 1px solid #e1e1ef;
 `;
-
-// const GraphBoxes = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   margin-bottom: 10px;
-// `;
 
 export default CompletedCampaign;

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Chart } from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
-import { automaticDate, hashTag } from '../OngoingCampaignDailyFigures';
 
-function GraphBox({
+Chart.register(ChartDataLabels, ...registerables);
+
+function OnGoingGraphBox({
   width,
   FiguresList,
   FiguresClass,
@@ -17,41 +19,41 @@ function GraphBox({
   const handleGraph = e => {
     setGraph(e.target.value);
   };
-
   function findFigure(e) {
-    if (e.id == graph) {
+    if (e.primaryFigureId === graph) {
       return true;
     }
   }
   const selectedFigure = FiguresClass.find(findFigure);
-  const selectedfigureData = FiguresList[selectedFigure.figureName];
+  const onGoingSelectedfigureData = FiguresList[selectedFigure.dailyFigureData];
+  const dateList = FiguresList?.date_graph.map(d => {
+    return d.slice(0, 10);
+  });
+  console.log(dateList);
   return (
     <GraphBoxWrap width={width}>
       <GraphDrop value={graph} onChange={handleGraph} List={FiguresClass} />
       <Graph>
         <Bar
           data={{
-            // labels: FiguresList.campaign_name,
-            labels: automaticDate,
+            labels: dateList,
             datasets: [
               {
                 label: selectedFigure?.figureTitle,
-                backgroundColor: 'blue',
-                // backgroundColor: function (value) {
-                //   if (value.include('고어텍스')) {
-                //     return 'yellow';
-                //   }
-                //   return 'blue';
-                // },
+                backgroundColor: theme.palette.chartBlue0,
                 borderWidth: 0,
-                barThickness: 5,
-
-                // data: selectedfigureData,
-                data: hashTag,
+                barThickness: BarThickness,
+                data: onGoingSelectedfigureData,
+                datalabels: {
+                  align: 'start',
+                  anchor: 'end',
+                  color: theme.palette.white,
+                },
               },
             ],
           }}
           options={{
+            aspectRatio: 1,
             indexAxis: IndexAxis,
             elements: {
               bar: {
@@ -59,7 +61,7 @@ function GraphBox({
               },
             },
             legend: {
-              display: true,
+              display: false,
               position: 'right',
             },
             scales: {
@@ -83,6 +85,7 @@ function GraphBox({
 
 const GraphBoxWrap = styled.div`
   width: ${props => props.width};
+  height: ${props => props.height};
   background-color: white;
   margin-top: 15px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
@@ -90,8 +93,7 @@ const GraphBoxWrap = styled.div`
 `;
 
 const Graph = styled.div`
-  height: 400px;
   margin-top: 10px;
 `;
 
-export default GraphBox;
+export default OnGoingGraphBox;
