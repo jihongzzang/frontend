@@ -1,11 +1,12 @@
 import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   selectedInfluencerState,
   selectedInfluencer,
   selectedWeeks,
   statusInfluencersData,
 } from '../Atoms/selectedState';
+import { rightSelectedInfluencer } from '../Atoms/analysisState';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Btn from './Btn';
 import styled from 'styled-components';
@@ -16,11 +17,14 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
   const [weeks, setWeeks] = useRecoilState(selectedWeeks);
   const influencerLists = useRecoilValue(statusInfluencersData);
 
+  const reset = useSetRecoilState(rightSelectedInfluencer);
+
   const changeSelectOptionHandler = e => {
     const { value } = e.target;
     setState(value);
     setInfluencer('');
     setWeeks('all');
+    reset('');
   };
 
   const changeSelectOptionHandler2 = e => {
@@ -63,11 +67,7 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
             <InputLabel className="inputLabel" shrink={false}>
               {influencer ? '' : '목록'}
             </InputLabel>
-            <Select
-              value={influencer}
-              onChange={changeSelectOptionHandler2}
-              autosize={true}
-            >
+            <Select value={influencer} onChange={changeSelectOptionHandler2}>
               {state === 'all' &&
                 influencerLists.map(({ id, name, kor_name }) => {
                   return (
@@ -98,11 +98,7 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
         <InputWrraper>
           <h4>주차별 검색</h4>
           <FormControl className="formControl" size="small">
-            <Select
-              value={weeks}
-              onChange={changeSelectOptionHandler3}
-              autosize={true}
-            >
+            <Select value={weeks} onChange={changeSelectOptionHandler3}>
               {weekType.map(({ id, name, korName }) => {
                 return (
                   <MenuItem key={id} value={name} name={name}>

@@ -126,7 +126,7 @@ export default ChartType4;
 
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 22%;
+  width: 297.78px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

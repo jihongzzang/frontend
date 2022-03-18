@@ -1,10 +1,6 @@
 import { atom, selector } from 'recoil';
 import { influencerListSelector2 } from './fetchDataState';
-
-export const rightSelectedCampaign = atom({
-  key: 'rightSelectedCampaign',
-  default: '',
-});
+import { statusInfluencersData } from './selectedState';
 
 export const rightSelectedInfluencer = atom({
   key: 'rightSelectedInfluencer',
@@ -14,12 +10,8 @@ export const rightSelectedInfluencer = atom({
 export const rightfilteredInfluencers = selector({
   key: 'rightfilteredInfluencers',
   get: ({ get }) => {
-    const allInfluencers = get(influencerListSelector2);
-    const target = get(rightSelectedCampaign);
-    const influencersData = allInfluencers.filter(ele => {
-      return ele.participatedCampaigns?.find(el => el.name === target);
-    });
-    return influencersData;
+    const target = get(statusInfluencersData);
+    return target;
   },
 });
 

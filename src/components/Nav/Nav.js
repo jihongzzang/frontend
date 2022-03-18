@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Btn from '../Btn';
 import NAVBTN_LISTS from './NAVBTN_LISTS';
+import { navState } from '../../Atoms/navState';
 
 function Nav() {
-  const [isClick, setIsClick] = useState({ main: true });
+  const [isClick, setIsClick] = useRecoilState(navState);
   const navBtnLists = NAVBTN_LISTS;
+
+  const location = useLocation();
+
   const changeColor = e => {
     const { name } = e.currentTarget;
-
-    let navMenuObj = {
-      main: false,
-      campaign: false,
-      influencer: false,
-      analysis: false,
-    };
-
-    navMenuObj[name] = true;
-    setIsClick(navMenuObj);
+    setIsClick({ [name]: true });
     navigate(name === 'main' ? '/' : `/${name}`);
   };
 
@@ -38,7 +34,7 @@ function Nav() {
               color="navNoneActive"
               name={engName}
               onClick={changeColor}
-              active={isClick[engName]}
+              active={location.pathname.slice(1) === engName}
             >
               <span>{korName}</span>
             </NavBtn>
