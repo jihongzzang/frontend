@@ -1,5 +1,8 @@
 const SECONDARY_FIGURES = [
-  { secondaryFigureId: 1, figureName: '마케팅 비용' },
+  {
+    id: 1,
+    figureName: '마케팅 비용',
+  },
   {
     id: 2,
     figureName: '평균 좋아요 수',

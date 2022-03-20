@@ -5,7 +5,6 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
-import { color } from '@mui/system';
 
 Chart.register(ChartDataLabels, ...registerables);
 
@@ -86,7 +85,7 @@ const GraphBoxWrap = styled.div`
   height: ${props => props.height};
   background-color: white;
   margin-top: 15px;
-  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   border: 1px solid #e1e1ef;
 `;
 

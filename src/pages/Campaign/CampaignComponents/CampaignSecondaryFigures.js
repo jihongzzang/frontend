@@ -6,7 +6,7 @@ import { convertNumber } from '../../../Hooks/convertData';
 
 function CampaignSecondaryFigures({ List }) {
   SECONDARY_FIGURES[0].figureValue =
-    convertNumber(List?.budget)?.toLocaleString() + '만원';
+    convertNumber(List?.Campaign?.budget).toLocaleString() + '만원';
   SECONDARY_FIGURES[1].figureValue = Math.floor(
     List?.average_like
   )?.toLocaleString();
@@ -25,12 +25,11 @@ function CampaignSecondaryFigures({ List }) {
       {SECONDARY_FIGURES.map(f => {
         return (
           <FigureBox
-            key={f.secondaryFigureId}
-            width="9vw"
-            height="9.5vh"
+            key={f.id}
+            width="130px"
+            height="70px"
             FigureName={f.figureName}
             Figure={f.figureValue}
-            money={f.money}
           />
         );
       })}
@@ -40,6 +39,6 @@ function CampaignSecondaryFigures({ List }) {
 const SmallFigures = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 46.65vw;
+  width: 670px;
 `;
 export default CampaignSecondaryFigures;

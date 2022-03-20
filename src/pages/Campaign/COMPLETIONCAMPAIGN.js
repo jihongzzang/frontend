@@ -1,4 +1,4 @@
-const LIST = [
+export const COMPLETIONCAMPAIGN = [
   {
     Campaign: {
       id: 1,
@@ -60,13 +60,13 @@ const LIST = [
     },
     count_post: 22,
     count_influencer: 22,
-    sum_hashtag: 10203,
-    average_like: 267.95454545454544,
-    average_exposure: 1661.3181818181818,
-    average_comment: 67.18181818181819,
-    daily_official_visit: 42036,
-    daily_official_follower: 2255926,
-    daily_official_referrer: 11755,
+    sum_hashtag: 328470,
+    average_like: 248.00252525252526,
+    average_exposure: 1551.763888888889,
+    average_comment: 66.60732323232324,
+    total_official_visit: 1408070,
+    total_official_follower: 81213732,
+    total_official_referrer: 396878,
   },
   {
     Campaign: {
@@ -83,13 +83,13 @@ const LIST = [
     },
     count_post: 15,
     count_influencer: 15,
-    sum_hashtag: 5990,
-    average_like: 247.2,
-    average_exposure: 1559.2666666666667,
-    average_comment: 75.66666666666667,
-    daily_official_visit: 26861,
-    daily_official_follower: 1536891,
-    daily_official_referrer: 7326,
+    sum_hashtag: 213662,
+    average_like: 248.68333333333334,
+    average_exposure: 1550.0648148148148,
+    average_comment: 65.76851851851852,
+    total_official_visit: 934099,
+    total_official_follower: 55328346,
+    total_official_referrer: 273435,
   },
   {
     Campaign: {
@@ -106,14 +106,12 @@ const LIST = [
     },
     count_post: 17,
     count_influencer: 17,
-    sum_hashtag: 6491,
-    average_like: 266.70588235294116,
-    average_exposure: 1556.1176470588234,
-    average_comment: 57.35294117647059,
-    daily_official_visit: 27902,
-    daily_official_follower: 1754153,
-    daily_official_referrer: 9585,
+    sum_hashtag: 244031,
+    average_like: 262.4330065359477,
+    average_exposure: 1563.5669934640523,
+    average_comment: 66.38235294117646,
+    total_official_visit: 1086930,
+    total_official_follower: 63149814,
+    total_official_referrer: 309324,
   },
 ];
-
-export default LIST;

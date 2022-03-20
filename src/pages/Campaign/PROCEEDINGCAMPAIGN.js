@@ -1,4 +1,4 @@
-const LIST = [
+export const PROCEEDCAMPAIGN = [
   {
     Campaign: {
       id: 1,
@@ -14,13 +14,13 @@ const LIST = [
     },
     count_post: 24,
     count_influencer: 24,
-    sum_hashtag: 352557,
-    average_like: 257.91898148148147,
-    average_exposure: 1569.15625,
-    average_comment: 66.04861111111111,
-    total_official_visit: 1511104,
-    total_official_follower: 88884864,
-    total_official_referrer: 442127,
+    sum_hashtag: 8212,
+    average_like: 307.8333333333333,
+    average_exposure: 1609.7083333333333,
+    average_comment: 70.91666666666667,
+    daily_official_visit: 38927,
+    daily_official_follower: 2469012,
+    daily_official_referrer: 12856,
   },
   {
     Campaign: {
@@ -37,13 +37,13 @@ const LIST = [
     },
     count_post: 22,
     count_influencer: 22,
-    sum_hashtag: 317226,
-    average_like: 265.729797979798,
-    average_exposure: 1564.030303030303,
-    average_comment: 66.32449494949495,
-    total_official_visit: 1384340,
-    total_official_follower: 81501444,
-    total_official_referrer: 402920,
+    sum_hashtag: 9946,
+    average_like: 236.0909090909091,
+    average_exposure: 1653.5,
+    average_comment: 54.90909090909091,
+    daily_official_visit: 39075,
+    daily_official_follower: 2263918,
+    daily_official_referrer: 12163,
   },
   {
     Campaign: {
@@ -115,5 +115,3 @@ const LIST = [
     daily_official_referrer: 9585,
   },
 ];
-
-export default LIST;

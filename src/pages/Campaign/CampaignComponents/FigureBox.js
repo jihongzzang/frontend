@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 function FigureBox({ width, height, FigureName, Figure, money }) {
   return (
-    <SmallFigure width={width} height={height}>
+    <FigureBoxWrap width={width} height={height}>
       <FigureNameText>{FigureName}</FigureNameText>
       <FigureText>{Figure}</FigureText>
-    </SmallFigure>
+    </FigureBoxWrap>
   );
 }
-const SmallFigure = styled.div`
+const FigureBoxWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@ const SmallFigure = styled.div`
   width: ${props => props.width};
   height: ${props => props.height};
   background-color: ${({ theme }) => theme.palette.white};
-  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   border: 1px solid #e1e1ef;
 `;
 
@@ -27,12 +27,9 @@ const FigureNameText = styled.span`
   white-space: pre-wrap;
   text-align: center;
   line-height: 18px;
+  margin-bottom: 5px;
 `;
-const Money = styled.span`
-  margin: 0 0 5px;
-  font-size: ${({ theme }) => theme.fontsize.fontSize0};
-  color: ${({ theme }) => theme.palette.grey};
-`;
+
 const FigureText = styled.span`
   font-size: 24px;
   color: ${({ theme }) => theme.palette.navNoneActive};

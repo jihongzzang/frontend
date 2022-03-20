@@ -29,14 +29,14 @@ function OnGoingGraphBox({
   const dateList = FiguresList?.date_graph.map(d => {
     return d.slice(0, 10);
   });
-  console.log(dateList);
+
   return (
     <GraphBoxWrap width={width}>
       <GraphDrop value={graph} onChange={handleGraph} List={FiguresClass} />
       <Graph>
         <Bar
           data={{
-            labels: dateList,
+            labels: dateList.slice(0, 24),
             datasets: [
               {
                 label: selectedFigure?.figureTitle,
@@ -53,7 +53,7 @@ function OnGoingGraphBox({
             ],
           }}
           options={{
-            aspectRatio: 1,
+            aspectRatio: 1.5,
             indexAxis: IndexAxis,
             elements: {
               bar: {
@@ -88,7 +88,7 @@ const GraphBoxWrap = styled.div`
   height: ${props => props.height};
   background-color: white;
   margin-top: 15px;
-  border-radius: ${({ theme }) => theme.btnRadius.borderRadius4};
+  border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   border: 1px solid #e1e1ef;
 `;
 

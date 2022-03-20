@@ -5,8 +5,9 @@ import OnGoingGraphBox from './OnGoingGraphBox';
 import PRIMARY_FIGURES from '../PRIMARY_FIGURES';
 import { CHANGEDONGOING } from '../CHANGEDONGOING';
 
-function GraphBoxes({ List, FiguresList }) {
-  const campaignStatus = List?.campaign_status === '진행 중';
+function GraphBoxes({ List, FiguresList, campaignStatus }) {
+  // const campaignStatus = List?.campaign_status === '진행 중';
+  // const campaignStatus = { campaignStatus };
   const dailyList = CHANGEDONGOING[1];
 
   return (
@@ -14,14 +15,14 @@ function GraphBoxes({ List, FiguresList }) {
       {campaignStatus ? (
         <>
           <OnGoingGraphBox
-            width="46.65vw"
+            width="670px"
             FiguresList={dailyList}
             FiguresClass={PRIMARY_FIGURES}
             IndexAxis="y"
             BarThickness="10"
           />
           <OnGoingGraphBox
-            width="46.65vw"
+            width="670px"
             FiguresList={dailyList}
             FiguresClass={PRIMARY_FIGURES}
             IndexAxis="y"
@@ -31,14 +32,14 @@ function GraphBoxes({ List, FiguresList }) {
       ) : (
         <>
           <CompletedGraphBox
-            width="46.65vw"
+            width="670px"
             FiguresList={FiguresList}
             FiguresClass={PRIMARY_FIGURES}
             IndexAxis="y"
             BarThickness="30"
           />
           <CompletedGraphBox
-            width="46.65vw"
+            width="670px"
             FiguresList={FiguresList}
             FiguresClass={PRIMARY_FIGURES}
             IndexAxis="y"
