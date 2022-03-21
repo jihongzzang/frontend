@@ -1,53 +1,53 @@
 import React from 'react';
 import styled from 'styled-components';
 import GraphBox from './GraphBox';
-import OnGraphBox from './OnGraphBox';
-import PRIMARY_FIGURES from '../PRIMARY_FIGURES';
+import { PRIMARY_FIGURES } from '../FIGURES';
 
-function GraphBoxes({ List, FiguresList }) {
-  const campaignStatus = List?.campaign_status === '진행 중';
-
+function GraphBoxes({ FiguresList, campaignStatus, dailyList, completedList }) {
+  const proceedingFigures = PRIMARY_FIGURES.slice(
+    0,
+    PRIMARY_FIGURES.length - 1
+  );
   return (
     <GraphBoxesWrap>
       {campaignStatus ? (
         <>
-          <OnGraphBox
-            width="46.65vw"
-            FiguresList={FiguresList}
-            FiguresClass={PRIMARY_FIGURES}
+          <GraphBox
+            width="670px"
+            FiguresList={dailyList}
+            FiguresClass={proceedingFigures}
             IndexAxis="y"
-            BarThickness="20"
+            BarThickness="10"
+            campaignStatus={campaignStatus}
           />
-          <OnGraphBox
-            width="46.65vw"
-            FiguresList={FiguresList}
-            FiguresClass={PRIMARY_FIGURES}
-            IndexAxis="x"
-            BarThickness="20"
-          />
-          {/* <OnGraphBox
-            width="32.2%"
-            FiguresList={FiguresList}
-            FiguresClass={PRIMARY_FIGURES}
+          <GraphBox
+            width="670px"
+            FiguresList={dailyList}
+            FiguresClass={proceedingFigures}
             IndexAxis="y"
-            BarThickness="20"
-          /> */}
+            BarThickness="10"
+            campaignStatus={campaignStatus}
+          />
         </>
       ) : (
         <>
           <GraphBox
-            width="46.65vw"
+            width="670px"
             FiguresList={FiguresList}
             FiguresClass={PRIMARY_FIGURES}
-            IndexAxis="x"
+            IndexAxis="y"
             BarThickness="30"
+            campaignStatus={campaignStatus}
+            completedList={completedList}
           />
           <GraphBox
-            width="46.65vw"
+            width="670px"
             FiguresList={FiguresList}
             FiguresClass={PRIMARY_FIGURES}
-            IndexAxis="x"
+            IndexAxis="y"
             BarThickness="30"
+            campaignStatus={campaignStatus}
+            completedList={completedList}
           />
         </>
       )}

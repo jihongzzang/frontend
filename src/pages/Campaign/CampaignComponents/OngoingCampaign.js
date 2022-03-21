@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
-import CampaignPrimaryFigures from './CampaignPrimaryFigures';
+import React from 'react';
 import GraphBoxes from './Graph/GraphBoxes';
 import Feeds from './Feeds/Feeds';
 
-function OngoingCampaign({ List, FiguresList }) {
+function OngoingCampaign({ List, campaignStatus, dailyList }) {
   return (
     <div>
-      <CampaignPrimaryFigures
+      <GraphBoxes
         List={List}
-        FigureStandardText="*2022년 3월 2일 기준, 전 일 대비 증가량"
+        campaignStatus={campaignStatus}
+        dailyList={dailyList}
       />
-      <GraphBoxes List={List} FiguresList={FiguresList} />
-      <Feeds />
+      {/* <Feeds /> */}
     </div>
   );
 }

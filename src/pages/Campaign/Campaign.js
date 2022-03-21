@@ -1,79 +1,129 @@
 import React, { useState, useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import CampaignInfo from './CampaignComponents/CampaignInfo';
+import { CAMAPAIGN_BASE_URL } from '../../config';
+import { formatDate } from '../../Hooks/convertData';
 import CompletedCampaign from './CampaignComponents/CompletedCampaign';
 import OngoingCampaign from './CampaignComponents/OngoingCampaign';
+import DropDown from './CampaignComponents/DropDown';
+import CampaignInformationFigures from './CampaignComponents/CampaignInformationFigures';
+import CampaignInformation from './CampaignComponents/CampaignInformation';
+import CampaignPrimaryFigures from './CampaignComponents/CampaignPrimaryFigures';
+import { selectedCampaignIdState } from '../../Atoms/campaignState';
+import {
+  proceedingCampaignList,
+  completionCampaignList,
+  completionCampaignGraphList,
+} from '../../Atoms/campaignFetchDataState';
 
 function Campaign() {
-  const [state, setState] = useState(1);
-  const [campaignList, setCampaignList] = useState([]);
-  const [completedCampaignList, setCompletedCampaignList] = useState([]);
+  const today = formatDate(new Date());
+  const proceeding = useRecoilValue(proceedingCampaignList);
+  const completion = useRecoilValue(completionCampaignList);
+  const proceedingList = proceeding.filter(a => a?.Campaign?.end_at > today);
+  const completedList = completion.filter(a => a?.Campaign?.end_at < today);
+  const campaignList = completedList.concat(proceedingList);
+  const completedCampaignGraph = useRecoilValue(completionCampaignGraphList);
+  const [selectedCampaignId, setSelectedCampaignId] = useRecoilState(
+    selectedCampaignIdState
+  );
+  const [dailyList, setDailyList] = useState([]);
+
   useEffect(() => {
-    fetch('http://172.1.6.129:8000/performance/completion?status_filter=all')
+    fetch(
+      `${CAMAPAIGN_BASE_URL}proceeding_graph?campaign_id=${Number(
+        selectedCampaignId
+      )}
+      `
+    )
       .then(res => res.json())
       .then(res => {
-        setCampaignList(res[0]);
-        setCompletedCampaignList(res[1]);
+        setDailyList(res[0]);
       });
-  }, []);
+  }, [Number(selectedCampaignId)]);
 
-  function findCampaign(e) {
-    if (e.id == state) {
+  const findCampaign = e => {
+    if (e.Campaign.id === selectedCampaignId) {
       return true;
     }
-  }
-  const selectedCampaign = campaignList?.find(findCampaign);
+  };
 
-  function defineState() {
-    if (selectedCampaign?.campaign_status === '진행 중') {
+  const selectedCampaign = campaignList.find(findCampaign);
+
+  const defineState = () => {
+    if (selectedCampaign?.Campaign.end_at > today) {
       return true;
-    } else if (selectedCampaign?.campaign_status === '완료') {
+    } else if (selectedCampaign?.Campaign.end_at < today) {
       return false;
     }
-  }
+  };
+
   const campaignStates = defineState();
-  const handle = e => {
-    setState(e.target.value);
+
+  const handleCampaignValue = e => {
+    setSelectedCampaignId(e.target.value);
   };
 
   return (
     <CampaignWrap>
-      {campaignStates ? (
-        <>
-          <CampaignInfo
-            List={selectedCampaign}
+      <CampaignInfoBoxWrap>
+        <CampaignInfoBox>
+          <DropDown
             dropDownList={campaignList}
-            stateTag="진행 중"
-            value={state}
-            onChange={handle}
+            value={selectedCampaignId}
+            onChange={handleCampaignValue}
           />
+          <CampaignInformation
+            campaignStates={campaignStates}
+            selectedCampaign={selectedCampaign}
+          />
+        </CampaignInfoBox>
+        <CampaignInformationFigures
+          List={selectedCampaign}
+          selectedCampaign={selectedCampaign}
+        />
+      </CampaignInfoBoxWrap>
+      <CampaignPrimaryFigures
+        List={selectedCampaign}
+        campaignStatus={defineState()}
+        completedCampaignList={completedCampaignGraph}
+        dailyList={dailyList}
+      />
+      {selectedCampaign ? (
+        campaignStates ? (
           <OngoingCampaign
             List={selectedCampaign}
-            FiguresList={completedCampaignList}
+            campaignStatus={defineState()}
+            dailyList={dailyList}
           />
-        </>
-      ) : (
-        <>
-          <CampaignInfo
-            List={selectedCampaign}
-            dropDownList={campaignList}
-            stateTag="완료"
-            value={state}
-            onChange={handle}
-          />
+        ) : (
           <CompletedCampaign
             List={selectedCampaign}
-            FiguresList={completedCampaignList}
+            campaignStatus={defineState()}
+            FiguresList={completedCampaignGraph}
+            completedList={completedList}
           />
-        </>
-      )}
+        )
+      ) : null}
     </CampaignWrap>
   );
 }
 
 const CampaignWrap = styled.div`
-  padding: 1% 3% 3% 3%;
+  width: 1440px;
+  padding: 36px 3% 3% 3%;
   background-color: ${({ theme }) => theme.palette.pageBackground};
+`;
+
+const CampaignInfoBoxWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const CampaignInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 670px;
 `;
 
 export default Campaign;
