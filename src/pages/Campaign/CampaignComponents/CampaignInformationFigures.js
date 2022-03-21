@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import FigureBox from './FigureBox';
-import SECONDARY_FIGURES from './SECONDARY_FIGURES';
+import { SECONDARY_FIGURES } from './FIGURES';
 import { convertNumber } from '../../../Hooks/convertData';
 
-function CampaignSecondaryFigures({ List }) {
+function CampaignInformationFigures({ List }) {
   SECONDARY_FIGURES[0].figureValue =
     convertNumber(List?.Campaign?.budget).toLocaleString() + '만원';
   SECONDARY_FIGURES[1].figureValue = Math.floor(
@@ -22,17 +22,19 @@ function CampaignSecondaryFigures({ List }) {
 
   return (
     <SmallFigures>
-      {SECONDARY_FIGURES.map(f => {
-        return (
-          <FigureBox
-            key={f.id}
-            width="130px"
-            height="70px"
-            FigureName={f.figureName}
-            Figure={f.figureValue}
-          />
-        );
-      })}
+      {List
+        ? SECONDARY_FIGURES.map(f => {
+            return (
+              <FigureBox
+                key={f.id}
+                width="130px"
+                height="70px"
+                FigureName={f.figureName}
+                Figure={f.figureValue}
+              />
+            );
+          })
+        : null}
     </SmallFigures>
   );
 }
@@ -41,4 +43,4 @@ const SmallFigures = styled.div`
   justify-content: space-between;
   width: 670px;
 `;
-export default CampaignSecondaryFigures;
+export default CampaignInformationFigures;

@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const campaignState = atom({
-  key: 'campaignState',
+export const selectedCampaignIdState = atom({
+  key: 'selectedCampaignIdState ',
   default: '',
 });

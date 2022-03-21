@@ -1,158 +1,110 @@
 import React, { useState, useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { CAMAPAIGN_BASE_URL } from '../../config';
+import { formatDate } from '../../Hooks/convertData';
 import CompletedCampaign from './CampaignComponents/CompletedCampaign';
 import OngoingCampaign from './CampaignComponents/OngoingCampaign';
-import { formatDate } from '../../Hooks/convertData';
-import { useRecoilState } from 'recoil';
-import { campaignState } from '../../Atoms/campaignState';
-import LIST from './CampaignComponents/LIST';
 import DropDown from './CampaignComponents/DropDown';
-import CampaignSecondaryFigures from './CampaignComponents/CampaignSecondaryFigures';
-import CampaignInformation from './CampaignInformation';
+import CampaignInformationFigures from './CampaignComponents/CampaignInformationFigures';
+import CampaignInformation from './CampaignComponents/CampaignInformation';
 import CampaignPrimaryFigures from './CampaignComponents/CampaignPrimaryFigures';
+import { selectedCampaignIdState } from '../../Atoms/campaignState';
+import {
+  proceedingCampaignList,
+  completionCampaignList,
+  completionCampaignGraphList,
+} from '../../Atoms/campaignFetchDataState';
 
 function Campaign() {
-  const [state, setState] = useRecoilState(campaignState);
   const today = formatDate(new Date());
-  const [proceeding, setProceeding] = useState([]);
-  const [completion, setCompletion] = useState([]);
-  // const [campaignList, setCampaignList] = useState([]);
+  const proceeding = useRecoilValue(proceedingCampaignList);
+  const completion = useRecoilValue(completionCampaignList);
+  const proceedingList = proceeding.filter(a => a?.Campaign?.end_at > today);
+  const completedList = completion.filter(a => a?.Campaign?.end_at < today);
+  const campaignList = completedList.concat(proceedingList);
+  const completedCampaignGraph = useRecoilValue(completionCampaignGraphList);
+  const [selectedCampaignId, setSelectedCampaignId] = useRecoilState(
+    selectedCampaignIdState
+  );
+  const [dailyList, setDailyList] = useState([]);
 
-  // const [completedCampaignList, setCompletedCampaignList] = useState([]);
-  // useEffect(() => {
-  //   fetch('http://172.1.6.129:8000/performance/proceeding?status_filter=all')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setProceeding(res);
-  //     });
-  // }, []);
-  // useEffect(() => {
-  //   fetch('http://172.1.6.129:8000/performance/completion?status_filter=all')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setCompletion(res);
-  //     });
-  // }, []);
-  // const proceedingList = proceeding.filter(a => a?.Campaign?.end_at > today);
-  // const completedList = completion.filter(a => a?.Campaign?.end_at < today);
-  // const campaignList = completedList.concat(proceedingList);
-  // console.log(campaignList);
-  const campaignList = LIST;
+  useEffect(() => {
+    fetch(
+      `${CAMAPAIGN_BASE_URL}proceeding_graph?campaign_id=${Number(
+        selectedCampaignId
+      )}
+      `
+    )
+      .then(res => res.json())
+      .then(res => {
+        setDailyList(res[0]);
+      });
+  }, [Number(selectedCampaignId)]);
 
-  function findCampaign(e) {
-    if (campaignList.indexOf(e) + 1 == state) {
+  const findCampaign = e => {
+    if (e.Campaign.id === selectedCampaignId) {
       return true;
     }
-  }
-  const selectedCampaign = campaignList?.find(findCampaign);
+  };
 
-  function defineState() {
-    if (selectedCampaign?.Campaign?.end_at > today) {
+  const selectedCampaign = campaignList.find(findCampaign);
+
+  const defineState = () => {
+    if (selectedCampaign?.Campaign.end_at > today) {
       return true;
-    } else if (selectedCampaign?.Campaign?.end_at < today) {
+    } else if (selectedCampaign?.Campaign.end_at < today) {
       return false;
     }
-  }
+  };
 
   const campaignStates = defineState();
+
   const handleCampaignValue = e => {
-    setState(e.target.value);
+    setSelectedCampaignId(e.target.value);
   };
 
   return (
     <CampaignWrap>
-      {/* <CampaignInfoBox>
-        {selectedCampaign ? (
-          <CampaignPrimaryInfoBox>
-            <DropDown
-              dropDownList={campaignList}
-              value={state}
-              onChange={handle}
-            />
-            <CampaignPrimaryInfos>
-              <CampaignState><span>{stateTag}</span></CampaignState>
-              <CampaignPrimaryInfoText>
-                <span>{selectedCampaign?.Campaign?.description}</span>
-                <span>{selectedCampaign?.Campaign?.tag}</span>
-                <CampaignPeriod>
-                  {convertDate(selectedCampaign?.Campaign?.created_at)} ~{' '}
-                  {convertDate(selectedCampaign?.Campaign?.end_at)}
-                </CampaignPeriod>
-              </CampaignPrimaryInfoText>
-            </CampaignPrimaryInfos>
-          </CampaignPrimaryInfoBox>
-        ) : (
-          <Roading>데이터를 받아옵니다.</Roading>
-        )}
-        <CampaignSecondaryFigures List={selectedCampaign} />
-      </CampaignInfoBox> */}
-
-      <CampaignInfoBox>
-        <CampaignPrimaryInfoBox>
+      <CampaignInfoBoxWrap>
+        <CampaignInfoBox>
           <DropDown
             dropDownList={campaignList}
-            value={state}
+            value={selectedCampaignId}
             onChange={handleCampaignValue}
           />
-          {selectedCampaign ? (
-            <CampaignInformation
-              campaignStates={campaignStates}
-              selectedCampaign={selectedCampaign}
-            />
-          ) : null}
-        </CampaignPrimaryInfoBox>
-        {selectedCampaign ? (
-          <CampaignSecondaryFigures List={selectedCampaign} />
-        ) : null}
-      </CampaignInfoBox>
+          <CampaignInformation
+            campaignStates={campaignStates}
+            selectedCampaign={selectedCampaign}
+          />
+        </CampaignInfoBox>
+        <CampaignInformationFigures
+          List={selectedCampaign}
+          selectedCampaign={selectedCampaign}
+        />
+      </CampaignInfoBoxWrap>
       <CampaignPrimaryFigures
         List={selectedCampaign}
         campaignStatus={defineState()}
+        completedCampaignList={completedCampaignGraph}
+        dailyList={dailyList}
       />
       {selectedCampaign ? (
         campaignStates ? (
           <OngoingCampaign
             List={selectedCampaign}
             campaignStatus={defineState()}
+            dailyList={dailyList}
           />
         ) : (
           <CompletedCampaign
             List={selectedCampaign}
             campaignStatus={defineState()}
-            // FiguresList={completedCampaignList}
+            FiguresList={completedCampaignGraph}
+            completedList={completedList}
           />
         )
       ) : null}
-
-      {/* {campaignStates ? (
-        <>
-          <CampaignInfo
-            List={selectedCampaign}
-            dropDownList={campaignList}
-            stateTag="진행 중"
-            value={state}
-            onChange={handle}
-          />
-          <OngoingCampaign
-            List={selectedCampaign}
-            campaignStatus={defineState()}
-          />
-        </>
-      ) : (
-        <>
-          <CampaignInfo
-            List={selectedCampaign}
-            dropDownList={campaignList}
-            stateTag="완료"
-            value={state}
-            onChange={handle}
-          />
-          <CompletedCampaign
-            List={selectedCampaign}
-            FiguresList={completedCampaignList}
-          />
-        </>
-      )} */}
     </CampaignWrap>
   );
 }
@@ -163,25 +115,15 @@ const CampaignWrap = styled.div`
   background-color: ${({ theme }) => theme.palette.pageBackground};
 `;
 
-const CampaignInfoBox = styled.div`
+const CampaignInfoBoxWrap = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const CampaignPrimaryInfoBox = styled.div`
+const CampaignInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 670px;
 `;
-
-// const Roading = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 670px;
-//   padding-top: 10px;
-//   font-size: ${({ theme }) => theme.fontsize.fontSize1};
-//   color: ${({ theme }) => theme.palette.darkGrey};
-// `;
 
 export default Campaign;

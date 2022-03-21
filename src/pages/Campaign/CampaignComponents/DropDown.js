@@ -9,10 +9,9 @@ function DropDown({ value, onChange, dropDownList }) {
         {value ? '' : <InputTitle>캠페인을 선택해주세요.</InputTitle>}
       </InputLabel>
       <DropDownBox
-        sx={{ borderRadius: '10px', borderColor: 'red' }}
+        sx={{ borderRadius: '10px' }}
         value={value}
         onChange={onChange}
-        // input="test"
       >
         {dropDownList?.map(campaign => {
           return (

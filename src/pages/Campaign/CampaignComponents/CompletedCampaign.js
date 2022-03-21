@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GraphBoxes from './Graph/GraphBoxes';
 
-function CompletedCampaign({ List, FiguresList, campaignStatus }) {
+function CompletedCampaign({ List, FiguresList, completedList }) {
   return (
     <div>
       <CampaignRoas>
@@ -11,14 +11,17 @@ function CompletedCampaign({ List, FiguresList, campaignStatus }) {
         </ExplainationROAS>
         <span>Campaign Marketing ROAS : </span>
         <RoasFigure>
-          {' '}
           {Math.floor(
             (2147798430 / List?.Campaign?.budget) * 100
           ).toLocaleString()}{' '}
           %
         </RoasFigure>
       </CampaignRoas>
-      {/* <GraphBoxes List={List} FiguresList={FiguresList} /> */}
+      <GraphBoxes
+        List={List}
+        FiguresList={FiguresList}
+        completedList={completedList}
+      />
     </div>
   );
 }

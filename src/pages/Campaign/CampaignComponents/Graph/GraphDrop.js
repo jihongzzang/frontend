@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Select, MenuItem } from '@mui/material';
 
 function GraphDrop({ value, onChange, List }) {
   return (
     <DropDownBox
-      sx={{ borderRadius: '12px' }}
+      sx={{ borderRadius: '10px' }}
       value={value}
       onChange={onChange}
     >
@@ -22,7 +22,7 @@ function GraphDrop({ value, onChange, List }) {
 
 const DropDownBox = styled(Select)`
   width: 100%;
-  height: 4vh;
+  height: 30px;
   background-color: ${({ theme }) => theme.palette.white};
   text-align: center;
 `;

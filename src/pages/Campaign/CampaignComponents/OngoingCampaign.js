@@ -1,12 +1,15 @@
 import React from 'react';
-import CampaignPrimaryFigures from './CampaignPrimaryFigures';
 import GraphBoxes from './Graph/GraphBoxes';
 import Feeds from './Feeds/Feeds';
 
-function OngoingCampaign({ List, campaignStatus }) {
+function OngoingCampaign({ List, campaignStatus, dailyList }) {
   return (
     <div>
-      <GraphBoxes List={List} campaignStatus={campaignStatus} />
+      <GraphBoxes
+        List={List}
+        campaignStatus={campaignStatus}
+        dailyList={dailyList}
+      />
       {/* <Feeds /> */}
     </div>
   );

@@ -8,12 +8,14 @@ import theme from '../../../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
-function CompletedGraphBox({
+function GraphBox({
   width,
   FiguresList,
   FiguresClass,
   IndexAxis,
   BarThickness,
+  campaignStatus,
+  completedList,
 }) {
   const [graph, setGraph] = useState(1);
   const handleGraph = e => {
@@ -24,8 +26,34 @@ function CompletedGraphBox({
       return true;
     }
   }
+
   const selectedFigure = FiguresClass.find(findFigure);
+  const onGoingSelectedfigureData =
+    FiguresList[selectedFigure?.dailyFigureData];
   const completedSelectedfigureData = FiguresList[selectedFigure?.figureName];
+  const dateList = FiguresList.date_graph?.map(d => {
+    return d.slice(0, 10);
+  });
+
+  const postingList = () => {
+    if (selectedFigure.dailyFigureData === 'count_post') {
+      return true;
+    }
+  };
+
+  const RoasList = () => {
+    if (selectedFigure.dailyFigureData === 'ROAS') {
+      return true;
+    }
+  };
+
+  // const test = () => {
+  //   if (FiguresList?.campaign_name === completedList?.Campaign?.name) {
+  //     return(
+
+  //     )
+  //   }
+  // };
 
   return (
     <GraphBoxWrap width={width}>
@@ -33,14 +61,24 @@ function CompletedGraphBox({
       <Graph>
         <Bar
           data={{
-            labels: FiguresList.campaign_name,
+            labels: campaignStatus
+              ? postingList()
+                ? FiguresList.post_date
+                : dateList
+              : FiguresList?.campaign_name,
             datasets: [
               {
                 label: selectedFigure?.figureTitle,
                 backgroundColor: theme.palette.chartBlue0,
                 borderWidth: 0,
                 barThickness: BarThickness,
-                data: completedSelectedfigureData,
+                data: campaignStatus
+                  ? postingList()
+                    ? FiguresList.count_post
+                    : onGoingSelectedfigureData
+                  : RoasList()
+                  ? FiguresList.sales_graph
+                  : completedSelectedfigureData,
                 datalabels: {
                   align: 'start',
                   anchor: 'end',
@@ -50,7 +88,7 @@ function CompletedGraphBox({
             ],
           }}
           options={{
-            aspectRatio: 3,
+            aspectRatio: campaignStatus ? 1.5 : 3,
             indexAxis: IndexAxis,
             elements: {
               bar: {
@@ -58,7 +96,7 @@ function CompletedGraphBox({
               },
             },
             legend: {
-              display: true,
+              display: false,
               position: 'right',
             },
             scales: {
@@ -93,4 +131,4 @@ const Graph = styled.div`
   margin-top: 10px;
 `;
 
-export default CompletedGraphBox;
+export default GraphBox;
