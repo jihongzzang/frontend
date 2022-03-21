@@ -1,46 +1,28 @@
 import { atom, selector } from 'recoil';
 import { influencerListSelector2 } from './fetchDataState';
-
-export const leftSelectedCampaign = atom({
-  key: 'leftSelectedCampaign',
-  default: '',
-});
-
-export const leftSelectedInfluencer = atom({
-  key: 'leftSelectedInfluencer',
-  default: '',
-});
-
-export const rightSelectedCampaign = atom({
-  key: 'rightSelectedCampaign',
-  default: '',
-});
+import { selectedInfluencer, statusInfluencersData } from './selectedState';
 
 export const rightSelectedInfluencer = atom({
   key: 'rightSelectedInfluencer',
   default: '',
 });
 
-export const leftfilteredInfluencers = selector({
-  key: 'leftfilteredInfluencers',
+export const rightfilteredInfluencers = selector({
+  key: 'rightfilteredInfluencers',
   get: ({ get }) => {
-    const allInfluencers = get(influencerListSelector2);
-    const target = get(leftSelectedCampaign);
-    const influencerData = allInfluencers.filter(ele => {
-      return ele.participatedCampaigns?.find(el => el.name === target);
-    });
+    const target = get(statusInfluencersData);
+    const target2 = get(selectedInfluencer);
+    const influencerData = target.filter(ele => ele.name !== target2);
     return influencerData;
   },
 });
 
-export const rightfilteredInfluencers = selector({
-  key: 'rightfilteredInfluencers',
+export const rightFilteredInfluencer = selector({
+  key: 'rightFilterdInfluencer',
   get: ({ get }) => {
     const allInfluencers = get(influencerListSelector2);
-    const target = get(rightSelectedCampaign);
-    const influencerData = allInfluencers.filter(ele => {
-      return ele.participatedCampaigns?.find(el => el.name === target);
-    });
+    const target = get(rightSelectedInfluencer);
+    const influencerData = allInfluencers.filter(({ name }) => name === target);
     return influencerData;
   },
 });

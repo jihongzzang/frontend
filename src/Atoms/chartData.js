@@ -1,4 +1,5 @@
 import { selector } from 'recoil';
+import { rightFilteredInfluencer } from './analysisState';
 import { filteredInfluencer } from './selectedState';
 import { selectedWeeks } from './selectedState';
 
@@ -61,6 +62,30 @@ export const chartData6 = selector({
   key: 'chartData6',
   get: ({ get }) => {
     const data = get(filteredInfluencer);
+    return data[0].insight_1;
+  },
+});
+
+export const chartData9 = selector({
+  key: 'chartData9',
+  get: ({ get }) => {
+    const data = get(rightFilteredInfluencer);
+    return data[0].followersRate;
+  },
+});
+
+export const chartData10 = selector({
+  key: 'chartData10',
+  get: ({ get }) => {
+    const data = get(rightFilteredInfluencer);
+    return data[0].followers;
+  },
+});
+
+export const chartData11 = selector({
+  key: 'chartData11',
+  get: ({ get }) => {
+    const data = get(rightFilteredInfluencer);
     return data[0].insight_1;
   },
 });

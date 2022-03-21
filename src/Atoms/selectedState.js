@@ -1,4 +1,6 @@
 import { atom, selector } from 'recoil';
+import { rightSelectedInfluencer } from './analysisState';
+
 import { influencerListSelector2 } from './fetchDataState';
 
 export const selectedInfluencerState = atom({
@@ -30,8 +32,18 @@ export const statusInfluencersData = selector({
 export const renderState = selector({
   key: 'renderState',
   get: ({ get }) => {
-    const isRenderCondition = get(selectedInfluencer);
-    return isRenderCondition.length > 0 ? true : false;
+    const renderCondition = get(selectedInfluencer);
+    const isRenderCondition = renderCondition.length > 0 ? true : false;
+    return isRenderCondition;
+  },
+});
+
+export const renderState2 = selector({
+  key: 'renderState2',
+  get: ({ get }) => {
+    const renderCondition = get(rightSelectedInfluencer);
+    const isRenderCondition = renderCondition.length > 0 ? true : false;
+    return isRenderCondition;
   },
 });
 

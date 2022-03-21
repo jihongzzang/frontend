@@ -1,26 +1,19 @@
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { campaignListSelector2 } from '../../Atoms/fetchDataState';
 import {
-  rightfilteredInfluencers,
-  rightSelectedCampaign,
   rightSelectedInfluencer,
+  rightfilteredInfluencers,
 } from '../../Atoms/analysisState';
+import { selectedInfluencer } from '../../Atoms/selectedState';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Btn from '../../components/Btn';
 import styled from 'styled-components';
 
 const RightSearch = () => {
-  const [campaign, setCampaign] = useRecoilState(rightSelectedCampaign);
   const [influencer, setInfluencer] = useRecoilState(rightSelectedInfluencer);
-  const campaignsList = useRecoilValue(campaignListSelector2);
-  const influencersList = useRecoilValue(rightfilteredInfluencers);
-
-  const changeSelectOptionHandler = e => {
-    const { value } = e.target;
-    setCampaign(value);
-    setInfluencer('');
-  };
+  const comparativeInfluencers = useRecoilValue(rightfilteredInfluencers);
+  const selectConditon = useRecoilValue(selectedInfluencer);
+  const disabled = selectConditon ? false : true;
 
   const changeSelectOptionHandler2 = e => {
     const { value } = e.target;
@@ -30,43 +23,21 @@ const RightSearch = () => {
   return (
     <SearchWrraper>
       <Title>
-        <h2>인플루언서 검색</h2>
+        <h2>비교대상 인플루언서 검색</h2>
       </Title>
       <Content>
         <div>
-          <h4>캠페인 목록</h4>
-          <FormControl className="formControl" size="small">
-            <InputLabel className="inputLabel" shrink={false}>
-              {campaign ? '' : '목록'}
-            </InputLabel>
-            <Select
-              value={campaign}
-              name={campaign}
-              id={campaign}
-              onChange={changeSelectOptionHandler}
-            >
-              {campaignsList.map(({ id, name, kor_name }) => {
-                return (
-                  <MenuItem key={id} value={name} name={name}>
-                    {kor_name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-        <div>
-          <h4>인플루언서</h4>
+          <h4>비교대상 인플루언서</h4>
           <FormControl className="formControl" size="small">
             <InputLabel className="inputLabel" shrink={false}>
               {influencer ? '' : '목록'}
             </InputLabel>
             <Select
               value={influencer}
-              name={influencer}
               onChange={changeSelectOptionHandler2}
+              disabled={disabled}
             >
-              {influencersList.map(({ id, name, kor_name }) => {
+              {comparativeInfluencers.map(({ id, name, kor_name }) => {
                 return (
                   <MenuItem key={id} value={name} name={name}>
                     {kor_name}

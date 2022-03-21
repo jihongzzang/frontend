@@ -1,18 +1,18 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { selectedWeeks } from '../../../Atoms/selectedState';
-import { chartData4 } from '../../../Atoms/chartData';
+import { selectedWeeks } from '../../Atoms/selectedState';
+import { chartData9 } from '../../Atoms/chartData';
 import { Chart, registerables } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import DataBox from '../../../components/DataBox';
+import DataBox from '../DataBox';
 import styled from 'styled-components';
-import theme from '../../../styles/theme';
+import theme from '../../styles/theme';
 
 Chart.register(ChartDataLabels, ...registerables);
 
-const ChartType4 = () => {
-  const followersRateData = useRecoilValue(chartData4);
+const ChartType9 = () => {
+  const followersRateData = useRecoilValue(chartData9);
   const week = useRecoilValue(selectedWeeks);
   const parsingData = {
     all: followersRateData[followersRateData.length - 1],
@@ -122,11 +122,11 @@ const ChartType4 = () => {
   );
 };
 
-export default ChartType4;
+export default ChartType9;
 
 const StyledDataBox = styled(DataBox)`
   background: white;
-  width: 22%;
+  width: 297.78px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

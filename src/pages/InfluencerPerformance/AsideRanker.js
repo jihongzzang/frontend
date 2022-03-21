@@ -1,20 +1,33 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { selectedWeeks } from '../../Atoms/selectedState';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { selectedInfluencer, selectedWeeks } from '../../Atoms/selectedState';
 import { influencerTop3 } from '../../Atoms/influencerTop3';
 import DataBox from '../../components/DataBox';
 import RankerBox from '../../components/RankerBox';
 import styled from 'styled-components';
+import { rightSelectedInfluencer } from '../../Atoms/analysisState';
+import { useNavigate } from 'react-router-dom';
 
 const AsideRanker = () => {
   const data = useRecoilValue(influencerTop3);
   const week = useRecoilValue(selectedWeeks);
+  const branchProcessingData = useRecoilValue(selectedInfluencer);
   const renderData = [...data]
     .sort(
       (a, b) =>
         b.insight_1[week].engagement_rate - a.insight_1[week].engagement_rate
     )
     .slice(0, 3);
+
+  const updateInfluencer = useSetRecoilState(rightSelectedInfluencer);
+  const navigate = useNavigate();
+  const conversionPage = e => {
+    const { id } = e.currentTarget;
+    branchProcessingData === id ? updateInfluencer('') : updateInfluencer(id);
+    branchProcessingData === id
+      ? alert('비교대상이 동일합니다. 다른 인플루언서를 선택해주세요')
+      : navigate('/analysis');
+  };
 
   return (
     <StyledDataBox size="large" color="borderColor" outline>
@@ -26,13 +39,17 @@ const AsideRanker = () => {
         </LegendDataBox>
         {renderData.map((influencer, idx) => {
           return (
-            <DataWrraper key={influencer.id}>
+            <DataWrraper
+              key={influencer.id}
+              onClick={conversionPage}
+              id={influencer.name}
+            >
               <Number>{idx + 1}.</Number>
               <CustomRankerBox
                 fullWidth
                 color="borderColor"
                 outline
-                className="hello"
+                name={influencer.name}
               >
                 <img src={influencer.img} alt="프로필 사진" />
                 <span>{influencer.kor_name}</span>
@@ -86,6 +103,7 @@ const DataWrraper = styled.div`
   color: black;
   padding: 10px;
   height: 97px;
+  cursor: pointer;
 `;
 
 const Number = styled.span`

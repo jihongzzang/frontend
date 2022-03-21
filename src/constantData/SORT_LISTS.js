@@ -1,4 +1,4 @@
-const SORT_LISTS = [
+export const SORT_LISTS = [
   {
     id: 1,
     name: 'recent',
@@ -30,5 +30,3 @@ const SORT_LISTS = [
     korName: '참여율 낮은 순',
   },
 ];
-
-export default SORT_LISTS;
