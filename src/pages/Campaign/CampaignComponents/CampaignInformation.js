@@ -1,23 +1,27 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { uiChangeCondition } from '../../../Atoms/campaignFetchDataState';
 import { convertDate } from '../../../Hooks/convertData';
 
-function CampaignInformation({ campaignState, selectedCampaign }) {
-  return selectedCampaign ? (
+function CampaignInformation({ List }) {
+  const campaignState = useRecoilValue(uiChangeCondition);
+
+  return (
     <CampaignInfoBox>
       <CampaignState>
         {campaignState ? <span>진행 중</span> : <span>완료</span>}
       </CampaignState>
       <CampaignPrimaryInfoText>
-        <span>{selectedCampaign?.Campaign?.description}</span>
-        <span>{selectedCampaign?.Campaign?.tag}</span>
+        <span>{List?.Campaign?.description}</span>
+        <span>{List?.Campaign?.tag}</span>
         <CampaignPeriod>
-          {convertDate(selectedCampaign?.Campaign?.created_at)} ~{' '}
-          {convertDate(selectedCampaign?.Campaign?.end_at)}
+          {convertDate(List?.Campaign?.created_at)} ~{' '}
+          {convertDate(List?.Campaign?.end_at)}
         </CampaignPeriod>
       </CampaignPrimaryInfoText>
     </CampaignInfoBox>
-  ) : null;
+  );
 }
 
 const CampaignInfoBox = styled.div`
@@ -49,6 +53,7 @@ const CampaignPeriod = styled.span`
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
   color: ${({ theme }) => theme.palette.darkGrey};
 `;
+
 const CampaignPrimaryInfoText = styled.div`
   display: flex;
   justify-content: space-between;

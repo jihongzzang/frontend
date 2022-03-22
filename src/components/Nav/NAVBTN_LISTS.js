@@ -1,8 +1,8 @@
 const NAVBTN_LISTS = [
   {
     id: 0,
-    korName: '메인',
-    engName: 'main',
+    korName: '리스트',
+    engName: 'list',
   },
   {
     id: 1,

@@ -7,8 +7,7 @@ const Card = ({ selected }) => {
   return (
     <CardWrapper>
       {selected === '' && <NotingSelect />}
-      {selected === 'campaign' && <CardList selected={selected} />}
-      {selected === 'influencer' && <CardList selected={selected} />}
+      {selected !== '' && <CardList selected={selected} />}
     </CardWrapper>
   );
 };
