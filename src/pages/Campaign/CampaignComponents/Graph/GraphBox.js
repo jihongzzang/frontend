@@ -86,7 +86,9 @@ function GraphBox({
             ],
           }}
           options={{
-            aspectRatio: campaignState ? 1.5 : 3,
+            maintainAspectRatio: true,
+            // aspectRatio: 0,
+            // campaignState ? 1.5 : 3,
             indexAxis: 'y',
             elements: {
               bar: {
@@ -118,7 +120,7 @@ function GraphBox({
 
 const GraphBoxWrap = styled.div`
   width: 670px;
-  height: ${props => props.height};
+  /* height: 400px; */
   background-color: white;
   margin-top: 15px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
@@ -127,6 +129,7 @@ const GraphBoxWrap = styled.div`
 
 const Graph = styled.div`
   margin-top: 10px;
+  height: 360px;
 `;
 
 export default GraphBox;
