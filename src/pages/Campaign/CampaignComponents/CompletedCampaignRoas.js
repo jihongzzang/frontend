@@ -5,6 +5,7 @@ import { completionCampaignGraphList } from '../../../Atoms/campaignFetchDataSta
 
 function CompletedCampaignRoas({ List }) {
   const completedCampaignGraph = useRecoilValue(completionCampaignGraphList);
+
   const getSales = () => {
     if (List?.Campaign?.name === completedCampaignGraph?.campaign_name[0]) {
       return completedCampaignGraph?.sales_graph[0];
@@ -13,7 +14,6 @@ function CompletedCampaignRoas({ List }) {
       return completedCampaignGraph?.sales_graph[1];
     }
   };
-
   return (
     <CampaignRoas>
       <ExplainationROAS>

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { CAMAPAIGN_BASE_URL } from '../../config';
-import { formatDate } from '../../Hooks/convertData';
 import DropDown from './CampaignComponents/DropDown';
 import CampaignInformationFigures from './CampaignComponents/CampaignInformationFigures';
 import CampaignInformation from './CampaignComponents/CampaignInformation';
@@ -10,55 +8,26 @@ import CampaignPrimaryFigures from './CampaignComponents/CampaignPrimaryFigures'
 import CompletedCampaignRoas from './CampaignComponents/CompletedCampaignRoas';
 import { selectedCampaignIdState } from '../../Atoms/campaignState';
 import {
-  proceedingCampaignList,
-  completionCampaignList,
   completionCampaignGraphList,
+  proceedingCampaignGraphList,
+  test,
+  renderCampaignData,
+  uiChangeCondition,
 } from '../../Atoms/campaignFetchDataState';
 import GraphBoxes from './CampaignComponents/Graph/GraphBoxes';
 import { PRIMARY_FIGURES } from './CampaignComponents/FIGURES';
+import NotingSelect from '../../components/NotingSelect';
 
 function Campaign() {
-  const today = formatDate(new Date());
-  const proceeding = useRecoilValue(proceedingCampaignList);
-  const completion = useRecoilValue(completionCampaignList);
-  const proceedingList = proceeding.filter(a => a?.Campaign?.end_at > today);
-  const completedList = completion.filter(a => a?.Campaign?.end_at < today);
-  const campaignList = completedList.concat(proceedingList);
+  const proceedingCampaignGraph = useRecoilValue(proceedingCampaignGraphList);
   const completedCampaignGraph = useRecoilValue(completionCampaignGraphList);
   const [selectedCampaignId, setSelectedCampaignId] = useRecoilState(
     selectedCampaignIdState
   );
-  const [dailyList, setDailyList] = useState([]);
 
-  useEffect(() => {
-    fetch(
-      `${CAMAPAIGN_BASE_URL}proceeding_graph?campaign_id=${Number(
-        selectedCampaignId
-      )}`
-    )
-      .then(res => res.json())
-      .then(res => {
-        setDailyList(res[0]);
-      });
-  }, [selectedCampaignId]);
-
-  const findCampaign = e => {
-    if (e.Campaign.id === selectedCampaignId) {
-      return true;
-    }
-  };
-
-  const selectedCampaign = campaignList.find(findCampaign);
-
-  const defineState = () => {
-    if (selectedCampaign?.Campaign.end_at > today) {
-      return true;
-    } else if (selectedCampaign?.Campaign.end_at < today) {
-      return false;
-    }
-  };
-
-  const campaignState = defineState();
+  const campaignList = useRecoilValue(test);
+  const list = useRecoilValue(renderCampaignData);
+  const uiChange = useRecoilValue(uiChangeCondition);
 
   const handleCampaignValue = e => {
     setSelectedCampaignId(e.target.value);
@@ -78,39 +47,35 @@ function Campaign() {
             value={selectedCampaignId}
             onChange={handleCampaignValue}
           />
-          <CampaignInformation
-            campaignState={campaignState}
-            selectedCampaign={selectedCampaign}
-          />
+          {selectedCampaignId && <CampaignInformation List={list} />}
         </CampaignInfoBox>
-        <CampaignInformationFigures List={selectedCampaign} />
+        {selectedCampaignId && <CampaignInformationFigures List={list} />}
       </CampaignInfoBoxWrap>
+      {selectedCampaignId < 1 && (
+        <Wrraper>
+          <NotingSelect />
+        </Wrraper>
+      )}
       <CampaignPrimaryFigures
-        List={selectedCampaign}
-        campaignState={campaignState}
+        List={list}
         completedCampaignList={completedCampaignGraph}
-        dailyList={dailyList}
+        dailyList={proceedingCampaignGraph}
         PRIMARY_FIGURES={PRIMARY_FIGURES}
       />
-      {selectedCampaign ? (
-        campaignState ? null : (
-          <CompletedCampaignRoas List={selectedCampaign} />
-        )
-      ) : null}
-      {selectedCampaign ? (
-        campaignState ? (
+      {selectedCampaignId && !uiChange && <CompletedCampaignRoas List={list} />}
+      {selectedCampaignId ? (
+        uiChange ? (
           <GraphBoxes
-            campaignState={campaignState}
-            FiguresList={dailyList}
+            campaignState={uiChange}
+            FiguresList={proceedingCampaignGraph}
             FiguresClass={proceedingFigures}
             BarThickness="10"
           />
         ) : (
           <GraphBoxes
-            campaignState={campaignState}
+            campaignState={uiChange}
             FiguresList={completedCampaignGraph}
             FiguresClass={PRIMARY_FIGURES}
-            completedList={completedList}
             BarThickness="30"
           />
         )
@@ -124,6 +89,10 @@ const CampaignWrap = styled.div`
   height: 900px;
   padding: 36px 3% 3% 3%;
   background-color: ${({ theme }) => theme.palette.pageBackground};
+`;
+
+const Wrraper = styled.div`
+  margin-top: 30px;
 `;
 
 const CampaignInfoBoxWrap = styled.div`

@@ -1,6 +1,7 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { listSelector, listSortCriteria } from '../../Atoms/list';
+import { selectedCampaignIdState } from '../../Atoms/campaignState';
 import { formatDate } from '../../Hooks/convertData';
 import Btn from '../../components/Btn';
 import styled from 'styled-components';
@@ -44,6 +45,11 @@ const CardList = ({ selected }) => {
       return dataB - dataA;
     },
   };
+  const updateCampaignPageData = useSetRecoilState(selectedCampaignIdState);
+
+  const changeCampaingPageData = e => {
+    updateCampaignPageData(e.currentTarget.id);
+  };
 
   const sortedData = [...data].sort(sortBy[selectedSort]);
   const renderData = selectedSort ? sortedData : data;
@@ -53,7 +59,11 @@ const CardList = ({ selected }) => {
       {selected === 'campaign' &&
         renderData.map((campaign, idx) => {
           return (
-            <Campaign key={campaign.Campaign.id}>
+            <Campaign
+              key={campaign.Campaign.id}
+              id={campaign.Campaign.id}
+              onClick={changeCampaingPageData}
+            >
               <ContentWrraper>
                 <span>No.{idx + 1}</span>
                 <img src={campaign.Campaign.image} alt="캠페인 이미지" />
