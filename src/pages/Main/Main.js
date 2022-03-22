@@ -2,20 +2,21 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { proceedingCampaignList } from '../../Atoms/campaignFetchDataState';
+import AsideCategory from '../InfluencerPerformance/AsideCategory';
 
-function Main_add() {
+function Main() {
   return (
-    // eslint-disable-next-line react/jsx-pascal-case
-    <Main_add>
+    <Main>
       <MainTitle>
         <span>지난 3개월간 진행된 캠페인 퍼포먼스 순위 현황</span>
       </MainTitle>
-      <RankingBoxes>
+      <AsideCategory />
+      {/* <RankingBoxes>
         {CAMPAIGN_RANKING.map(r => {
           return <RankingBox key={r.id}>r.rankingTitle</RankingBox>;
         })}
-      </RankingBoxes>
-    </Main_add>
+      </RankingBoxes> */}
+    </Main>
   );
 }
 
@@ -38,4 +39,4 @@ const RankingBox = styled.div`
   background-color: white;
 `;
 
-export default Main_add;
+export default Main;
