@@ -11,13 +11,13 @@ const SEARCH_LISTS = [
     optionLists: [
       [
         { id: 1, name: 'all', korName: '전체' },
-        { id: 2, name: 'ing', korName: '진행중' },
-        { id: 3, name: 'completed', korName: '완료' },
+        { id: 2, name: 'proceeding', korName: '진행중' },
+        { id: 3, name: 'completion', korName: '완료' },
       ],
       [
         { id: 1, name: 'all', korName: '전체' },
-        { id: 2, name: 'ing', korName: '계약중' },
-        { id: 3, name: 'completed', korName: '계약완료' },
+        { id: 2, name: 'proceeding', korName: '계약중' },
+        { id: 3, name: 'completion', korName: '계약완료' },
       ],
     ],
   },

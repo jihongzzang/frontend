@@ -1,32 +1,32 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { listCategory } from '../../Atoms/list';
 import Btn from '../../components/Btn';
 import { STATE_LISTS } from '../../constantData/STATE_LISTS';
 
-const StateArea = ({ selected }) => {
+const StateArea = () => {
   const stateLists = STATE_LISTS;
-  const renderUi = selected.length ? true : false;
+  const selected = useRecoilValue(listCategory);
   return (
-    renderUi && (
-      <StateWrraper>
-        <ContentWrraper>
-          {selected === 'campaign' && (
-            <>
-              {stateLists.campaign.map(({ id, korName }) => (
-                <StyledBtn key={id}>{korName}</StyledBtn>
-              ))}
-            </>
-          )}
-          {selected === 'influencer' && (
-            <>
-              {stateLists.influencer.map(({ id, korName }) => (
-                <StyledBtn key={id}>{korName}</StyledBtn>
-              ))}
-            </>
-          )}
-        </ContentWrraper>
-      </StateWrraper>
-    )
+    <StateWrraper>
+      <ContentWrraper>
+        {selected === 'campaign' && (
+          <>
+            {stateLists.campaign.map(({ id, korName }) => (
+              <StyledBtn key={id}>{korName}</StyledBtn>
+            ))}
+          </>
+        )}
+        {selected === 'influencer' && (
+          <>
+            {stateLists.influencer.map(({ id, korName }) => (
+              <StyledBtn key={id}>{korName}</StyledBtn>
+            ))}
+          </>
+        )}
+      </ContentWrraper>
+    </StateWrraper>
   );
 };
 
