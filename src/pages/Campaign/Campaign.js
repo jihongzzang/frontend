@@ -17,7 +17,7 @@ import {
   completionCampaignGraphList,
 } from '../../Atoms/campaignFetchDataState';
 import GraphBoxes from './CampaignComponents/Graph/GraphBoxes';
-import { PRIMARY_FIGURES } from './CampaignComponents/FIGURES';
+import { PRIMARY_FIGURES } from '../FIGURES';
 
 function Campaign() {
   const today = formatDate(new Date());
@@ -80,7 +80,7 @@ function Campaign() {
             onChange={handleCampaignValue}
           />
           <CampaignInformation
-            campaignState={campaignState}
+            campaignStates={campaignState}
             selectedCampaign={selectedCampaign}
           />
         </CampaignInfoBox>
@@ -88,41 +88,50 @@ function Campaign() {
       </CampaignInfoBoxWrap>
       <CampaignPrimaryFigures
         List={selectedCampaign}
-        campaignState={campaignState}
+        campaignStates={campaignState}
         completedCampaignList={completedCampaignGraph}
         dailyList={dailyList}
         PRIMARY_FIGURES={PRIMARY_FIGURES}
       />
-      {selectedCampaign ? (
-        campaignState ? null : (
-          <CompletedCampaignRoas List={selectedCampaign} />
-        )
-      ) : null}
-      {selectedCampaign ? (
+      {campaignState ? null : <CompletedCampaignRoas List={selectedCampaign} />}
+      {/* {selectedCampaign ? (
         campaignState ? (
-          <GraphBoxes
-            campaignState={campaignState}
-            FiguresList={dailyList}
-            FiguresClass={proceedingFigures}
-            BarThickness="10"
+          <OngoingCampaign
+            List={selectedCampaign}
+            campaignStatus={defineState()}
+            dailyList={dailyList}
           />
         ) : (
-          <GraphBoxes
-            campaignState={campaignState}
+          <CompletedCampaign
+            List={selectedCampaign}
+            campaignStatus={defineState()}
             FiguresList={completedCampaignGraph}
-            FiguresClass={PRIMARY_FIGURES}
             completedList={completedList}
-            BarThickness="30"
           />
         )
-      ) : null}
+      ) : null} */}
+      {campaignState ? (
+        <GraphBoxes
+          campaignState={campaignState}
+          FiguresList={dailyList}
+          FiguresClass={proceedingFigures}
+          BarThickness="10"
+        />
+      ) : (
+        <GraphBoxes
+          campaignState={campaignState}
+          FiguresList={completedCampaignGraph}
+          FiguresClass={PRIMARY_FIGURES}
+          completedList={completedList}
+          BarThickness="30"
+        />
+      )}
     </CampaignWrap>
   );
 }
 
 const CampaignWrap = styled.div`
   width: 1440px;
-  height: 900px;
   padding: 36px 3% 3% 3%;
   background-color: ${({ theme }) => theme.palette.pageBackground};
 `;

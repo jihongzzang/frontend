@@ -1,31 +1,41 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { proceedingCampaignList } from '../../Atoms/campaignFetchDataState';
 
 function Main_add() {
   return (
-    <MainWrap>
-      <MainCampaignBoxes>
-        <MainCampaignBox>1</MainCampaignBox>
-        <MainCampaignBox>1</MainCampaignBox>
-        <MainCampaignBox>1</MainCampaignBox>
-      </MainCampaignBoxes>
-    </MainWrap>
+    // eslint-disable-next-line react/jsx-pascal-case
+    <Main_add>
+      <MainTitle>
+        <span>지난 3개월간 진행된 캠페인 퍼포먼스 순위 현황</span>
+      </MainTitle>
+      <RankingBoxes>
+        {CAMPAIGN_RANKING.map(r => {
+          return <RankingBox key={r.id}>r.rankingTitle</RankingBox>;
+        })}
+      </RankingBoxes>
+    </Main_add>
   );
 }
-const MainWrap = styled.div`
-  width: 1440px;
-  height: 900px;
-  padding: 36px 3% 3% 3%;
-  background-color: ${({ theme }) => theme.palette.pageBackground};
-`;
 
-const MainCampaignBoxes = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const MainCampaignBox = styled.div`
-  width: 400px;
+const CAMPAIGN_RANKING = [
+  { id: 1, rankingTitle: '캠페인 태그 검색 횟수' },
+  { id: 2, rankingTitle: '캠페인 태그 게시물 갯수' },
+  { id: 3, rankingTitle: '캠페인 평균 노출' },
+  { id: 4, rankingTitle: '캠페인 평균 참여' },
+  { id: 5, rankingTitle: '캠페인 ROAS' },
+];
+const MainTitle = styled.div`
   background-color: white;
 `;
+
+const RankingBoxes = styled.div`
+  display: flex;
+`;
+
+const RankingBox = styled.div`
+  background-color: white;
+`;
+
 export default Main_add;
