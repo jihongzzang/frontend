@@ -38,9 +38,11 @@ function CampaignInformationFigures({ List }) {
     </SmallFigures>
   );
 }
+
 const SmallFigures = styled.div`
   display: flex;
   justify-content: space-between;
   width: 670px;
 `;
+
 export default CampaignInformationFigures;

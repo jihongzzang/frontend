@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function FigureBox({ width, height, FigureName, Figure, money }) {
+function FigureBox({ width, height, FigureName, Figure }) {
   return (
     <FigureBoxWrap width={width} height={height}>
       <FigureNameText>{FigureName}</FigureNameText>
@@ -9,6 +9,7 @@ function FigureBox({ width, height, FigureName, Figure, money }) {
     </FigureBoxWrap>
   );
 }
+
 const FigureBoxWrap = styled.div`
   display: flex;
   flex-direction: column;
