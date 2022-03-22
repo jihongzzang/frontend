@@ -5,15 +5,11 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
+import { useRecoilValue } from 'recoil';
+import { completionCampaignList } from '../../../../Atoms/campaignFetchDataState';
 Chart.register(ChartDataLabels, ...registerables);
 
-function GraphBox({
-  FiguresList,
-  FiguresClass,
-  BarThickness,
-  campaignState,
-  completedList,
-}) {
+function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
   const [graph, setGraph] = useState(1);
   const handleGraph = e => {
     setGraph(e.target.value);
@@ -23,7 +19,7 @@ function GraphBox({
       return true;
     }
   };
-
+  const completedList = useRecoilValue(completionCampaignList);
   const selectedFigure = FiguresClass.find(findFigure);
   const onGoingSelectedfigureData =
     FiguresList[selectedFigure?.dailyFigureData];
@@ -43,16 +39,16 @@ function GraphBox({
       return true;
     }
   };
-  // TODO : 추가 구현 - 주어진 데이터로 ROAS 구하는 로직
-  // const sales = FiguresList?.sales_graph;
-  // const budget = [
-  //   completedList?.[1]?.Campaign?.budget,
-  //   completedList?.[0]?.Campaign?.budget,
-  // ];
-  // const roasFigures = [
-  //   Math.floor((sales?.[0] / budget?.[0]) * 100),
-  //   Math.floor((sales?.[1] / budget?.[1]) * 100),
-  // ];
+
+  const sales = FiguresList?.sales_graph[0];
+  const budget = [
+    completedList?.[1]?.Campaign?.budget,
+    completedList?.[0]?.Campaign?.budget,
+  ];
+  const roasFigures = [
+    Math.floor((sales / budget[0]) * 100),
+    Math.floor((sales / budget[1]) * 100),
+  ];
 
   return (
     <GraphBoxWrap>
@@ -76,7 +72,7 @@ function GraphBox({
                     ? FiguresList.count_post
                     : onGoingSelectedfigureData
                   : RoasList()
-                  ? [7903, 7159]
+                  ? roasFigures
                   : completedSelectedfigureData,
                 datalabels: {
                   align: 'start',
