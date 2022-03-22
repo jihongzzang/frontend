@@ -7,13 +7,7 @@ import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
 Chart.register(ChartDataLabels, ...registerables);
 
-function GraphBox({
-  FiguresList,
-  FiguresClass,
-  BarThickness,
-  campaignState,
-  completedList,
-}) {
+function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
   const [graph, setGraph] = useState(1);
   const handleGraph = e => {
     setGraph(e.target.value);
@@ -28,6 +22,7 @@ function GraphBox({
   const onGoingSelectedfigureData =
     FiguresList[selectedFigure?.dailyFigureData];
   const completedSelectedfigureData = FiguresList[selectedFigure?.figureName];
+
   const dateList = FiguresList.date_graph?.map(d => {
     return d.slice(0, 10);
   });
@@ -43,16 +38,72 @@ function GraphBox({
       return true;
     }
   };
-  // TODO : 추가 구현 - 주어진 데이터로 ROAS 구하는 로직
-  // const sales = FiguresList?.sales_graph;
-  // const budget = [
-  //   completedList?.[1]?.Campaign?.budget,
-  //   completedList?.[0]?.Campaign?.budget,
-  // ];
-  // const roasFigures = [
-  //   Math.floor((sales?.[0] / budget?.[0]) * 100),
-  //   Math.floor((sales?.[1] / budget?.[1]) * 100),
-  // ];
+
+  const options = {
+    plugins: {
+      legend: {
+        display: true,
+        position: 'right',
+        align: 'start',
+      },
+      tooltip: {
+        displayColors: false,
+      },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem) {
+            return tooltipItem.yLabel;
+          },
+        },
+      },
+    },
+    indexAxis: 'y',
+    datalabels: {
+      display: true,
+      align: 'center',
+      font: {
+        weight: 'normal',
+      },
+    },
+    maintainAspectRatio: true,
+    elements: {
+      bar: {
+        borderWidth: 0,
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: true,
+          color: theme.palette.lightGrey,
+        },
+      },
+      y: {
+        grid: {
+          display: true,
+          color: theme.palette.lightGrey,
+        },
+        ticks: {
+          font: {
+            size: c => {
+              if (c.tick.label === '디스커버리 고어텍스 공유 바람막이') {
+                return theme.fontsize.fontSize1;
+              } else {
+                return theme.fontsize.fontSize1;
+              }
+            },
+            weight: c => {
+              if (c.index === 0) {
+                return 'bold';
+              } else {
+                return 'normal';
+              }
+            },
+          },
+        },
+      },
+    },
+  };
 
   return (
     <GraphBoxWrap>
@@ -86,33 +137,7 @@ function GraphBox({
               },
             ],
           }}
-          options={{
-            maintainAspectRatio: true,
-            // aspectRatio: 0,
-            // campaignState ? 1.5 : 3,
-            indexAxis: 'y',
-            elements: {
-              bar: {
-                borderWidth: 0,
-              },
-            },
-            legend: {
-              display: false,
-              position: 'right',
-            },
-            scales: {
-              x: {
-                grid: {
-                  display: false,
-                },
-              },
-              y: {
-                grid: {
-                  display: false,
-                },
-              },
-            },
-          }}
+          options={options}
         />
       </Graph>
     </GraphBoxWrap>
@@ -121,7 +146,6 @@ function GraphBox({
 
 const GraphBoxWrap = styled.div`
   width: 670px;
-  /* height: 400px; */
   background-color: white;
   margin-top: 15px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};

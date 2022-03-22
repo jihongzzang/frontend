@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
-function DropDown({ value, onChange, dropDownList }) {
+function DropDown({ value, onChange, dropDownList, name }) {
   return (
     <FormControl size="small">
       <InputLabel className="inpitLabel" shrink={false}>
