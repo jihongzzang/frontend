@@ -7,7 +7,6 @@ function GraphBoxes({
   campaignState,
   BarThickness,
   FiguresClass,
-  completedList,
 }) {
   return (
     <GraphBoxesWrap>
