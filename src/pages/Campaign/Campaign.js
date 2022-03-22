@@ -9,12 +9,15 @@ import DropDown from './CampaignComponents/DropDown';
 import CampaignInformationFigures from './CampaignComponents/CampaignInformationFigures';
 import CampaignInformation from './CampaignComponents/CampaignInformation';
 import CampaignPrimaryFigures from './CampaignComponents/CampaignPrimaryFigures';
+import CompletedCampaignRoas from './CampaignComponents/CompletedCampaignRoas';
 import { selectedCampaignIdState } from '../../Atoms/campaignState';
 import {
   proceedingCampaignList,
   completionCampaignList,
   completionCampaignGraphList,
 } from '../../Atoms/campaignFetchDataState';
+import GraphBoxes from './CampaignComponents/Graph/GraphBoxes';
+import { PRIMARY_FIGURES } from './CampaignComponents/FIGURES';
 
 function Campaign() {
   const today = formatDate(new Date());
@@ -33,14 +36,13 @@ function Campaign() {
     fetch(
       `${CAMAPAIGN_BASE_URL}proceeding_graph?campaign_id=${Number(
         selectedCampaignId
-      )}
-      `
+      )}`
     )
       .then(res => res.json())
       .then(res => {
         setDailyList(res[0]);
       });
-  }, [Number(selectedCampaignId)]);
+  }, [selectedCampaignId]);
 
   const findCampaign = e => {
     if (e.Campaign.id === selectedCampaignId) {
@@ -58,11 +60,15 @@ function Campaign() {
     }
   };
 
-  const campaignStates = defineState();
+  const campaignState = defineState();
 
   const handleCampaignValue = e => {
     setSelectedCampaignId(e.target.value);
   };
+  const proceedingFigures = PRIMARY_FIGURES.slice(
+    0,
+    PRIMARY_FIGURES.length - 1
+  );
 
   return (
     <CampaignWrap>
@@ -74,34 +80,39 @@ function Campaign() {
             onChange={handleCampaignValue}
           />
           <CampaignInformation
-            campaignStates={campaignStates}
+            campaignState={campaignState}
             selectedCampaign={selectedCampaign}
           />
         </CampaignInfoBox>
-        <CampaignInformationFigures
-          List={selectedCampaign}
-          selectedCampaign={selectedCampaign}
-        />
+        <CampaignInformationFigures List={selectedCampaign} />
       </CampaignInfoBoxWrap>
       <CampaignPrimaryFigures
         List={selectedCampaign}
-        campaignStatus={defineState()}
+        campaignState={campaignState}
         completedCampaignList={completedCampaignGraph}
         dailyList={dailyList}
+        PRIMARY_FIGURES={PRIMARY_FIGURES}
       />
       {selectedCampaign ? (
-        campaignStates ? (
-          <OngoingCampaign
-            List={selectedCampaign}
-            campaignStatus={defineState()}
-            dailyList={dailyList}
+        campaignState ? null : (
+          <CompletedCampaignRoas List={selectedCampaign} />
+        )
+      ) : null}
+      {selectedCampaign ? (
+        campaignState ? (
+          <GraphBoxes
+            campaignState={campaignState}
+            FiguresList={dailyList}
+            FiguresClass={proceedingFigures}
+            BarThickness="10"
           />
         ) : (
-          <CompletedCampaign
-            List={selectedCampaign}
-            campaignStatus={defineState()}
+          <GraphBoxes
+            campaignState={campaignState}
             FiguresList={completedCampaignGraph}
+            FiguresClass={PRIMARY_FIGURES}
             completedList={completedList}
+            BarThickness="30"
           />
         )
       ) : null}
@@ -111,6 +122,7 @@ function Campaign() {
 
 const CampaignWrap = styled.div`
   width: 1440px;
+  height: 900px;
   padding: 36px 3% 3% 3%;
   background-color: ${({ theme }) => theme.palette.pageBackground};
 `;
