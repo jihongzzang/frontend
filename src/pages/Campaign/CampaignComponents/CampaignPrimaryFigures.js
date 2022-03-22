@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import FigureBox from './FigureBox';
 import { formatDateKo } from '../../../Hooks/convertData';
+import { useRecoilValue } from 'recoil';
+import { uiChangeCondition } from '../../../Atoms/campaignFetchDataState';
 
 function CampaignPrimaryFigures({
   List,
-  campaignState,
   completedCampaignList,
   dailyList,
   PRIMARY_FIGURES,
@@ -17,16 +18,17 @@ function CampaignPrimaryFigures({
   const today = new Date();
   const yesterday = new Date(today.setDate(today.getDate() - 1));
   const yesterdayDateFormat = formatDateKo(yesterday);
+  const uiChange = useRecoilValue(uiChangeCondition);
 
   proceedingFigures[0].figureValue = List?.sum_hashtag?.toLocaleString();
   proceedingFigures[1].figureValue = List?.count_post?.toLocaleString();
-  proceedingFigures[2].figureValue = campaignState
+  proceedingFigures[2].figureValue = uiChange
     ? List?.daily_official_visit?.toLocaleString()
     : List?.total_official_visit?.toLocaleString();
-  proceedingFigures[3].figureValue = campaignState
+  proceedingFigures[3].figureValue = uiChange
     ? List?.daily_official_follower?.toLocaleString()
     : List?.total_official_follower?.toLocaleString();
-  proceedingFigures[4].figureValue = campaignState
+  proceedingFigures[4].figureValue = uiChange
     ? List?.daily_official_referrer?.toLocaleString()
     : List?.total_official_referrer?.toLocaleString();
 
@@ -42,7 +44,7 @@ function CampaignPrimaryFigures({
     }
   };
 
-  proceedingFigures[5].figureValue = campaignState
+  proceedingFigures[5].figureValue = uiChange
     ? dailyList?.sales_graph?.[
         dailyList?.sales_graph?.length - 1
       ]?.toLocaleString() + '원'
@@ -50,11 +52,11 @@ function CampaignPrimaryFigures({
 
   return (
     <BigFiguresBox>
-      {List ? (
+      {List && (
         <>
           <FigureStandard>
             *
-            {campaignState
+            {uiChange
               ? yesterdayDateFormat + ' 기준, 전 일 대비 증가량'
               : '캠페인 기간동안 총 증가량'}
           </FigureStandard>
@@ -72,7 +74,7 @@ function CampaignPrimaryFigures({
             })}
           </FigureBoxes>
         </>
-      ) : null}
+      )}
     </BigFiguresBox>
   );
 }

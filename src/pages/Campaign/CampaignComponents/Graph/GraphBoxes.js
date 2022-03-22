@@ -22,7 +22,6 @@ function GraphBoxes({
         FiguresClass={FiguresClass}
         BarThickness={BarThickness}
         campaignState={campaignState}
-        completedList={completedList}
       />
     </GraphBoxesWrap>
   );
