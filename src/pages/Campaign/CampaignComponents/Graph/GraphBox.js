@@ -7,7 +7,13 @@ import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
 Chart.register(ChartDataLabels, ...registerables);
 
-function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
+function GraphBox({
+  FiguresList,
+  FiguresClass,
+  BarThickness,
+  campaignState,
+  completedList,
+}) {
   const [graph, setGraph] = useState(1);
   const handleGraph = e => {
     setGraph(e.target.value);
@@ -37,6 +43,16 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
       return true;
     }
   };
+  // TODO : 추가 구현 - 주어진 데이터로 ROAS 구하는 로직
+  // const sales = FiguresList?.sales_graph;
+  // const budget = [
+  //   completedList?.[1]?.Campaign?.budget,
+  //   completedList?.[0]?.Campaign?.budget,
+  // ];
+  // const roasFigures = [
+  //   Math.floor((sales?.[0] / budget?.[0]) * 100),
+  //   Math.floor((sales?.[1] / budget?.[1]) * 100),
+  // ];
 
   return (
     <GraphBoxWrap>

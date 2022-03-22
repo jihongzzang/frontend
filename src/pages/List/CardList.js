@@ -1,15 +1,17 @@
 import React from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { listSelector, listSortCriteria } from '../../Atoms/list';
+import { listCategory, listSelector, listSortCriteria } from '../../Atoms/list';
 import { selectedCampaignIdState } from '../../Atoms/campaignState';
 import { formatDate } from '../../Hooks/convertData';
 import Btn from '../../components/Btn';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const CardList = ({ selected }) => {
   const data = useRecoilValue(listSelector);
   const selectedSort = useRecoilValue(listSortCriteria);
-
+  const navigate = useNavigate();
+  const selectedCategory = useRecoilValue(listCategory);
   const today = new Date();
   const convertToday = new Date(formatDate(today)).getTime();
 
@@ -49,6 +51,7 @@ const CardList = ({ selected }) => {
 
   const changeCampaingPageData = e => {
     updateCampaignPageData(e.currentTarget.id);
+    navigate(`/${selectedCategory}`);
   };
 
   const sortedData = [...data].sort(sortBy[selectedSort]);

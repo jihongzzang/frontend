@@ -48,8 +48,8 @@ export const today = atom({
   default: formatDate(new Date()),
 });
 
-export const test = selector({
-  key: 'test',
+export const parsingCampaignData = selector({
+  key: 'parsingCampaignData',
   get: async ({ get }) => {
     const comparison = get(today);
     const proceedingList = get(proceedingCampaignList).filter(
@@ -66,7 +66,7 @@ export const renderCampaignData = selector({
   key: 'renderCampaignData',
   get: async ({ get }) => {
     const target = get(selectedCampaignIdState);
-    const datas = get(test);
+    const datas = get(parsingCampaignData);
     const data = datas.find(x => x.Campaign.id === Number(target));
     return data;
   },

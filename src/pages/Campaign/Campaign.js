@@ -10,9 +10,9 @@ import { selectedCampaignIdState } from '../../Atoms/campaignState';
 import {
   completionCampaignGraphList,
   proceedingCampaignGraphList,
-  test,
   renderCampaignData,
   uiChangeCondition,
+  parsingCampaignData,
 } from '../../Atoms/campaignFetchDataState';
 import GraphBoxes from './CampaignComponents/Graph/GraphBoxes';
 import { PRIMARY_FIGURES } from './CampaignComponents/FIGURES';
@@ -25,7 +25,7 @@ function Campaign() {
     selectedCampaignIdState
   );
 
-  const campaignList = useRecoilValue(test);
+  const campaignList = useRecoilValue(parsingCampaignData);
   const list = useRecoilValue(renderCampaignData);
   const uiChange = useRecoilValue(uiChangeCondition);
 
