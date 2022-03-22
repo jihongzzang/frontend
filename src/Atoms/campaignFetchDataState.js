@@ -53,10 +53,10 @@ export const parsingCampaignData = selector({
   get: async ({ get }) => {
     const comparison = get(today);
     const proceedingList = get(proceedingCampaignList).filter(
-      a => a?.Campaign.end_at > comparison
+      a => a?.Campaign?.end_at > comparison
     );
     const completedList = get(completionCampaignList).filter(
-      a => a?.Campaign.end_at < comparison
+      a => a?.Campaign?.end_at < comparison
     );
     return completedList.concat(proceedingList);
   },

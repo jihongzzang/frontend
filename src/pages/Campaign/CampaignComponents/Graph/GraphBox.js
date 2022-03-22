@@ -5,6 +5,8 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
+import { useRecoilValue } from 'recoil';
+import { completionCampaignList } from '../../../../Atoms/campaignFetchDataState';
 Chart.register(ChartDataLabels, ...registerables);
 
 function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
@@ -17,7 +19,7 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
       return true;
     }
   };
-
+  const completedList = useRecoilValue(completionCampaignList);
   const selectedFigure = FiguresClass.find(findFigure);
   const onGoingSelectedfigureData =
     FiguresList[selectedFigure?.dailyFigureData];
@@ -38,6 +40,15 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
       return true;
     }
   };
+
+  const sales = FiguresList?.sales_graph[0];
+  const budget = completedList.slice(0, 2).map(a => {
+    return a?.Campaign?.budget;
+  });
+
+  const roasFigures = budget.map(a => {
+    return Math.floor((sales / a) * 100);
+  });
 
   const options = {
     plugins: {
@@ -127,7 +138,7 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
                     ? FiguresList.count_post
                     : onGoingSelectedfigureData
                   : RoasList()
-                  ? [7903, 7159]
+                  ? roasFigures
                   : completedSelectedfigureData,
                 datalabels: {
                   align: 'start',
