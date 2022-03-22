@@ -42,14 +42,13 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
   };
 
   const sales = FiguresList?.sales_graph[0];
-  const budget = [
-    completedList?.[1]?.Campaign?.budget,
-    completedList?.[0]?.Campaign?.budget,
-  ];
-  const roasFigures = [
-    Math.floor((sales / budget[0]) * 100),
-    Math.floor((sales / budget[1]) * 100),
-  ];
+  const budget = completedList.slice(0, 2).map(a => {
+    return a?.Campaign?.budget;
+  });
+
+  const roasFigures = budget.map(a => {
+    return Math.floor((sales / a) * 100);
+  });
 
   const options = {
     plugins: {
