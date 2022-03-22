@@ -3,8 +3,6 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { CAMAPAIGN_BASE_URL } from '../../config';
 import { formatDate } from '../../Hooks/convertData';
-import CompletedCampaign from './CampaignComponents/CompletedCampaign';
-import OngoingCampaign from './CampaignComponents/OngoingCampaign';
 import DropDown from './CampaignComponents/DropDown';
 import CampaignInformationFigures from './CampaignComponents/CampaignInformationFigures';
 import CampaignInformation from './CampaignComponents/CampaignInformation';
@@ -65,6 +63,7 @@ function Campaign() {
   const handleCampaignValue = e => {
     setSelectedCampaignId(e.target.value);
   };
+
   const proceedingFigures = PRIMARY_FIGURES.slice(
     0,
     PRIMARY_FIGURES.length - 1
@@ -131,6 +130,7 @@ const CampaignInfoBoxWrap = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 const CampaignInfoBox = styled.div`
   display: flex;
   flex-direction: column;

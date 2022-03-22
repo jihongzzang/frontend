@@ -2,9 +2,9 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { completionCampaignGraphList } from '../../../Atoms/campaignFetchDataState';
+
 function CompletedCampaignRoas({ List }) {
   const completedCampaignGraph = useRecoilValue(completionCampaignGraphList);
-
   const getSales = () => {
     if (List?.Campaign?.name === completedCampaignGraph?.campaign_name[0]) {
       return completedCampaignGraph?.sales_graph[0];
@@ -40,6 +40,7 @@ const CampaignRoas = styled.div`
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   border: 1px solid #e1e1ef;
 `;
+
 const ExplainationROAS = styled.span`
   font-size: ${({ theme }) => theme.fontsize.fontSize0};
   color: ${({ theme }) => theme.palette.grey};

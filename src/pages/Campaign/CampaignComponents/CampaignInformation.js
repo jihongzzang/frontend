@@ -49,6 +49,7 @@ const CampaignPeriod = styled.span`
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
   color: ${({ theme }) => theme.palette.darkGrey};
 `;
+
 const CampaignPrimaryInfoText = styled.div`
   display: flex;
   justify-content: space-between;
