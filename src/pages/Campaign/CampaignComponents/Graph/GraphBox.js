@@ -5,27 +5,24 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
-
 Chart.register(ChartDataLabels, ...registerables);
 
 function GraphBox({
-  width,
   FiguresList,
   FiguresClass,
-  IndexAxis,
   BarThickness,
-  campaignStatus,
+  campaignState,
   completedList,
 }) {
   const [graph, setGraph] = useState(1);
   const handleGraph = e => {
     setGraph(e.target.value);
   };
-  function findFigure(e) {
+  const findFigure = e => {
     if (e.primaryFigureId === graph) {
       return true;
     }
-  }
+  };
 
   const selectedFigure = FiguresClass.find(findFigure);
   const onGoingSelectedfigureData =
@@ -36,7 +33,7 @@ function GraphBox({
   });
 
   const postingList = () => {
-    if (selectedFigure.dailyFigureData === 'count_post') {
+    if (selectedFigure?.dailyFigureData === 'count_post') {
       return true;
     }
   };
@@ -46,22 +43,23 @@ function GraphBox({
       return true;
     }
   };
-
-  // const test = () => {
-  //   if (FiguresList?.campaign_name === completedList?.Campaign?.name) {
-  //     return(
-
-  //     )
-  //   }
-  // };
+  const sales = FiguresList?.sales_graph;
+  const budget = [
+    completedList?.[1]?.Campaign?.budget,
+    completedList?.[0]?.Campaign?.budget,
+  ];
+  const roasFigures = [
+    Math.floor((sales?.[0] / budget?.[0]) * 100),
+    Math.floor((sales?.[1] / budget?.[1]) * 100),
+  ];
 
   return (
-    <GraphBoxWrap width={width}>
+    <GraphBoxWrap>
       <GraphDrop value={graph} onChange={handleGraph} List={FiguresClass} />
       <Graph>
         <Bar
           data={{
-            labels: campaignStatus
+            labels: campaignState
               ? postingList()
                 ? FiguresList.post_date
                 : dateList
@@ -72,12 +70,12 @@ function GraphBox({
                 backgroundColor: theme.palette.chartBlue0,
                 borderWidth: 0,
                 barThickness: BarThickness,
-                data: campaignStatus
+                data: campaignState
                   ? postingList()
                     ? FiguresList.count_post
                     : onGoingSelectedfigureData
                   : RoasList()
-                  ? FiguresList.sales_graph
+                  ? [7903, 7159]
                   : completedSelectedfigureData,
                 datalabels: {
                   align: 'start',
@@ -88,8 +86,10 @@ function GraphBox({
             ],
           }}
           options={{
-            aspectRatio: campaignStatus ? 1.5 : 3,
-            indexAxis: IndexAxis,
+            maintainAspectRatio: true,
+            // aspectRatio: 0,
+            // campaignState ? 1.5 : 3,
+            indexAxis: 'y',
             elements: {
               bar: {
                 borderWidth: 0,
@@ -119,8 +119,8 @@ function GraphBox({
 }
 
 const GraphBoxWrap = styled.div`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: 670px;
+  /* height: 400px; */
   background-color: white;
   margin-top: 15px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
@@ -129,6 +129,7 @@ const GraphBoxWrap = styled.div`
 
 const Graph = styled.div`
   margin-top: 10px;
+  height: 360px;
 `;
 
 export default GraphBox;

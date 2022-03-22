@@ -1,6 +1,5 @@
 import { selector } from 'recoil';
 import axios from 'axios';
-import { selectedCampaignIdState } from './campaignState';
 import { CAMAPAIGN_BASE_URL } from '../config';
 
 export const proceedingCampaignList = selector({

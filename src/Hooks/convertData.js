@@ -35,3 +35,16 @@ export const formatDate = date => {
 export const convertNumberToFixed = data => {
   return typeof data === 'number' ? data.toFixed(2) : data;
 };
+
+export const formatDateKo = date => {
+  let mm = date.getMonth() + 1;
+  let dd = date.getDate();
+  return [
+    date.getFullYear(),
+    '년 ',
+    (mm > 9 ? '' : '0') + mm,
+    '월 ',
+    (dd > 9 ? '' : '0') + dd,
+    '일',
+  ].join('');
+};

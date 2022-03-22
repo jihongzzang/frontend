@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { convertDate } from '../../../Hooks/convertData';
 
-function CampaignInformation({ campaignStates, selectedCampaign }) {
+function CampaignInformation({ campaignState, selectedCampaign }) {
   return selectedCampaign ? (
     <CampaignInfoBox>
       <CampaignState>
-        {campaignStates ? <span>진행 중</span> : <span>완료</span>}
+        {campaignState ? <span>진행 중</span> : <span>완료</span>}
       </CampaignState>
       <CampaignPrimaryInfoText>
         <span>{selectedCampaign?.Campaign?.description}</span>

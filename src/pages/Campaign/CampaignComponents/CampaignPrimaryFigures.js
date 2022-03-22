@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import FigureBox from './FigureBox';
-import { PRIMARY_FIGURES } from './FIGURES';
+import { formatDateKo } from '../../../Hooks/convertData';
 
 function CampaignPrimaryFigures({
   List,
-  campaignStatus,
+  campaignState,
   completedCampaignList,
   dailyList,
+  PRIMARY_FIGURES,
 }) {
   const proceedingFigures = PRIMARY_FIGURES.slice(
     0,
@@ -15,31 +16,20 @@ function CampaignPrimaryFigures({
   );
   const today = new Date();
   const yesterday = new Date(today.setDate(today.getDate() - 1));
-  const dateFormat = date => {
-    let mm = date.getMonth() + 1;
-    let dd = date.getDate();
-    return [
-      date.getFullYear(),
-      '년 ',
-      (mm > 9 ? '' : '0') + mm,
-      '월 ',
-      (dd > 9 ? '' : '0') + dd,
-      '일',
-    ].join('');
-  };
-  const yesterdayDateFormat = dateFormat(yesterday);
+  const yesterdayDateFormat = formatDateKo(yesterday);
 
   proceedingFigures[0].figureValue = List?.sum_hashtag?.toLocaleString();
   proceedingFigures[1].figureValue = List?.count_post?.toLocaleString();
-  proceedingFigures[2].figureValue = campaignStatus
+  proceedingFigures[2].figureValue = campaignState
     ? List?.daily_official_visit?.toLocaleString()
     : List?.total_official_visit?.toLocaleString();
-  proceedingFigures[3].figureValue = campaignStatus
+  proceedingFigures[3].figureValue = campaignState
     ? List?.daily_official_follower?.toLocaleString()
     : List?.total_official_follower?.toLocaleString();
-  proceedingFigures[4].figureValue = campaignStatus
+  proceedingFigures[4].figureValue = campaignState
     ? List?.daily_official_referrer?.toLocaleString()
     : List?.total_official_referrer?.toLocaleString();
+
   const testIndex = completedCampaignList?.campaign_name?.indexOf(
     List?.Campaign?.name
   );
@@ -52,7 +42,7 @@ function CampaignPrimaryFigures({
     }
   };
 
-  proceedingFigures[5].figureValue = campaignStatus
+  proceedingFigures[5].figureValue = campaignState
     ? dailyList?.sales_graph?.[
         dailyList?.sales_graph?.length - 1
       ]?.toLocaleString() + '원'
@@ -64,7 +54,7 @@ function CampaignPrimaryFigures({
         <>
           <FigureStandard>
             *
-            {campaignStatus
+            {campaignState
               ? yesterdayDateFormat + ' 기준, 전 일 대비 증가량'
               : '캠페인 기간동안 총 증가량'}
           </FigureStandard>
