@@ -41,10 +41,10 @@ const TopSearchRanking = () => {
                     <span>{idx + 1}.</span>
                   </div>
                   <div>
-                    <span>{campaign.Campaign.name}</span>
+                    <span>{campaign?.Campaign?.name}</span>
                   </div>
                   <div>
-                    <span>{campaign.sum_hashtag.toLocaleString()}</span>
+                    <span>{campaign?.sum_hashtag?.toLocaleString()}</span>
                   </div>
                 </CustomCampaignBox>
               </DataWrraper>
