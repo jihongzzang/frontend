@@ -15,6 +15,7 @@ function Router() {
         <Route path="/influencer" element={<InfluencerPerformance />} />
         <Route path="/analysis" element={<InfluencerAnalysis />} />
         <Route path="/campaign" element={<Campaign />} />
+        <Route path="/" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
