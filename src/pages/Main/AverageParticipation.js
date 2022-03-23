@@ -2,10 +2,12 @@ import React from 'react';
 import DataBox from '../../components/DataBox';
 import RankerBox from '../../components/RankerBox';
 import styled from 'styled-components';
-import { MAIN_CAMPAIGN_LIST } from './MAIN_CAMPAIGN_LIST';
+import { parsingCampaignData } from '../../Atoms/campaignFetchDataState';
+import { useRecoilValue } from 'recoil';
 
 const AverageParticipation = () => {
-  const averageParticipationRank = MAIN_CAMPAIGN_LIST.sort(function (a, b) {
+  const campaignList = useRecoilValue(parsingCampaignData);
+  const averageParticipationRank = [...campaignList].sort(function (a, b) {
     if (
       a.average_like + a.average_comment >
       b.average_like + b.average_comment
@@ -34,7 +36,7 @@ const AverageParticipation = () => {
         <TableContent>
           {averageParticipationRank.map((campaign, idx) => {
             return (
-              <DataWrraper key={campaign.Campaign.id}>
+              <DataWrraper key={campaign?.Campaign?.id}>
                 <CustomCampaignBox
                   fullWidth
                   color="borderColor"
@@ -45,13 +47,13 @@ const AverageParticipation = () => {
                     <span>{idx + 1}.</span>
                   </div>
                   <div>
-                    <span>{campaign.Campaign.name}</span>
+                    <span>{campaign?.Campaign?.name}</span>
                   </div>
                   <div>
                     <span>
                       {Math.floor(
-                        campaign.average_like + campaign.average_comment
-                      ).toLocaleString()}
+                        campaign?.average_like + campaign?.average_comment
+                      )?.toLocaleString()}
                     </span>
                   </div>
                 </CustomCampaignBox>

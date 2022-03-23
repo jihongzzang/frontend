@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { MAIN_CAMPAIGN_LIST } from './MAIN_CAMPAIGN_LIST';
 
 const TagPostRanking = () => {
-  const tagPostRank = MAIN_CAMPAIGN_LIST.sort(function (a, b) {
+  const tagPostRank = MAIN_CAMPAIGN_LIST?.sort(function (a, b) {
     if (a.count_post > b.count_post) {
       return -1;
     }
@@ -28,7 +28,7 @@ const TagPostRanking = () => {
         <TableContent>
           {tagPostRank.map((campaign, idx) => {
             return (
-              <DataWrraper key={campaign.Campaign.id}>
+              <DataWrraper key={campaign?.Campaign?.id}>
                 <CustomCampaignBox
                   fullWidth
                   color="borderColor"
@@ -39,10 +39,10 @@ const TagPostRanking = () => {
                     <span>{idx + 1}.</span>
                   </div>
                   <div>
-                    <span>{campaign.Campaign.name}</span>
+                    <span>{campaign?.Campaign.name}</span>
                   </div>
                   <div>
-                    <span>{campaign.count_post.toLocaleString()}</span>
+                    <span>{campaign?.count_post}</span>
                   </div>
                 </CustomCampaignBox>
               </DataWrraper>

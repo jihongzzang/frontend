@@ -5,12 +5,11 @@ import styled from 'styled-components';
 import { MAIN_CAMPAIGN_LIST } from './MAIN_CAMPAIGN_LIST';
 
 const RoasRanking = () => {
-  const sales = 72798090;
   const roasRank = MAIN_CAMPAIGN_LIST.sort(function (a, b) {
-    if ((sales / a.Campaign.budget) * 100 > (sales / b.Campaign.budget) * 100) {
+    if (a.ROAS > b.ROAS) {
       return -1;
     }
-    if ((sales / a.Campaign.budget) * 100 < (sales / b.Campaign.budget) * 100) {
+    if (a.ROAS < b.ROAS) {
       return 1;
     }
   });
@@ -29,7 +28,10 @@ const RoasRanking = () => {
         <TableContent>
           {roasRank.map((campaign, idx) => {
             return (
-              <DataWrraper key={campaign.Campaign.id}>
+              <DataWrraper
+                key={campaign.Campaign.id}
+                value={campaign.Campaign.id}
+              >
                 <CustomCampaignBox
                   fullWidth
                   color="borderColor"
@@ -43,10 +45,7 @@ const RoasRanking = () => {
                     <span>{campaign.Campaign.name}</span>
                   </div>
                   <div>
-                    <span>
-                      {Math.floor((sales / campaign.Campaign.budget) * 100)}%
-                      {/* {Math.floor(campaign?.average_exposure).toLocaleString()} */}
-                    </span>
+                    <span>{Math.floor(campaign.ROAS).toLocaleString()}%</span>
                   </div>
                 </CustomCampaignBox>
               </DataWrraper>
