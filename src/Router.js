@@ -5,7 +5,7 @@ import InfluencerPerformance from './pages/InfluencerPerformance/InfluencerPerfo
 import Nav from './components/Nav/Nav';
 import InfluencerAnalysis from './pages/InfluencerAnalysis/InfluencerAnalysis';
 import Campaign from './pages/Campaign/Campaign';
-
+import Main from './pages/Main/Main';
 function Router() {
   return (
     <BrowserRouter>
@@ -15,6 +15,7 @@ function Router() {
         <Route path="/influencer" element={<InfluencerPerformance />} />
         <Route path="/analysis" element={<InfluencerAnalysis />} />
         <Route path="/campaign" element={<Campaign />} />
+        <Route path="/" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );

@@ -86,7 +86,6 @@ function Campaign() {
 
 const CampaignWrap = styled.div`
   width: 1440px;
-  height: 900px;
   padding: 36px 3% 3% 3%;
   background-color: ${({ theme }) => theme.palette.pageBackground};
 `;
