@@ -179,7 +179,6 @@ const GraphBoxWrap = styled.div`
 
 const Graph = styled.div`
   margin-top: 10px;
-  height: 360px;
 `;
 
 export default GraphBox;
