@@ -1,11 +1,20 @@
 import React from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { listCategory, listSelector, listSortCriteria } from '../../Atoms/list';
+import {
+  listCategory,
+  listSelector,
+  listSortCriteria,
+  listState,
+} from '../../Atoms/list';
 import { selectedCampaignIdState } from '../../Atoms/campaignState';
 import { formatDate } from '../../Hooks/convertData';
 import Btn from '../../components/Btn';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import {
+  selectedInfluencer,
+  selectedInfluencerState,
+} from '../../Atoms/selectedState';
 
 const CardList = ({ selected }) => {
   const data = useRecoilValue(listSelector);
@@ -14,6 +23,8 @@ const CardList = ({ selected }) => {
   const selectedCategory = useRecoilValue(listCategory);
   const today = new Date();
   const convertToday = new Date(formatDate(today)).getTime();
+
+  const state = useRecoilValue(listState);
 
   const sortBy = {
     recent: function (a, b) {
@@ -48,9 +59,17 @@ const CardList = ({ selected }) => {
     },
   };
   const updateCampaignPageData = useSetRecoilState(selectedCampaignIdState);
+  const updateSelectedInfluencer = useSetRecoilState(selectedInfluencer);
+  const updateSelectedState = useSetRecoilState(selectedInfluencerState);
 
   const changeCampaingPageData = e => {
     updateCampaignPageData(e.currentTarget.id);
+    navigate(`/${selectedCategory}`);
+  };
+
+  const changeInfluencerPageData = e => {
+    updateSelectedInfluencer(e.currentTarget.id);
+    updateSelectedState('all');
     navigate(`/${selectedCategory}`);
   };
 
@@ -127,7 +146,12 @@ const CardList = ({ selected }) => {
       {selected === 'influencer' &&
         renderData.map((influencer, idx) => {
           return (
-            <Campaign key={influencer.Influencer.id}>
+            <Campaign
+              key={influencer.Influencer.id}
+              name={influencer.Influencer.full_name}
+              id={influencer.Influencer.full_name}
+              onClick={changeInfluencerPageData}
+            >
               <ContentWrraper>
                 <span>No.{idx + 1}</span>
                 <img
@@ -137,7 +161,9 @@ const CardList = ({ selected }) => {
                 <span>{influencer.Influencer.full_name}</span>
               </ContentWrraper>
               <ContentWrraper>
-                {/* <span>{influencer.campaign_status}</span> */}
+                {state === 'all' && <span>전체</span>}
+                {state === 'proceeding' && <span>계약중</span>}
+                {state === 'completion' && <span>계약완료</span>}
               </ContentWrraper>
               <ContentWrraper>
                 <span>

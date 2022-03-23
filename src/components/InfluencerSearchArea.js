@@ -8,7 +8,6 @@ import {
 } from '../Atoms/selectedState';
 import { rightSelectedInfluencer } from '../Atoms/analysisState';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import Btn from './Btn';
 import styled from 'styled-components';
 
 const InfluencerSearchArea = ({ influencerType, weekType }) => {
@@ -72,23 +71,23 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
               {state === 'all' &&
                 influencerLists.map(({ id, name, kor_name }) => {
                   return (
-                    <MenuItem key={id} value={name} name={name}>
+                    <MenuItem key={id} value={kor_name} name={name}>
                       {kor_name}
                     </MenuItem>
                   );
                 })}
-              {state === 'ing' &&
+              {state === 'proceeding' &&
                 influencerLists.map(({ id, name, kor_name }) => {
                   return (
-                    <MenuItem key={id} value={name} name={name}>
+                    <MenuItem key={id} value={kor_name} name={name}>
                       {kor_name}
                     </MenuItem>
                   );
                 })}
-              {state === 'complete' &&
+              {state === 'completion' &&
                 influencerLists.map(({ id, name, kor_name }) => {
                   return (
-                    <MenuItem key={id} value={name} name={name}>
+                    <MenuItem key={id} value={kor_name} name={name}>
                       {kor_name}
                     </MenuItem>
                   );
@@ -110,9 +109,6 @@ const InfluencerSearchArea = ({ influencerType, weekType }) => {
             </Select>
           </FormControl>
         </InputWrraper>
-        <StyledBtn color="darkGrey" outline>
-          검색
-        </StyledBtn>
       </Content>
     </SearchWrraper>
   );
@@ -168,22 +164,6 @@ const Content = styled.div`
     font-size: 14px;
     font-weight: 500;
     color: ${({ theme }) => theme.palette.black};
-  }
-`;
-
-const StyledBtn = styled(Btn)`
-  margin-top: 18px;
-  margin-left: 20px;
-  height: 40px;
-  font-size: 13px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.palette.black};
-  border: 1px solid #c4c4c3;
-  :active {
-    background: ${({ theme }) => theme.palette.lightGrey};
-  }
-  :hover {
-    border: 1px solid ${({ theme }) => theme.palette.black};
   }
 `;
 

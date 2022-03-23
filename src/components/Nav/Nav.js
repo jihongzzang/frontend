@@ -20,9 +20,13 @@ function Nav() {
 
   const navigate = useNavigate();
 
+  const goMain = e => {
+    navigate('/');
+  };
+
   return (
     <NavWrraper>
-      <NavTitleWrraper>
+      <NavTitleWrraper onClick={goMain}>
         <h2>Campaign & Influencer Marketing</h2>
         <h2>management system</h2>
       </NavTitleWrraper>
@@ -59,6 +63,7 @@ const NavWrraper = styled.div`
     rgba(0, 31, 91, 0) 100%,
     rgba(0, 31, 91, 0) 100%
   );
+  cursor: pointer;
 
   h2 {
     color: ${({ theme }) => theme.palette.white};

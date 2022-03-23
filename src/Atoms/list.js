@@ -17,14 +17,6 @@ export const listSortCriteria = atom({
   default: '',
 });
 
-export const influencerListSelector = selector({
-  key: 'influencerListSelector',
-  get: async ({ get }) => {
-    const response = await axios.get(MAIN_BASE_URL + 'influnecer');
-    return response.data;
-  },
-});
-
 export const listSelector = selector({
   key: 'campaignListSelector',
   get: async ({ get }) => {
