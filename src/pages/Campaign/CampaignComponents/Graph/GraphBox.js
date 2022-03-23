@@ -6,7 +6,10 @@ import { Bar } from 'react-chartjs-2';
 import GraphDrop from './GraphDrop';
 import theme from '../../../../styles/theme';
 import { useRecoilValue } from 'recoil';
-import { completionCampaignList } from '../../../../Atoms/campaignFetchDataState';
+import {
+  completionCampaignList,
+  today,
+} from '../../../../Atoms/campaignFetchDataState';
 Chart.register(ChartDataLabels, ...registerables);
 
 function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
@@ -41,10 +44,15 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
     }
   };
 
+  const Today = useRecoilValue(today);
   const sales = FiguresList?.sales_graph[0];
-  const budget = completedList.slice(0, 2).map(a => {
-    return a?.Campaign?.budget;
-  });
+  const budget = completedList
+    .filter(c => {
+      return c?.Campaign?.end_at < Today;
+    })
+    .map(a => {
+      return a?.Campaign?.budget;
+    });
 
   const roasFigures = budget.map(a => {
     return Math.floor((sales / a) * 100);
@@ -54,7 +62,6 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
     plugins: {
       legend: {
         display: true,
-        position: 'right',
         align: 'start',
       },
       tooltip: {
@@ -69,11 +76,20 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
       },
     },
     indexAxis: 'y',
-    datalabels: {
-      display: true,
-      align: 'center',
-      font: {
-        weight: 'normal',
+    plugins: {
+      datalabels: {
+        display: true,
+        align: 'center',
+        font: {
+          weight: 'normal',
+        },
+        formatter: value => {
+          if (value !== 0) {
+            return value.toLocaleString();
+          } else {
+            return value;
+          }
+        },
       },
     },
     maintainAspectRatio: true,
@@ -98,16 +114,12 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
           font: {
             size: c => {
               if (c.tick.label === '디스커버리 고어텍스 공유 바람막이') {
-                return theme.fontsize.fontSize1;
-              } else {
-                return theme.fontsize.fontSize1;
+                return '12px';
               }
-            },
-            weight: c => {
-              if (c.index === 0) {
-                return 'bold';
+              if (c.tick.label === '디스커버리 이노블럭 하이넥 바람막이') {
+                return '12px';
               } else {
-                return 'normal';
+                return theme.fontsize.fontSize1;
               }
             },
           },
@@ -145,6 +157,8 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
                   anchor: 'end',
                   color: theme.palette.white,
                 },
+                categoryPercentage: 0.8,
+                barPercentage: 0.6,
               },
             ],
           }}
