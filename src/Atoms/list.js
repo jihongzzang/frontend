@@ -30,9 +30,7 @@ export const listSelector = selector({
   get: async ({ get }) => {
     const category = get(listCategory);
     const state = get(listState);
-    const response = await axios.get(
-      `http://172.1.6.129:8000/main/${category}/${state}`
-    );
+    const response = await axios.get(`${MAIN_BASE_URL}${category}/${state}`);
     return response.data;
   },
 });
