@@ -2,10 +2,12 @@ import React from 'react';
 import DataBox from '../../components/DataBox';
 import RankerBox from '../../components/RankerBox';
 import styled from 'styled-components';
-import { MAIN_CAMPAIGN_LIST } from './MAIN_CAMPAIGN_LIST';
+import { parsingCampaignData } from '../../Atoms/campaignFetchDataState';
+import { useRecoilValue } from 'recoil';
 
 const TopSearchRanking = () => {
-  const tagSearchRank = MAIN_CAMPAIGN_LIST.sort(function (a, b) {
+  const campaignList = useRecoilValue(parsingCampaignData);
+  const tagSearchRank = [...campaignList].sort(function (a, b) {
     if (a.sum_hashtag > b.sum_hashtag) {
       return -1;
     }

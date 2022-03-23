@@ -2,14 +2,16 @@ import React from 'react';
 import DataBox from '../../components/DataBox';
 import RankerBox from '../../components/RankerBox';
 import styled from 'styled-components';
-import { MAIN_CAMPAIGN_LIST } from './MAIN_CAMPAIGN_LIST';
+import { parsingCampaignData } from '../../Atoms/campaignFetchDataState';
+import { useRecoilValue } from 'recoil';
 
 const AverageExposure = () => {
-  const averageExposureRank = MAIN_CAMPAIGN_LIST.sort(function (a, b) {
-    if (a.average_exposure > b.average_exposure) {
+  const campaignList = useRecoilValue(parsingCampaignData);
+  const averageExposureRank = [...campaignList]?.sort((a, b) => {
+    if (a?.average_exposure > b?.average_exposure) {
       return -1;
     }
-    if (a.average_exposure < b.average_exposure) {
+    if (a?.average_exposure < b?.average_exposure) {
       return 1;
     }
   });
@@ -28,7 +30,7 @@ const AverageExposure = () => {
         <TableContent>
           {averageExposureRank.map((campaign, idx) => {
             return (
-              <DataWrraper key={campaign.Campaign.id}>
+              <DataWrraper key={campaign?.Campaign?.id}>
                 <CustomCampaignBox
                   fullWidth
                   color="borderColor"
@@ -39,7 +41,7 @@ const AverageExposure = () => {
                     <span>{idx + 1}.</span>
                   </div>
                   <div>
-                    <span>{campaign.Campaign.name}</span>
+                    <span>{campaign?.Campaign?.name}</span>
                   </div>
                   <div>
                     <span>

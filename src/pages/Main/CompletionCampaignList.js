@@ -2,14 +2,14 @@ import React from 'react';
 import DataBox from '../../components/DataBox';
 import RankerBox from '../../components/RankerBox';
 import styled from 'styled-components';
-import { MAIN_CAMPAIGN_LIST } from './MAIN_CAMPAIGN_LIST';
 import { today } from '../../Atoms/campaignFetchDataState';
 import { useRecoilValue } from 'recoil';
+import { parsingCampaignData } from '../../Atoms/campaignFetchDataState';
 
 const CompletionCampaignList = () => {
   const todayData = useRecoilValue(today);
-
-  const completion = MAIN_CAMPAIGN_LIST.filter(a => {
+  const campaignList = useRecoilValue(parsingCampaignData);
+  const completion = campaignList.filter(a => {
     return a.Campaign.end_at < todayData;
   });
 
