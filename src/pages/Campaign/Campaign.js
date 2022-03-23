@@ -63,8 +63,8 @@ function Campaign() {
         PRIMARY_FIGURES={PRIMARY_FIGURES}
       />
       {selectedCampaignId && !uiChange && <CompletedCampaignRoas List={list} />}
-      {selectedCampaignId ? (
-        uiChange ? (
+      {selectedCampaignId &&
+        (uiChange ? (
           <GraphBoxes
             campaignState={uiChange}
             FiguresList={proceedingCampaignGraph}
@@ -78,8 +78,7 @@ function Campaign() {
             FiguresClass={PRIMARY_FIGURES}
             BarThickness="30"
           />
-        )
-      ) : null}
+        ))}
     </CampaignWrap>
   );
 }

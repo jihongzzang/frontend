@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import FigureBox from './FigureBox';
 import { formatDateKo } from '../../../Hooks/convertData';
 import { useRecoilValue } from 'recoil';
-import { uiChangeCondition } from '../../../Atoms/campaignFetchDataState';
+import {
+  uiChangeCondition,
+  proceedingCampaignPostGraph,
+} from '../../../Atoms/campaignFetchDataState';
 
 function CampaignPrimaryFigures({
   List,
@@ -19,19 +22,7 @@ function CampaignPrimaryFigures({
   const yesterday = new Date(today.setDate(today.getDate() - 1));
   const yesterdayDateFormat = formatDateKo(yesterday);
   const uiChange = useRecoilValue(uiChangeCondition);
-
-  proceedingFigures[0].figureValue = List?.sum_hashtag?.toLocaleString();
-  proceedingFigures[1].figureValue = List?.count_post?.toLocaleString();
-  proceedingFigures[2].figureValue = uiChange
-    ? List?.daily_official_visit?.toLocaleString()
-    : List?.total_official_visit?.toLocaleString();
-  proceedingFigures[3].figureValue = uiChange
-    ? List?.daily_official_follower?.toLocaleString()
-    : List?.total_official_follower?.toLocaleString();
-  proceedingFigures[4].figureValue = uiChange
-    ? List?.daily_official_referrer?.toLocaleString()
-    : List?.total_official_referrer?.toLocaleString();
-
+  const proceedingPostFigure = useRecoilValue(proceedingCampaignPostGraph);
   const selectedIndex = completedCampaignList?.campaign_name?.indexOf(
     List?.Campaign?.name
   );
@@ -43,7 +34,28 @@ function CampaignPrimaryFigures({
       return completedCampaignList?.sales_graph[1];
     }
   };
+  const selectedPosts = () => {
+    if (selectedIndex === 0) {
+      return completedCampaignList?.count_post[0];
+    }
+    if (selectedIndex === 1) {
+      return completedCampaignList?.count_post[1];
+    }
+  };
 
+  proceedingFigures[0].figureValue = List?.sum_hashtag?.toLocaleString();
+  proceedingFigures[1].figureValue = uiChange
+    ? proceedingPostFigure?.count_post?.toLocaleString()
+    : selectedPosts()?.toLocaleString();
+  proceedingFigures[2].figureValue = uiChange
+    ? List?.daily_official_visit?.toLocaleString()
+    : List?.total_official_visit?.toLocaleString();
+  proceedingFigures[3].figureValue = uiChange
+    ? List?.daily_official_follower?.toLocaleString()
+    : List?.total_official_follower?.toLocaleString();
+  proceedingFigures[4].figureValue = uiChange
+    ? List?.daily_official_referrer?.toLocaleString()
+    : List?.total_official_referrer?.toLocaleString();
   proceedingFigures[5].figureValue = uiChange
     ? dailyList?.sales_graph?.[
         dailyList?.sales_graph?.length - 1

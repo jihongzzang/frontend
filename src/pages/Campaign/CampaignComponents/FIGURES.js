@@ -9,7 +9,7 @@ export const PRIMARY_FIGURES = [
   },
   {
     primaryFigureId: 2,
-    figureTitle: '캠페인 태그\n게시물 총 갯수',
+    figureTitle: '캠페인 태그\n게시물 총 개수',
     figureName: 'count_post',
     figureSubName: 'count_post',
     dailyFigureData: 'count_post',

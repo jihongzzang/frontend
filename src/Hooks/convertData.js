@@ -15,7 +15,7 @@ export const convertNumber = num => {
 };
 
 export const convertDate = date => {
-  return date.slice(0, 10);
+  return date?.slice(0, 10);
 };
 
 export const convertPercent = num => {

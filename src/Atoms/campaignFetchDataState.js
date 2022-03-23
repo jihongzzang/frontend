@@ -43,6 +43,19 @@ export const proceedingCampaignGraphList = selector({
   },
 });
 
+export const proceedingCampaignPostGraph = selector({
+  key: 'proceedingCampaignPostGraph',
+  get: async ({ get }) => {
+    const targetId = get(selectedCampaignIdState);
+    const response = await axios.get(
+      `${CAMAPAIGN_BASE_URL}post_count?status_filter=all&campaign_id=${Number(
+        targetId
+      )}`
+    );
+    return response.data[0];
+  },
+});
+
 export const today = atom({
   key: 'today',
   default: formatDate(new Date()),
