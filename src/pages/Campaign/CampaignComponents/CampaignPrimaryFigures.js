@@ -43,7 +43,7 @@ function CampaignPrimaryFigures({
     }
   };
 
-  proceedingFigures[0].figureValue = List?.sum_hashtag?.toLocaleString();
+  proceedingFigures[0].figureValue = List?.average_hashtag?.toLocaleString();
   proceedingFigures[1].figureValue = uiChange
     ? proceedingPostFigure?.count_post?.toLocaleString()
     : selectedPosts()?.toLocaleString();

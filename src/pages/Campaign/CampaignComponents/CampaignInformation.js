@@ -61,6 +61,9 @@ const CampaignPrimaryInfoText = styled.div`
   width: 100%;
   margin: 0 10px;
   color: ${({ theme }) => theme.palette.darkGrey};
+  span {
+    font-size: ${({ theme }) => theme.fontsize.fontSize2};
+  }
 `;
 
 export default CampaignInformation;
