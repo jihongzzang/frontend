@@ -8,10 +8,10 @@ import { useRecoilValue } from 'recoil';
 const TopSearchRanking = () => {
   const campaignList = useRecoilValue(parsingCampaignData);
   const tagSearchRank = [...campaignList].sort(function (a, b) {
-    if (a.sum_hashtag > b.sum_hashtag) {
+    if (a.average_hashtag > b.average_hashtag) {
       return -1;
     }
-    if (a.sum_hashtag < b.sum_hashtag) {
+    if (a.average_hashtag < b.average_hashtag) {
       return 1;
     }
   });
@@ -44,7 +44,7 @@ const TopSearchRanking = () => {
                     <span>{campaign?.Campaign?.name}</span>
                   </div>
                   <div>
-                    <span>{campaign?.sum_hashtag?.toLocaleString()}</span>
+                    <span>{campaign?.average_hashtag?.toLocaleString()}</span>
                   </div>
                 </CustomCampaignBox>
               </DataWrraper>

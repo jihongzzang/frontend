@@ -37,7 +37,7 @@ function Campaign() {
     0,
     PRIMARY_FIGURES.length - 1
   );
-
+  console.log(campaignList);
   return (
     <CampaignWrap>
       <CampaignInfoBoxWrap>
