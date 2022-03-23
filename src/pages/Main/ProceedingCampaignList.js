@@ -69,6 +69,7 @@ const TableContent = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
+
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -82,6 +83,7 @@ const StyledDataBox = styled(DataBox)`
   display: flex;
   flex-direction: column;
   margin: 10px 0 0 0;
+  margin-bottom: 20px;
 `;
 
 const Header = styled.div`
@@ -105,11 +107,11 @@ const TableDataBox = styled(DataBox)`
 `;
 
 const LegendDataBox = styled(DataBox)`
-  background: white;
+  background: ${({ theme }) => theme.palette.red};
+  color: ${({ theme }) => theme.palette.white};
   height: 40px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
-  color: ${({ theme }) => theme.palette.black};
   justify-content: center;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -143,15 +145,15 @@ const CustomCampaignBox = styled(RankerBox)`
 
   div:nth-child(1) {
     width: 15%;
-    font-weight: 500;
+    font-weight: 400;
   }
   div:nth-child(2) {
     width: 70%;
-    font-weight: 500;
+    font-weight: 400;
   }
   div:nth-child(3) {
     width: 25%;
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
   }
 `;

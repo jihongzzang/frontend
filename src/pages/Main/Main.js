@@ -31,10 +31,14 @@ function Main() {
 const MainWrap = styled.div`
   width: 1440px;
   padding: 36px 3% 3% 3%;
+  height: 100vh;
   background-color: ${({ theme }) => theme.palette.pageBackground};
 `;
 const MainTitle = styled.div`
   padding: 10px;
+  height: 70px;
+  display: flex;
+  align-items: center;
   background-color: white;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   border: 1px solid ${({ theme }) => theme.palette.borderColor};
@@ -53,6 +57,8 @@ const RankingBoxes = styled.div`
 
 const CampaignList = styled.div`
   width: 430px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 `;
 
 export default Main;
