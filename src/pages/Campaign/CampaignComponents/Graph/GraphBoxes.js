@@ -9,7 +9,7 @@ function GraphBoxes({
   FiguresClass,
 }) {
   return (
-    <GraphBoxesWrap>
+    <GraphBoxesWrap marginBottom={campaignState && '70px'}>
       <GraphBox
         FiguresList={FiguresList}
         FiguresClass={FiguresClass}
@@ -29,6 +29,7 @@ function GraphBoxes({
 const GraphBoxesWrap = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: ${props => props.marginBottom};
 `;
 
 export default GraphBoxes;
