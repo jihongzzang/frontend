@@ -92,7 +92,8 @@ function GraphBox({ FiguresList, FiguresClass, BarThickness, campaignState }) {
         },
       },
     },
-    maintainAspectRatio: true,
+    // maintainAspectRatio: true,
+    aspectRatio: campaignState ? 1.6 : 2,
     elements: {
       bar: {
         borderWidth: 0,
