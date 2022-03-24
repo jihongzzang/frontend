@@ -42,7 +42,7 @@ const TagPostRanking = () => {
                     <span>{campaign?.Campaign.name}</span>
                   </div>
                   <div>
-                    <span>{campaign?.count_post}</span>
+                    <span>{campaign?.count_post} 개</span>
                   </div>
                 </CustomCampaignBox>
               </DataWrraper>
@@ -73,6 +73,8 @@ const StyledDataBox = styled(DataBox)`
   display: flex;
   flex-direction: column;
   margin: 10px 0;
+  height: 350px;
+  margin-top: 40px;
 `;
 
 const Header = styled.div`
@@ -96,11 +98,11 @@ const TableDataBox = styled(DataBox)`
 `;
 
 const LegendDataBox = styled(DataBox)`
-  background: white;
+  background: ${({ theme }) => theme.palette.blue};
+  color: ${({ theme }) => theme.palette.white};
   height: 40px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
-  color: ${({ theme }) => theme.palette.black};
   justify-content: center;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -132,15 +134,15 @@ const CustomCampaignBox = styled(RankerBox)`
   color: ${({ theme }) => theme.palette.black};
   div:nth-child(1) {
     width: 15%;
-    font-weight: 500;
+    font-weight: 400;
   }
   div:nth-child(2) {
     width: 70%;
-    font-weight: 500;
+    font-weight: 400;
   }
   div:nth-child(3) {
     width: 15%;
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
   }
 `;

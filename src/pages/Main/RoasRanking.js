@@ -99,11 +99,11 @@ const TableDataBox = styled(DataBox)`
 `;
 
 const LegendDataBox = styled(DataBox)`
-  background: white;
   height: 40px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
-  color: ${({ theme }) => theme.palette.black};
+  background: ${({ theme }) => theme.palette.chartBlue2};
+  color: ${({ theme }) => theme.palette.white};
   justify-content: center;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -135,15 +135,15 @@ const CustomCampaignBox = styled(RankerBox)`
   color: ${({ theme }) => theme.palette.black};
   div:nth-child(1) {
     width: 15%;
-    font-weight: 500;
+    font-weight: 400;
   }
   div:nth-child(2) {
     width: 70%;
-    font-weight: 500;
+    font-weight: 400;
   }
   div:nth-child(3) {
     width: 15%;
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
   }
 `;

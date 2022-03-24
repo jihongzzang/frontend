@@ -53,7 +53,8 @@ const AverageParticipation = () => {
                     <span>
                       {Math.floor(
                         campaign?.average_like + campaign?.average_comment
-                      )?.toLocaleString()}
+                      )?.toLocaleString()}{' '}
+                      회
                     </span>
                   </div>
                 </CustomCampaignBox>
@@ -108,11 +109,11 @@ const TableDataBox = styled(DataBox)`
 `;
 
 const LegendDataBox = styled(DataBox)`
-  background: white;
+  background: ${({ theme }) => theme.palette.chartGreen2};
+  color: ${({ theme }) => theme.palette.white};
   height: 40px;
   border-radius: ${({ theme }) => theme.btnRadius.borderRadius2};
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
-  color: ${({ theme }) => theme.palette.black};
   justify-content: center;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -144,15 +145,15 @@ const CustomCampaignBox = styled(RankerBox)`
   color: ${({ theme }) => theme.palette.black};
   div:nth-child(1) {
     width: 15%;
-    font-weight: 500;
+    font-weight: 400;
   }
   div:nth-child(2) {
     width: 70%;
-    font-weight: 500;
+    font-weight: 400;
   }
   div:nth-child(3) {
     width: 15%;
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
   }
 `;
