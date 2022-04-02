@@ -57,6 +57,27 @@
   6. Chart.Js 라이브러리를 활용하여 차트 구현 및 커스터 마이징
   ```
 
+## **시연**
+
+- Axios를 활용하여 리스트페이지 API 패칭
+
+<img src='https://ifh.cc/g/NbLom3.gif' border='0'/>
+
+- 리스트 페이지와 퍼포먼스 측정 페이지 연동 및 주차별 데이터 UI 구현
+- 리스트 페이지를 거치지 않고도 퍼포먼스 측정 페이지에서 바로 검색 가능
+
+<img src='https://ifh.cc/g/N26hn1.gif' border='0'/>
+
+- 비교분석 페이지에서 비교대상군 선택 option에서 현재 퍼포먼스 페이지의 대상은 필터링 되서 나오도록 설정
+- 두 인플루언서의 주차별 비교 진행 
+
+<img src='https://ifh.cc/g/AHGR0B.gif' border='0'/>
+
+- 퍼포먼스 측정 페이지 비교분석 페이지 연동
+- 해당 페이지에서 인플루언서 클릭시 두페이지 모두 데이터가 들어감
+
+<img src='https://ifh.cc/g/YcN3g0.gif' border='0'/>
+
 ## **Build Installation**
 
 ```
@@ -65,11 +86,3 @@ $ npm install
 # serve with hot reload at localhost:3000
 $ npm start
 ```
-
-## **시연**
-
-- 라이브러리를 활용한 이미지캐러셀 구현 및 캐러셀 커스터마이징
-- 페이지내에 다중 필터링 및 가격 높은순 낮은순 캐러셀 구현
-- 
--
-- 
