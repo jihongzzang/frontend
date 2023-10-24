@@ -61,7 +61,7 @@
 
 - Axios를 활용하여 리스트페이지 API 패칭
 
-<img src="https://ibb.co/4ZrKYnj" border='0'/>
+<img src="https://github.com/jihongzzang/frontend/assets/94615083/7541b8b7-febd-43d0-b451-430e002b760d" border='0'/>
 
 - 리스트 페이지와 퍼포먼스 측정 페이지 연동 및 주차별 데이터 UI 구현
 - 리스트 페이지를 거치지 않고도 퍼포먼스 측정 페이지에서 바로 검색 가능
