@@ -58,6 +58,7 @@
   ```
 
 
+
 ## **시연**
 
 - Axios를 활용하여 리스트페이지 API 패칭
@@ -67,7 +68,7 @@
 - 리스트 페이지와 퍼포먼스 측정 페이지 연동 및 주차별 데이터 UI 구현
 - 리스트 페이지를 거치지 않고도 퍼포먼스 측정 페이지에서 바로 검색 가능
 
-<img src='https://github.com/jihongzzang/frontend/assets/94615083/0bd18ac9-8dec-4a95-866e-b24f267773e5' border='0'/>
+<img src='https://github.com/jihongzzang/frontend/assets/94615083/e11f5c35-1fc9-4392-bc29-1e6d0afe5ce0' border='0'/>
 
 - 비교분석 페이지에서 비교대상군 선택 option에서 현재 퍼포먼스 페이지의 대상은 필터링 되서 나오도록 설정
 - 두 인플루언서의 주차별 비교 진행 
